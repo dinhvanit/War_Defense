@@ -11,14 +11,14 @@
 using namespace std;
 
 
-static SDL_Window* g_window = NULL;
-static SDL_Renderer* g_screen = NULL;
-static SDL_Event* g_event;
+static SDL_Window* window = NULL;
+static SDL_Renderer* renderer = NULL;
+static SDL_Event event;
 
 //screen
-const int SCREEN_WIDTH = 1280;
-const int SCREEN_HEIGHT = 640;
-const string WINDOW_TITLE = "War_Defense";
+const int SCREEN_WIDTH = 1300;
+const int SCREEN_HEIGHT = 700;
+const string WINDOW_TITLE = "War Defense";
 const int SCREEN_BPP = 32;
 
 const int COLOR_KEY_R = 167;
@@ -26,5 +26,13 @@ const int COLOR_KEY_G = 175;
 const int COLOR_KEY_B =180;
 
 const int RENDER_DRAW_COLOR = 0xff;
-
+//tile
+const int TILE_WIDTH = 80;
+const int TILE_HEIGHT = 100;
+//tao map 11*7 o
+const int nCOL = 11;
+const int nROW = 7;
+//bang de thanh chon defense
+const int X_UPPER_LEFT=200;
+const int Y_UPPER_LEFT=0;
 #endif // COMMONFUNC_H

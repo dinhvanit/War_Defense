@@ -38,6 +38,8 @@
 		<Unit filename="src/CommonFunc.cpp" />
 		<Unit filename="src/CommonFunc.h" />
 		<Unit filename="src/Main.cpp" />
+		<Unit filename="src/SDL_utils.cpp" />
+		<Unit filename="src/SDL_utils.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
