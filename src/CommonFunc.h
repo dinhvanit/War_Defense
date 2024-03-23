@@ -33,7 +33,7 @@ const int RENDER_DRAW_COLOR = 0xff;
 const int TILE_WIDTH = 80;
 const int TILE_HEIGHT = 100;
 //tao map 11*7 o
-const int nCOL = 11;
+const int nCOL = 13;
 const int nROW = 7;
 //bang de thanh chon defense
 const int X_UPPER_LEFT=200;
@@ -45,7 +45,6 @@ struct Block
     int row, col;
     int isTowerIn[nROW][nCOL];
     // bool isTowerIn = false;
-    char* file_name_;
 };
 
 #endif // COMMONFUNC_H

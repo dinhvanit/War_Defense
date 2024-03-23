@@ -5,8 +5,9 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
     if (window != nullptr && renderer != nullptr) {
         bool is_quit = false;
         while(!is_quit){
-            processEvents(renderer, is_quit);
             draw(renderer);
+            processEvents(renderer, is_quit);
+
         }
     }
 }
