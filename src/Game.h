@@ -9,7 +9,7 @@ class Game
 {
     public:
         Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT);
-        ~Game();
+        ~Game(){};
 
     private:
         void draw(SDL_Renderer* renderer);

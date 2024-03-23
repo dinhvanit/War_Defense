@@ -8,6 +8,9 @@
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
+#include <string>
+#include <unordered_map>
+
 using namespace std;
 
 
@@ -35,4 +38,14 @@ const int nROW = 7;
 //bang de thanh chon defense
 const int X_UPPER_LEFT=200;
 const int Y_UPPER_LEFT=0;
+//
+struct Block
+{
+    int x1, y1, x2, y2;
+    int row, col;
+    int isTowerIn[nROW][nCOL];
+    // bool isTowerIn = false;
+    char* file_name_;
+};
+
 #endif // COMMONFUNC_H

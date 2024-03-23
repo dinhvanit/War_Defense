@@ -38,7 +38,8 @@ void Game::draw(SDL_Renderer* renderer)
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
-    GameMap.DrawMap(renderer);
+    GameMap game_map;
+    game_map.DrawMap(renderer);
 
     SDL_RenderPresent(renderer);
 }
