@@ -10,6 +10,7 @@
 #include <SDL_ttf.h>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 using namespace std;
 
@@ -19,7 +20,7 @@ static SDL_Renderer* renderer = NULL;
 static SDL_Event event;
 
 //screen
-const int SCREEN_WIDTH = 1300;
+const int SCREEN_WIDTH = 1240;
 const int SCREEN_HEIGHT = 700;
 const string WINDOW_TITLE = "War Defense";
 const int SCREEN_BPP = 32;
@@ -43,8 +44,10 @@ struct Block
 {
     int x1, y1, x2, y2;
     int row, col;
-    int isTowerIn[nROW][nCOL];
+    int isTowerIn;
     // bool isTowerIn = false;
 };
+typedef vector<vector<Block>> Map;
+//
 
 #endif // COMMONFUNC_H
