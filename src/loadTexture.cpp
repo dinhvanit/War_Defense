@@ -23,7 +23,6 @@ SDL_Texture* loadTexture::loadT(SDL_Renderer* renderer, string filename) {
                 if (textureOutput != nullptr) {
                     SDL_SetTextureBlendMode(textureOutput, SDL_BLENDMODE_BLEND);
                     umapTexturesLoaded[filename] = textureOutput;
-                    cout << "not found"<<endl;
                     return textureOutput;
                 }
             }

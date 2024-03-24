@@ -2,7 +2,7 @@
 1710425315 source:d:\bigproject\game_sdl2\src\commonfunc.cpp
 	"CommonFunc.h"
 
-1711219575 d:\bigproject\game_sdl2\src\commonfunc.h
+1711250416 d:\bigproject\game_sdl2\src\commonfunc.h
 	<iostream>
 	<windows.h>
 	<string>
@@ -69,6 +69,6 @@
 1711208806 d:\bigproject\game_sdl2\src\loadtexture.h
 	"CommonFunc.h"
 
-1711210075 source:d:\bigproject\game_sdl2\src\loadtexture.cpp
+1711250465 source:d:\bigproject\game_sdl2\src\loadtexture.cpp
 	"loadTexture.h"
 
