@@ -45,7 +45,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                     if( gmap[y][x].isTowerIn == 0){
 
                         SDL_Rect rect = {(mouseX-X_UPPER_LEFT)/TILE_WIDTH*TILE_WIDTH+X_UPPER_LEFT, (mouseY-Y_UPPER_LEFT)/TILE_HEIGHT*TILE_HEIGHT+Y_UPPER_LEFT, TILE_WIDTH, TILE_HEIGHT };
-                        SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "archer.png"), NULL, &rect);
+                        SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "Archer.png"), NULL, &rect);
                         SDL_RenderPresent(renderer);
                         gmap[y][x]=Block(y, x, 1);
                     }
