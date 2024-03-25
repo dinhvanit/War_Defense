@@ -39,9 +39,16 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                     int mouseX = 0, mouseY = 0;
                     SDL_GetMouseState(&mouseX, &mouseY);
                     cout << mouseX << " "<<mouseY<<endl;
-                    SDL_Rect rect = {(mouseX-X_UPPER_LEFT)/TILE_WIDTH*TILE_WIDTH+X_UPPER_LEFT, (mouseY-Y_UPPER_LEFT)/TILE_HEIGHT*TILE_HEIGHT+Y_UPPER_LEFT, TILE_WIDTH, TILE_HEIGHT };
-                    SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "archer.png"), NULL, &rect);
-                    SDL_RenderPresent(renderer);
+                    int y = (mouseY-Y_UPPER_LEFT)/TILE_HEIGHT;
+                    int x = (mouseX-X_UPPER_LEFT)/TILE_WIDTH;
+                    cout << y <<" "<<x <<" "<< gmap[y][x].isTowerIn<<endl;
+                    if( gmap[y][x].isTowerIn == 0){
+
+                        SDL_Rect rect = {(mouseX-X_UPPER_LEFT)/TILE_WIDTH*TILE_WIDTH+X_UPPER_LEFT, (mouseY-Y_UPPER_LEFT)/TILE_HEIGHT*TILE_HEIGHT+Y_UPPER_LEFT, TILE_WIDTH, TILE_HEIGHT };
+                        SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "archer.png"), NULL, &rect);
+                        SDL_RenderPresent(renderer);
+                        gmap[y][x]=Block(y, x, 1);
+                    }
                 }
                 else if (event.button.button == SDL_BUTTON_RIGHT)
                     mouseStatus = SDL_BUTTON_RIGHT;

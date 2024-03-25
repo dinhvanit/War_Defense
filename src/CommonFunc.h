@@ -40,14 +40,30 @@ const int nROW = 7;
 const int X_UPPER_LEFT=200;
 const int Y_UPPER_LEFT=0;
 //
-struct Block
-{
+struct Block {
     int x1, y1, x2, y2;
     int row, col;
     int isTowerIn;
-    // bool isTowerIn = false;
+
+    // Khai báo hàm tạo mặc định
+    Block() {}
+
+    // Hàm tạo với đầy đủ tham số
+    Block(int _row, int _col, int _isTowerIn) {
+        this->row = _row;
+        this->col = _col;
+        this->isTowerIn = _isTowerIn;
+
+        // Tính toán giá trị của các thành viên dựa trên các tham số truyền vào
+        this->x1 = this->col * TILE_WIDTH + X_UPPER_LEFT;
+        this->y1 = this->row * TILE_HEIGHT + Y_UPPER_LEFT;
+        this->x2 = this->x1 + TILE_WIDTH;
+        this->y2 = this->y1 + TILE_HEIGHT;
+    }
 };
 typedef vector<vector<Block>> Map;
+Map CreateMap();
+static Map gmap = CreateMap();
 //
 
 #endif // COMMONFUNC_H

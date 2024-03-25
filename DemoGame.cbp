@@ -39,6 +39,8 @@
 		<Unit filename="src/CommonFunc.h" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/Game.h" />
+		<Unit filename="src/Level.cpp" />
+		<Unit filename="src/Level.h" />
 		<Unit filename="src/Main.cpp" />
 		<Unit filename="src/game_map.cpp" />
 		<Unit filename="src/game_map.h" />
