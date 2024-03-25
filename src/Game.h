@@ -12,6 +12,7 @@ class Game
         ~Game(){};
 
     private:
+        int mouseStatus = 0;
         void draw(SDL_Renderer* renderer);
         void processEvents(SDL_Renderer* renderer, bool& is_quit);
 };

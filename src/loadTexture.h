@@ -13,4 +13,5 @@ class loadTexture
     private:
         static std::unordered_map<string, SDL_Texture*> umapTexturesLoaded;
 };
+
 #endif // LOADTEXTURE_H

@@ -4,8 +4,6 @@
 #include "CommonFunc.h"
 #include "loadTexture.h"
 
-
-
 class GameMap
 {
     public:
@@ -19,8 +17,8 @@ class GameMap
     private:
         SDL_Texture* tile1 = nullptr;
         SDL_Texture* tile2 = nullptr;
-        SDL_Texture* tile3 = nullptr;
-        SDL_Texture* tile4 = nullptr;
+        SDL_Texture* tileStart = nullptr;
+        SDL_Texture* tileFinish = nullptr;
         SDL_Texture* TowerBar = nullptr;
         SDL_Texture* Archer = nullptr;
         SDL_Texture* Canon = nullptr;

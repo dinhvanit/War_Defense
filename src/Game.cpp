@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "game_map.h"
 
 Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT)
 {
@@ -17,6 +18,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
 //}
 void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
 {
+    bool mouseDownThisFrame = false;
     while(!is_quit){
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
@@ -30,9 +32,38 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                     is_quit = true;
                     break;
                 }
+            case SDL_MOUSEBUTTONDOWN:
+                mouseDownThisFrame = (mouseStatus == 0);
+                if (event.button.button == SDL_BUTTON_LEFT){
+                    mouseStatus = SDL_BUTTON_LEFT;
+                    int mouseX = 0, mouseY = 0;
+                    SDL_GetMouseState(&mouseX, &mouseY);
+                    cout << mouseX << " "<<mouseY<<endl;
+                    SDL_Rect rect = {(mouseX-X_UPPER_LEFT)/TILE_WIDTH*TILE_WIDTH+X_UPPER_LEFT, (mouseY-Y_UPPER_LEFT)/TILE_HEIGHT*TILE_HEIGHT+Y_UPPER_LEFT, TILE_WIDTH, TILE_HEIGHT };
+                    SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "archer.png"), NULL, &rect);
+                    SDL_RenderPresent(renderer);
+                }
+                else if (event.button.button == SDL_BUTTON_RIGHT)
+                    mouseStatus = SDL_BUTTON_RIGHT;
+                break;
+            case SDL_MOUSEBUTTONUP:
+                mouseStatus = 0;
+                break;
+
             }
         }
+//        int mouseX = 0, mouseY = 0;
+//        SDL_GetMouseState(&mouseX, &mouseY);
+//        if(mouseStatus > 0)
+//        {
+//            cout << mouseX << " "<<mouseY<<endl;
+//            SDL_Texture* Archer = loadTexture::loadT(renderer, "archer.png");
+//            SDL_Rect rect = { mouseX, mouseY, TILE_WIDTH, TILE_HEIGHT };
+//            SDL_RenderCopy(renderer,Archer, NULL, &rect);
+//        }
+
     }
+
 }
 void Game::draw(SDL_Renderer* renderer)
 {
@@ -41,6 +72,5 @@ void Game::draw(SDL_Renderer* renderer)
 
     GameMap game_map;
     game_map.DrawMap(renderer);
-
     SDL_RenderPresent(renderer);
 }
