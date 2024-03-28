@@ -4,11 +4,11 @@
 void GameMap::DrawMap(SDL_Renderer* renderer)
 {
     Map mp = CreateMap();
-    for (int y = 0; y < nROW; y++) {
-        for (int x = 0; x < nCOL; x++) {
-            cout <<"("<< mp[y][x].x1<<","<<mp[y][x].y1<<") "<<mp[y][x].isTowerIn<<endl;
-        }
-    }
+//    for (int y = 0; y < nROW; y++) {
+//        for (int x = 0; x < nCOL; x++) {
+//            cout <<"("<< mp[y][x].x1<<","<<mp[y][x].y1<<") "<<mp[y][x].isTowerIn<<endl;
+//        }
+//    }
     SDL_Texture* tile1 = loadTexture::loadT(renderer, "Frontyard1.jpg");
     SDL_Texture* tile2 = loadTexture::loadT(renderer, "Frontyard2.jpg");
     SDL_Texture* tileStart = loadTexture::loadT(renderer, "Start.jpg");

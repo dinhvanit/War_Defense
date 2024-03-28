@@ -42,6 +42,8 @@
 		<Unit filename="src/Level.cpp" />
 		<Unit filename="src/Level.h" />
 		<Unit filename="src/Main.cpp" />
+		<Unit filename="src/enemy.cpp" />
+		<Unit filename="src/enemy.h" />
 		<Unit filename="src/game_map.cpp" />
 		<Unit filename="src/game_map.h" />
 		<Unit filename="src/loadTexture.cpp" />
