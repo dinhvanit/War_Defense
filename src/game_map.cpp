@@ -49,7 +49,7 @@ void GameMap::DrawMap(SDL_Renderer* renderer)
 bool GameMap::isValid(int col, int row, int rows, int cols) {
     return (col >= 0 && col < cols && row >= 0 && row < rows);
 }
-vector<Block> GameMap::findShortestPath(Map gmap, Block start, Block finish)
+vector<Block> GameMap::findShortestPath(Map& gmap, Block start, Block finish)
 {
     int rows = gmap.size();
     int cols = gmap[0].size();
@@ -91,7 +91,7 @@ vector<Block> GameMap::findShortestPath(Map gmap, Block start, Block finish)
         current = parent[current.row][current.col];
     }
     reverse(path.begin(), path.end());
-    cout << "Đường đi ngắn nhất:" << endl;
+    cout << "Duong di ngan nhat" << endl;
     for (const auto& block : path) {
         cout << "(" << block.row << ", " << block.col << ")" << endl;
     }

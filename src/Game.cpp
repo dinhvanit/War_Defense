@@ -54,6 +54,13 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                     for (const auto& block : shortestPath) {
                         cout << "(" << block.row << ", " << block.col << ")" << endl;
                     }
+                    cout << "trang thai hien tai la"<<endl;
+                    for (int i = 0; i < nROW; ++i) {
+                        for (int j = 0; j < nCOL; ++j) {
+                            cout << gmap[i][j].isTowerIn << " ";
+                        }
+                        cout << endl;
+                    }
                 }
                 else if (event.button.button == SDL_BUTTON_RIGHT)
                     mouseStatus = SDL_BUTTON_RIGHT;
