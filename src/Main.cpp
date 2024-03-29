@@ -1,5 +1,4 @@
 #include "CommonFunc.h"
-#include "BaseObject.h"
 #include "game_map.h"
 #include "Game.h"
 bool InitData()

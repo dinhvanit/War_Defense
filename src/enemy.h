@@ -5,20 +5,23 @@
 #include "loadTexture.h"
 #include <vector>
 
-//class enemy
-//{
-//    public:
-//        enemy(SDL_Renderer* renderer);
-//        virtual ~enemy();
-//        void draw(SDL_Renderer* renderer);
+class enemy
+{
+    public:
+        enemy();
+        ~enemy();
+        enemy(SDL_Renderer* renderer, int x, int y);
+        void drawEnemy(SDL_Renderer* renderer, float x_pos, float y_pos);
 //        void moveInBlock();
 //        void moveInMap();
-//        bool isAlive = false;
-//        void
-//
-////    protected:
-//
-////    private:
-//};
+
+    private:
+        int x_pos;
+        int y_pos;
+        int w;
+        int h;
+
+        SDL_Texture* enemyTexture = nullptr;
+};
 
 #endif // ENEMY_H

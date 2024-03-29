@@ -11,6 +11,8 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <queue>
+#include <algorithm>
 
 using namespace std;
 
@@ -33,12 +35,13 @@ const int RENDER_DRAW_COLOR = 0xff;
 //tile
 const int TILE_WIDTH = 80;
 const int TILE_HEIGHT = 100;
-//tao map 11*7 o
-const int nCOL = 13;
-const int nROW = 7;
 //bang de thanh chon defense
 const int X_UPPER_LEFT=200;
 const int Y_UPPER_LEFT=0;
+
+//tao map nCOL*nROW o
+const int nCOL = (SCREEN_WIDTH - X_UPPER_LEFT)/TILE_WIDTH ;
+const int nROW = (SCREEN_HEIGHT - Y_UPPER_LEFT)/TILE_HEIGHT ;
 //
 struct Block {
     int x1, y1, x2, y2;

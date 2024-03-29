@@ -26,6 +26,7 @@ SDL_Texture* loadTexture::loadT(SDL_Renderer* renderer, string filename) {
                     umapTexturesLoaded[filename] = textureOutput;
                     return textureOutput;
                 }
+                else cout <<"load khong ok" << endl;
             }
         }
     }

@@ -3,6 +3,9 @@
 
 #include "CommonFunc.h"
 #include "loadTexture.h"
+#include <queue>
+#include <vector>
+#include <algorithm>
 
 class GameMap
 {
@@ -13,6 +16,8 @@ class GameMap
         void LoadTiles(SDL_Renderer* _renderer);
         //fill hinh anh vao cac vi tri
         void DrawMap(SDL_Renderer* _renderer);
+        static bool isValid(int col, int row, int rows, int cols);
+        static vector<Block> findShortestPath(Map gmap, Block start, Block finish);
 
     private:
         SDL_Texture* tile1 = nullptr;

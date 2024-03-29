@@ -18,6 +18,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
 //}
 void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
 {
+    GameMap gm;
     bool mouseDownThisFrame = false;
     while(!is_quit){
         while (SDL_PollEvent(&event)) {
@@ -48,6 +49,10 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                         SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "Archer.png"), NULL, &rect);
                         SDL_RenderPresent(renderer);
                         gmap[y][x]=Block(y, x, 1);
+                    }
+                    vector<Block> shortestPath = GameMap::findShortestPath(gmap, gmap[3][0], gmap[3][12]);
+                    for (const auto& block : shortestPath) {
+                        cout << "(" << block.row << ", " << block.col << ")" << endl;
                     }
                 }
                 else if (event.button.button == SDL_BUTTON_RIGHT)
