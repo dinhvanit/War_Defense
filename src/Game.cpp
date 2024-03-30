@@ -50,11 +50,14 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                         SDL_RenderPresent(renderer);
                         gmap[y][x]=Block(y, x, 1);
                     }
-                    vector<Block> shortestPath = GameMap::findShortestPath(gmap, gmap[3][0], gmap[3][12]);
+                    Block start = gmap[nROW / 2][0]; // Lấy start từ CreateMap()
+                    Block finish = gmap[nROW / 2][nCOL - 1]; // Lấy finish từ CreateMap()
+                    vector<Block> shortestPath = GameMap::findShortestPath(gmap, start, finish);
+                    cout << "duong di ngan nhat la : "<<endl;
                     for (const auto& block : shortestPath) {
                         cout << "(" << block.row << ", " << block.col << ")" << endl;
                     }
-                    cout << "trang thai hien tai la"<<endl;
+                    cout << "trang thai hien tai den "<<gmap[3][12].row << " "<< gmap[3][12].col <<" "<< gmap[3][12].isTowerIn <<endl;
                     for (int i = 0; i < nROW; ++i) {
                         for (int j = 0; j < nCOL; ++j) {
                             cout << gmap[i][j].isTowerIn << " ";

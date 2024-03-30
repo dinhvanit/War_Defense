@@ -33,8 +33,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="src/BaseObject.cpp" />
-		<Unit filename="src/BaseObject.h" />
 		<Unit filename="src/CommonFunc.cpp" />
 		<Unit filename="src/CommonFunc.h" />
 		<Unit filename="src/Game.cpp" />
@@ -42,6 +40,8 @@
 		<Unit filename="src/Level.cpp" />
 		<Unit filename="src/Level.h" />
 		<Unit filename="src/Main.cpp" />
+		<Unit filename="src/Move.cpp" />
+		<Unit filename="src/Move.h" />
 		<Unit filename="src/enemy.cpp" />
 		<Unit filename="src/enemy.h" />
 		<Unit filename="src/game_map.cpp" />

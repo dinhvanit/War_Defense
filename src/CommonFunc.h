@@ -26,6 +26,7 @@ const int SCREEN_WIDTH = 1240;
 const int SCREEN_HEIGHT = 700;
 const string WINDOW_TITLE = "War Defense";
 const int SCREEN_BPP = 32;
+const int FPS = 60;
 
 const int COLOR_KEY_R = 167;
 const int COLOR_KEY_G = 175;

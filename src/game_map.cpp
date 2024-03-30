@@ -46,16 +46,13 @@ void GameMap::DrawMap(SDL_Renderer* renderer)
         }
     }
 }
-bool GameMap::isValid(int col, int row, int rows, int cols) {
-    return (col >= 0 && col < cols && row >= 0 && row < rows);
+bool GameMap::isValid(int col, int row, int nROW, int nCOL) {
+    return (col >= 0 && col < nCOL && row >= 0 && row < nROW);
 }
 vector<Block> GameMap::findShortestPath(Map& gmap, Block start, Block finish)
 {
-    int rows = gmap.size();
-    int cols = gmap[0].size();
-
-    vector<vector<bool>> visited(rows, vector<bool>(cols, false)); // Đánh dấu các vị trí đã được duyệt
-    vector<vector<Block>> parent(rows, vector<Block>(cols, {-1, -1, -1})); // Lưu vị trí cha của mỗi vị trí
+    vector<vector<bool>> visited(nROW, vector<bool>(nCOL, false));
+    vector<vector<Block>> parent(nROW, vector<Block>(nCOL, {-1, -1, -1}));
 
     queue<Block> q;
     q.push(start);
@@ -65,16 +62,15 @@ vector<Block> GameMap::findShortestPath(Map& gmap, Block start, Block finish)
         Block current = q.front();
         q.pop();
 
-        if (current.row == finish.row && current.col == finish.col)
-            break;
 
-        int dr[4] = {-1, 0, 1, 0}; // Lên, phải, xuống, trái
+        int dr[4] = {-1, 0, 1, 0};
         int dc[4] = {0, 1, 0, -1};
 
         for (int i = 0; i < 4; ++i) {
             int new_row = current.row + dr[i];
             int new_col = current.col + dc[i];
-            if ((new_col >= 0 && new_col < cols && new_row >= 0 && new_row < rows) && !visited[new_row][new_col] && gmap[new_row][new_col].isTowerIn != 1) {
+
+            if (isValid(new_col, new_row, nROW, nCOL) && !visited[new_row][new_col] && gmap[new_row][new_col].isTowerIn != 1) {
                 Block next = {new_col, new_row, -1};
                 q.push(next);
                 visited[new_row][new_col] = true;
@@ -83,7 +79,6 @@ vector<Block> GameMap::findShortestPath(Map& gmap, Block start, Block finish)
         }
     }
 
-    // Tạo đường đi từ start đến finish
     vector<Block> path;
     Block current = finish;
     while (current.row != -1 && current.col != -1) {
@@ -91,9 +86,5 @@ vector<Block> GameMap::findShortestPath(Map& gmap, Block start, Block finish)
         current = parent[current.row][current.col];
     }
     reverse(path.begin(), path.end());
-    cout << "Duong di ngan nhat" << endl;
-    for (const auto& block : path) {
-        cout << "(" << block.row << ", " << block.col << ")" << endl;
-    }
     return path;
 }
