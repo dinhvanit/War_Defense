@@ -6,11 +6,8 @@ class Tower
 {
     public:
         Tower();
-        virtual ~Tower();
-
-    protected:
-
-    private:
+        ~Tower();
+//        void drawTower(SDL_Renderer* renderer,Map& gmap, int x, int y);
 };
 
 #endif // TOWER_H

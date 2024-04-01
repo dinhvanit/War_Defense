@@ -33,7 +33,7 @@
 1710438376 d:\bigproject\game_sdl2\src\sdl_utils.h
 	"CommonFunc.h"
 
-1711797682 source:d:\bigproject\game_sdl2\src\game_map.cpp
+1711977664 source:d:\bigproject\game_sdl2\src\game_map.cpp
 	"game_map.h"
 
 1711734086 d:\bigproject\game_sdl2\src\game_map.h
@@ -80,14 +80,14 @@
 1711274136 source:d:\bigproject\game_sdl2\src\tower.cpp
 	"Tower.h"
 
-1711274136 d:\bigproject\game_sdl2\src\tower.h
+1711897959 d:\bigproject\game_sdl2\src\tower.h
 
 1711372463 source:d:\bigproject\game_sdl2\src\level.cpp
 	"Level.h"
 
 1711374414 d:\bigproject\game_sdl2\src\level.h
 
-1711708943 source:d:\bigproject\game_sdl2\src\enemy.cpp
+1711807050 source:d:\bigproject\game_sdl2\src\enemy.cpp
 	"enemy.h"
 
 1711807050 d:\bigproject\game_sdl2\src\enemy.h
@@ -102,4 +102,9 @@
 1711704257 d:\bigproject\game_sdl2\src\move.h
 	"CommonFunc.h"
 	"enemy.h"
+
+1711897806 source:d:\bigproject\game_sdl2\src\player.cpp
+	"Player.h"
+
+1711897806 d:\bigproject\game_sdl2\src\player.h
 

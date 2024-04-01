@@ -71,7 +71,7 @@ vector<Block> GameMap::findShortestPath(Map& gmap, Block start, Block finish)
             int new_col = current.col + dc[i];
 
             if (isValid(new_col, new_row, nROW, nCOL) && !visited[new_row][new_col] && gmap[new_row][new_col].isTowerIn != 1) {
-                Block next = {new_col, new_row, -1};
+                Block next = {new_row, new_col, -1};
                 q.push(next);
                 visited[new_row][new_col] = true;
                 parent[new_row][new_col] = current;
