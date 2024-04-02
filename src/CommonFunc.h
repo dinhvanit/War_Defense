@@ -66,6 +66,7 @@ struct Block {
     }
 };
 typedef vector<vector<Block>> Map;
+typedef pair<int, int> pos;
 Map CreateMap();
 static Map gmap = CreateMap();
 //

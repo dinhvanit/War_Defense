@@ -18,7 +18,7 @@ class GameMap
         void DrawMap(SDL_Renderer* _renderer);
         static bool isValid(int col, int row, int rows, int cols);
         static vector<Block> findShortestPath(Map& gmap, Block start, Block finish);
-
+        static pos getBlockInMap(int x, int y);
     private:
         SDL_Texture* tile1 = nullptr;
         SDL_Texture* tile2 = nullptr;

@@ -8,7 +8,7 @@ class Move
 {
     public:
         Move();
-        virtual ~Move();
+        ~Move();
 
     protected:
 
