@@ -6,8 +6,15 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
 {
     if (window != nullptr && renderer != nullptr) {
         bool is_quit = false;
+        draw(renderer);
         while(!is_quit){
-            draw(renderer);
+//            draw(renderer);
+
+            Block start = gmap[nROW / 2][0]; // Lấy start từ CreateMap()
+            Block finish = gmap[nROW / 2][nCOL - 1]; // Lấy finish từ CreateMap()
+            vector<Block> shortestPath = GameMap::findShortestPath(gmap, start, finish);
+            enemy enm;
+            enm.moveInMap(renderer, shortestPath);
             processEvents(renderer, is_quit);
 
         }
@@ -20,7 +27,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
 void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
 {
     bool mouseDownThisFrame = false;
-    while(!is_quit){
+//    while(!is_quit){
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
             case SDL_QUIT:
@@ -104,7 +111,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
 //            }
             }
         }
-    }
+//    }//bo vong lap game ra khoi xu ly su kien
 //    cout << "khong truy cap vao duoc"<<endl;
 }
 
@@ -117,3 +124,4 @@ void Game::draw(SDL_Renderer* renderer)
     game_map.DrawMap(renderer);
     SDL_RenderPresent(renderer);
 }
+//void Game::addEnemy(SDL_Renderer* renderer)

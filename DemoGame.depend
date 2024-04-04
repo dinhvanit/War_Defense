@@ -88,14 +88,15 @@
 
 1711374414 d:\bigproject\game_sdl2\src\level.h
 
-1711980831 source:d:\bigproject\game_sdl2\src\enemy.cpp
+1712245636 source:d:\bigproject\game_sdl2\src\enemy.cpp
 	"enemy.h"
 
-1711979331 d:\bigproject\game_sdl2\src\enemy.h
+1712243069 d:\bigproject\game_sdl2\src\enemy.h
 	"CommonFunc.h"
 	"loadTexture.h"
 	"game_map.h"
 	<vector>
+	"time.h"
 
 1711702408 source:d:\bigproject\game_sdl2\src\move.cpp
 	"Move.h"
@@ -108,4 +109,9 @@
 	"Player.h"
 
 1711897806 d:\bigproject\game_sdl2\src\player.h
+
+1712236754 source:d:\bigproject\game_sdl2\src\time.cpp
+	"time.h"
+
+1712236754 d:\bigproject\game_sdl2\src\time.h
 
