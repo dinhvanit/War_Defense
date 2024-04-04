@@ -10,11 +10,11 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
         while(!is_quit){
 //            draw(renderer);
 
-            Block start = gmap[nROW / 2][0]; // Lấy start từ CreateMap()
-            Block finish = gmap[nROW / 2][nCOL - 1]; // Lấy finish từ CreateMap()
-            vector<Block> shortestPath = GameMap::findShortestPath(gmap, start, finish);
-            enemy enm;
-            enm.moveInMap(renderer, shortestPath);
+//            Block start = gmap[nROW / 2][0]; // Lấy start từ CreateMap()
+//            Block finish = gmap[nROW / 2][nCOL - 1]; // Lấy finish từ CreateMap()
+//            vector<Block> shortestPath = GameMap::findShortestPath(gmap, start, finish);
+//            enemy enm;
+//            enm.moveInMap(renderer, shortestPath);
             processEvents(renderer, is_quit);
 
         }
@@ -74,43 +74,31 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
         switch (mouseStatus)
         {
             case SDL_BUTTON_LEFT:
-            switch (TypeCurrent) {
-            case TowerType::archer:
-//                cout << "ve ra archer o vi tri "<<posM.first << " "<<posM.second<<"====="<<endl;
-                if( gmap[posM.first][posM.second].isTowerIn == 0){
+                if( gmap[posM.first][posM.second].isTowerIn == 0 ){
                     gmap[posM.first][posM.second]=Block(posM.first, posM.second, 1);
-                    SDL_Rect rect = {gmap[posM.first][posM.second].x1,gmap[posM.first][posM.second].y1, TILE_WIDTH, TILE_HEIGHT };
-                    SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "Archer.png"), NULL, &rect);
-                    SDL_RenderPresent(renderer);
+                    if(!GameMap::ConDuong(gmap)) {
+                        cout << "khong dat duoc vi tri nay!"<<endl;
+                        gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
+                    }
+                    else {
+                        SDL_Rect rect = {gmap[posM.first][posM.second].x1,gmap[posM.first][posM.second].y1, TILE_WIDTH, TILE_HEIGHT };
+                        switch (TypeCurrent) {
+                        case TowerType::archer:
+            //                cout << "ve ra archer o vi tri "<<posM.first << " "<<posM.second<<"====="<<endl;
+                                SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "Archer.png"), NULL, &rect);
+                            break;
+                        case TowerType::canon:
+            //                cout << "ve ra canon o vi tri "<<posM.first << " "<<posM.second<<"====="<<endl;
+                                SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "canon.png"), NULL, &rect);
+                            break;
+                        }
+                        SDL_RenderPresent(renderer);
+                    }
                 }
-                break;
-            case TowerType::canon:
-//                cout << "ve ra canon o vi tri "<<posM.first << " "<<posM.second<<"====="<<endl;
-                if( gmap[posM.first][posM.second].isTowerIn == 0){
-                    gmap[posM.first][posM.second]=Block(posM.first, posM.second, 1);
-                    SDL_Rect rect = {gmap[posM.first][posM.second].x1,gmap[posM.first][posM.second].y1, TILE_WIDTH, TILE_HEIGHT };
-                    SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "canon.png"), NULL, &rect);
-                    SDL_RenderPresent(renderer);
-                }
-                break;
-            }
+
             break;
-//            Block start = gmap[nROW / 2][0]; // Lấy start từ CreateMap()
-//            Block finish = gmap[nROW / 2][nCOL - 1]; // Lấy finish từ CreateMap()
-//            vector<Block> shortestPath = GameMap::findShortestPath(gmap, start, finish);
-//            cout << "duong di ngan nhat la : "<<endl;
-//            for (const auto& block : shortestPath) {
-//                cout << "(" << block.row << ", " << block.col << ")" << endl;
-//            }
-//            cout << "trang thai hien tai den "<<gmap[3][12].row << " "<< gmap[3][12].col <<" "<< gmap[3][12].isTowerIn <<endl;
-//            for (int i = 0; i < nROW; ++i) {
-//                for (int j = 0; j < nCOL; ++j) {
-//                    cout << gmap[i][j].isTowerIn << " ";
-//                }
-//                cout << endl;
-//            }
-            }
         }
+    }
 //    }//bo vong lap game ra khoi xu ly su kien
 //    cout << "khong truy cap vao duoc"<<endl;
 }

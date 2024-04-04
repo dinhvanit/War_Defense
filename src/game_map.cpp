@@ -97,3 +97,11 @@ vector<Block> GameMap::findShortestPath(Map& gmap, Block start, Block finish)
     reverse(path.begin(), path.end());
     return path;
 }
+bool GameMap::ConDuong(Map gmap)
+{
+    Block start = gmap[nROW / 2][0]; // Lấy start từ CreateMap()
+    Block finish = gmap[nROW / 2][nCOL - 1]; // Lấy finish từ CreateMap()
+    vector<Block> shortestPath = GameMap::findShortestPath(gmap, start, finish);
+    if(shortestPath.size()>1) return true;
+    return false;
+}

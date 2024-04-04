@@ -19,17 +19,17 @@ void time::countUp(float dT) {
 
 
 void time::countDown(float dT) {
-	if (timeSCurrent > 0.0f) {
+	if (timeSCurrent > 0) {
 		timeSCurrent -= dT;
-		if (timeSCurrent < 0.0f)
-			timeSCurrent = 0.0f;
+		if (timeSCurrent < 0)
+			timeSCurrent = 0;
 	}
 }
 
 
 
 void time::resetToZero() {
-	timeSCurrent = 0.0f;
+	timeSCurrent = 0;
 }
 
 
