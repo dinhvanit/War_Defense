@@ -1,22 +1,37 @@
 #include "Game.h"
 #include "game_map.h"
 
-Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT)
+Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT):
+    TypeCurrent(TowerType::archer),
+    spawnTimer(0.25f), roundTimer(5.0f)
 
 {
     if (window != nullptr && renderer != nullptr) {
         bool is_quit = false;
+
+        auto time1 = std::chrono::system_clock::now();
+        auto time2 = std::chrono::system_clock::now();
+
+        const float dT = 1.0f / 60.0f;
+
         draw(renderer);
         while(!is_quit){
-//            draw(renderer);
 
-//            Block start = gmap[nROW / 2][0]; // Lấy start từ CreateMap()
-//            Block finish = gmap[nROW / 2][nCOL - 1]; // Lấy finish từ CreateMap()
-//            vector<Block> shortestPath = GameMap::findShortestPath(gmap, start, finish);
-//            enemy enm;
-//            enm.moveInMap(renderer, shortestPath);
-            processEvents(renderer, is_quit);
+            time2 = std::chrono::system_clock::now();
+            std::chrono::duration<float> timeDelta = time2 - time1;
+            float timeDeltaFloat = timeDelta.count();
 
+            if(timeDeltaFloat >= dT){
+                time1=time2;
+//              draw(renderer);
+
+//              Block start = gmap[nROW / 2][0]; // Lấy start từ CreateMap()
+//              Block finish = gmap[nROW / 2][nCOL - 1]; // Lấy finish từ CreateMap()
+//              vector<Block> shortestPath = GameMap::findShortestPath(gmap, start, finish);
+//              enemy enm;
+//              enm.moveInMap(renderer, shortestPath);
+                processEvents(renderer, is_quit);
+            }
         }
     }
 }

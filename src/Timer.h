@@ -1,11 +1,11 @@
-#ifndef TIME_H
-#define TIME_H
+#ifndef TIMER_H
+#define TIMER_H
 
 
-class time
+class Timer
 {
 public:
-	time(float setTimeSMax, float setTimeSCurrent = 0);
+	Timer(float setTimeSMax, float setTimeSCurrent = 0.0f);
 
 	void countUp(float dT);
 	void countDown(float dT);
@@ -20,4 +20,4 @@ private:
 	float timeSCurrent;
 };
 
-#endif // TIME_H
+#endif // TIMER_H

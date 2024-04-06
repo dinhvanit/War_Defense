@@ -36,7 +36,7 @@
 1712249104 source:d:\bigproject\game_sdl2\src\game_map.cpp
 	"game_map.h"
 
-1712249089 d:\bigproject\game_sdl2\src\game_map.h
+1712249424 d:\bigproject\game_sdl2\src\game_map.h
 	"CommonFunc.h"
 	"loadTexture.h"
 	<queue>
@@ -63,14 +63,17 @@
 	"CommonFunc.h"
 	"game_map.h"
 
-1712248956 source:d:\bigproject\game_sdl2\src\game.cpp
+1712250760 source:d:\bigproject\game_sdl2\src\game.cpp
 	"Game.h"
 	"game_map.h"
 
-1712064674 d:\bigproject\game_sdl2\src\game.h
+1712375491 d:\bigproject\game_sdl2\src\game.h
 	"CommonFunc.h"
 	"game_map.h"
 	"enemy.h"
+	<chrono>
+	<ctime>
+	"Timer.h"
 
 1711296537 d:\bigproject\game_sdl2\src\loadtexture.h
 	"CommonFunc.h"
@@ -110,8 +113,14 @@
 
 1711897806 d:\bigproject\game_sdl2\src\player.h
 
-1712247315 source:d:\bigproject\game_sdl2\src\time.cpp
+1712374998 source:d:\bigproject\game_sdl2\src\time.cpp
 	"time.h"
 
-1712246990 d:\bigproject\game_sdl2\src\time.h
+1712374992 d:\bigproject\game_sdl2\src\time.h
+
+1712375392 d:\bigproject\game_sdl2\src\timer.h
+
+1712375392 source:d:\bigproject\game_sdl2\src\timer.cpp
+	"Timer.h"
+	"Timer.h"
 
