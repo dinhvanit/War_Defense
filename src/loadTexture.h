@@ -9,7 +9,6 @@ class loadTexture
         static SDL_Texture* loadT(SDL_Renderer* renderer, string filename);
         static void deallocateTextures();
 
-
     private:
         static std::unordered_map<string, SDL_Texture*> umapTexturesLoaded;
 };

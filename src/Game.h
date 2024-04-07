@@ -38,4 +38,5 @@ class Game
         int spawnEnemyCount;
 };
 
+
 #endif // GAME_H

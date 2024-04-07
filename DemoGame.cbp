@@ -44,6 +44,8 @@
 		<Unit filename="src/Move.h" />
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/Player.h" />
+		<Unit filename="src/Timer.cpp" />
+		<Unit filename="src/Timer.h" />
 		<Unit filename="src/Tower.cpp" />
 		<Unit filename="src/Tower.h" />
 		<Unit filename="src/enemy.cpp" />
@@ -52,7 +54,6 @@
 		<Unit filename="src/game_map.h" />
 		<Unit filename="src/loadTexture.cpp" />
 		<Unit filename="src/loadTexture.h" />
-		<Unit filename="src/time.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

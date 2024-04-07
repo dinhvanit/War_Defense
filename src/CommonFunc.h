@@ -70,5 +70,4 @@ typedef pair<int, int> pos;
 Map CreateMap();
 static Map gmap = CreateMap();
 //
-
 #endif // COMMONFUNC_H

@@ -1,11 +1,11 @@
 #include "Tower.h"
 
-Tower::Tower()
-{
-    //ctor
-}
-
-Tower::~Tower()
-{
-    //dtor
-}
+//Tower::Tower()
+//{
+//    ctor
+//}
+//
+//Tower::~Tower()
+//{
+//    dtor
+//}

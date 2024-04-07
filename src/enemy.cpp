@@ -1,12 +1,11 @@
 #include "enemy.h"
 
-enemy::enemy() : x_pos(X_UPPER_LEFT+TILE_WIDTH/4) ,y_pos(Y_UPPER_LEFT+TILE_HEIGHT*3+TILE_HEIGHT/4), blockIndex(0)
-{
-    enemyTexture = loadTexture::loadT(renderer, "zombie.png");
-}
-//    enemyTexture = loadTexture::loadT(renderer, "zombie.png");
-
-//
+const float enemy::speed = 0.5f;
+enemy::enemy() :
+ x_pos(X_UPPER_LEFT) ,y_pos(Y_UPPER_LEFT+TILE_HEIGHT*3), blockIndex(0)
+ {
+//    enemyTexture =loadTexture::loadT(renderer, "demon.png");
+ }
 enemy::~enemy()
 {
     SDL_DestroyTexture(enemyTexture);
@@ -15,26 +14,51 @@ enemy::~enemy()
 void enemy::drawEnemy(SDL_Renderer* renderer, float x_pos, float y_pos)
 {
     SDL_Rect eRect= {(int)( x_pos),(int) (y_pos), enemyW, enemyH }; // Vị trí và kích thước của
-    SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "zombie.png"), NULL, &eRect);
+//    enemyTexture = loadTexture::loadT(renderer, "mage.png");
+    SDL_RenderCopy(renderer, enemyTexture, NULL, &eRect);
+    SDL_DestroyTexture(enemyTexture);
 }
 //moi lan vong lap game thi load anh tren map
 //nen dung if khong can dung while
 void enemy::moveInMap(SDL_Renderer* renderer, vector<Block> enemyPath)
 {
+    enemyTexture = loadTexture::loadT(renderer, "demon.png");
     int targetX = enemyPath[blockIndex].x1;
     int targetY = enemyPath[blockIndex].y1;
-    if(enemyPath[blockIndex].x1 < targetX)
+    cout << targetX <<" "<<targetY<<endl;
+    if(x_pos < targetX)
     {
         x_pos+=5;
+        cout << "dich phai"<<endl;
     }
-    else if(enemyPath[blockIndex].x1 < targetX) x_pos-=5;
-    else if(enemyPath[blockIndex].x1 < targetX) y_pos+=5;
-    else if(enemyPath[blockIndex].x1 < targetX) y_pos-=5;
+    else if(x_pos > targetX) x_pos-=5;
+    else if(y_pos < targetY) y_pos+=5;
+    else if(y_pos > targetY) y_pos-=5;
     else
     {
-        blockIndex++;
+        cout <<"tang chi so : " <<blockIndex<<endl;
+        blockIndex = (blockIndex+1)% enemyPath.size();
     }
-    drawEnemy(renderer, x_pos+TILE_WIDTH/4, y_pos+TILE_HEIGHT/4);
-
-    SDL_Delay(1000/FPS);
+//    drawEnemy(renderer, x_pos+TILE_WIDTH/4, y_pos+TILE_HEIGHT/4);
+    SDL_Rect eRect= {x_pos+TILE_WIDTH/4,y_pos+TILE_HEIGHT/4, enemyW, enemyH }; // Vị trí và kích thước của
+    SDL_RenderCopy(renderer, enemyTexture, NULL, &eRect);
+    SDL_RenderPresent(renderer);
+//    SDL_DestroyTexture(enemyTexture);
+//    SDL_Delay(200);
 }
+
+//pos enemy::getPos(){
+//    return pos;
+//}
+//
+//bool enemy::isAlive(){
+//    return (healthCurrent > 0);
+//}
+//
+//void Unit::removeHealth(int damage) {
+//	if (damage > 0) {
+//		healthCurrent -= damage;
+//		if (healthCurrent < 0)
+//			healthCurrent = 0;
+//	}
+//}
