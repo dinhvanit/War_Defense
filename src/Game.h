@@ -30,19 +30,23 @@ class Game
         void addTower(SDL_Renderer* renderer, pos posM);
         void addEnemy();
 
-        void update(SDL_Renderer* renderer, float dT);
-        void updateEnemy(float dT);
-        void updateTower(SDL_Renderer* renderer, Map& gmap);
+        void updates(SDL_Renderer* renderer, float dT);
+        void updateEnemys(float dT);
+        void updateTowers(SDL_Renderer* renderer, Map& gmap);
+        void updateSpawnEnemy(SDL_Renderer* renderer, float dT);
 
+//        void DestroyTower(SDL_renderer* renderer, Block posM);
 
         int mouseStatus = 0;
 
-        vector<enemy> listEnemys;
+        vector<shared_ptr<enemy>> listEnemys;
         vector<Tower> listTowers;
 
         Timer spawnTimer, roundTimer;
 
-        int spawnEnemyCount=0;
+        GameMap game_map;
+
+        int spawnEnemyCount=0;//so quai 1 turn
 };
 
 

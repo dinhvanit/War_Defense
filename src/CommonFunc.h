@@ -40,7 +40,7 @@ const int TILE_HEIGHT = 100;
 const int X_UPPER_LEFT=200;
 const int Y_UPPER_LEFT=0;
 
-//tao map nCOL*nROW o
+//tao map nCOL*nROW 13*7
 const int nCOL = (SCREEN_WIDTH - X_UPPER_LEFT)/TILE_WIDTH ;
 const int nROW = (SCREEN_HEIGHT - Y_UPPER_LEFT)/TILE_HEIGHT ;
 //
@@ -69,5 +69,10 @@ typedef vector<vector<Block>> Map;
 typedef pair<int, int> pos;
 Map CreateMap();
 static Map gmap = CreateMap();
-//
+
+const Block start = Block(nROW/2, 0 , 3);
+const Block finish = Block(nROW/2, nCOL-1, 4);
+
+//so quai moi turn
+const int countEnemy = 5;
 #endif // COMMONFUNC_H

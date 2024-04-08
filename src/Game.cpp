@@ -120,25 +120,67 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
 
 
 
-//void Game::update(SDL_Renderer* renderer, float dT)
-//{
-//    updateEnemy(dT);
-//}
+void Game::updates(SDL_Renderer* renderer, float dT)
+{
+    updateEnemy(dT);
+}
+
+void Game::updateEnemys(float dT)
+{
+    auto it = listEnemys.begin();
+    while (it != listEnemys.end()) {
+        bool increment = true;
+
+        if ((*it) != nullptr) {
+            (*it)->updateEnemy(dT, listUnits);
+
+            //Check if the unit is still alive.  If not then erase it and don't increment the iterator.
+            if ((*it)->isAlive() == false) {
+                it = listUnits.erase(it);
+                increment = false;
+            }
+        }
+
+        if (increment)
+            it++;
+    }
+}
 
 
+void Game::updateSpawnEnemy(SDL_Renderer* renderer, float dT)
+{
+    spawnTimer.countDown(dT);
+    //bat dau moi round moi
+    if(listEnemys.empty() && spawnEnemyCount = 0){
+        roundTimer.countDown(dT);
+        if (roundTimer.timeSIsZero()){
+            spawnEnemyCount = countEnemy;
+            roundTimer.resetToMax();
+        }
+    }
 
+    //them quai vao round
+    if(spawnEnemyCount > 0 && spawnTimer.timeSIsZero()){
+        addEnemy();
+
+        spawnEnemyCount--;
+        spawnTimer.resetToMax();
+    }
+}
 
 void Game::draw(SDL_Renderer* renderer)
 {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
-    GameMap game_map;
-
     game_map.DrawMap(renderer);
+    for(auto& enemySelected : listEnemys)
+        if(enemySelected != nullptr)
+            enemySelected->drawEnemy(renderer);
 
-    for(auto& x : listTowers)
-        x.draw(renderer);
+
+    for(auto& towerSelected : listTowers)
+        towerSelected.draw(renderer);
 
     SDL_RenderPresent(renderer);
 }
@@ -154,9 +196,9 @@ void Game::addTower(SDL_Renderer* renderer, pos posM)
 
 
 
-//void Game::addEnemy(){
-//    listEnemys.push_back(enemy));
-//}
+void Game::addEnemy(){
+    listEnemys.push_back(make_shared<enemy>(renderer, start));
+}
 
 
 

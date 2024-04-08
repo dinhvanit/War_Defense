@@ -7,34 +7,57 @@
 #include <vector>
 #include "time.h"
 
+
+//typedef enum{
+//    stateNone = 0;̬
+//    stateWalkRight,
+//    stateWalkLeft,
+//	stateWalkUp,
+//	stateWalkDown,
+//	stateDeath,
+//	stateFrozen
+//}EnemyState;
+//typedef enum{
+//    DEMON = 0;
+//    ORC,
+//    WOLF,
+//}EnemyName;
+
 class enemy
 {
     public:
-        enemy();
+        enemy(SDL_renderer* renderer, Block currentBlock);
         ~enemy();
-        enemy(SDL_Renderer* renderer, int x, int y);
-        void drawEnemy(SDL_Renderer* renderer, float x_pos, float y_pos);
+
+        void updateEnemy(SDL_Renderer* renderer, vector <shared_ptr<enemy>>& listEnemys);
+
+        void drawEnemy(SDL_Renderer* renderer, Block curBlock)
 //        void moveInBlock();
-        void moveInMap(SDL_Renderer* renderer, vector<Block> enemyPath);
-        pos getPos();
-        void removeHealth(int damege);
+        void moveInMap(SDL_Renderer* renderer);
+
+        Block getNextBlock();
+
+        Block getBlock();
+
+        void getDamage(int damage);
+
         bool isAlive();
-        SDL_Texture* enemyTexture ;
-        void MakeParameter();
+
+        void runNextBlock();
+
     private:
-        int x_pos;
-        int y_pos;
-        int w;
-        int h;
+        pos ePos;
+        Block eBlock;
         static const float speed;
         int enemyW = 40;
         int enemyH = 50;
         int blockIndex;
         const int healthMax = 10;
         int healthCurrent = healthMax;
-        int numFrames;
-        int CurrentFrame;
-        SDL_Rect frame_clip[20];
+
+//        int numFrames;
+//        int CurrentFrame;
+        SDL_Texture* enemyTexture ;
 };
 
 #endif // ENEMY_H
