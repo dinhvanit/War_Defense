@@ -19,6 +19,8 @@ class enemy
         pos getPos();
         void removeHealth(int damege);
         bool isAlive();
+        SDL_Texture* enemyTexture ;
+        void MakeParameter();
     private:
         int x_pos;
         int y_pos;
@@ -27,10 +29,12 @@ class enemy
         static const float speed;
         int enemyW = 40;
         int enemyH = 50;
-        SDL_Texture* enemyTexture = nullptr;
         int blockIndex;
         const int healthMax = 10;
         int healthCurrent = healthMax;
+        int numFrames;
+        int CurrentFrame;
+        SDL_Rect frame_clip[20];
 };
 
 #endif // ENEMY_H

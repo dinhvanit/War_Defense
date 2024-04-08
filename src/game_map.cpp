@@ -46,6 +46,8 @@ void GameMap::DrawMap(SDL_Renderer* renderer)
         }
     }
 }
+
+
 pos GameMap::getBlockInMap(int x, int y)
 {
 //    cout << x << " "<<y <<"---------"<<endl;
@@ -55,6 +57,8 @@ pos GameMap::getBlockInMap(int x, int y)
 //    cout << result.first << " "<<result.second<<"---------"<<endl;
     return result;
 }
+
+
 bool GameMap::isValid(int col, int row, int nROW, int nCOL) {
     return (col >= 0 && col < nCOL && row >= 0 && row < nROW);
 }

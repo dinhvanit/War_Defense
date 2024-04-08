@@ -8,14 +8,19 @@
 
 class Tower
 {
-//    public:
-//        Tower(SDL_Renderer* renderer, GameMap gamemap);
-//        ~Tower();
-//        void update(SDL_Renderer* renderer, float dT);
+
+    public:
+        Tower(SDL_Renderer* renderer, pos _pos);
+        void update(SDL_Renderer* renderer, float dT);
 //        void addTower(SDL_Renderer* renderer,Map& gmap, int x, int y);
-//        void draw(SDL_Renderer* renderer);
-//    private:
-//        bool updateA(float dT);
+        void draw(SDL_Renderer* renderer);
+
+
+    private:
+        bool updateA(float dT);
+        pos posM;
+        static const float weaponRange;
+        SDL_Texture* textureTower = nullptr;
 };
 
 #endif // TOWER_H

@@ -7,6 +7,7 @@
 #include <chrono>
 #include <ctime>
 #include "Timer.h"
+#include "Tower.h"
 
 class Game
 {
@@ -23,19 +24,25 @@ class Game
 //        void addTower(SDL_renderer* renderer, )
 
     private:
-        int mouseStatus = 0;
         void draw(SDL_Renderer* renderer);
         void processEvents(SDL_Renderer* renderer, bool& is_quit);
-        void addTower(SDL_Renderer* renderer);
+
+        void addTower(SDL_Renderer* renderer, pos posM);
         void addEnemy();
+
         void update(SDL_Renderer* renderer, float dT);
         void updateEnemy(float dT);
+        void updateTower(SDL_Renderer* renderer, Map& gmap);
+
+
+        int mouseStatus = 0;
 
         vector<enemy> listEnemys;
-//        vector<Tower> listTowers;
+        vector<Tower> listTowers;
 
         Timer spawnTimer, roundTimer;
-        int spawnEnemyCount;
+
+        int spawnEnemyCount=0;
 };
 
 

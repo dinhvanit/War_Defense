@@ -1,7 +1,4 @@
 #include "Game.h"
-#include "game_map.h"
-
-vector<Block> vtest={Block(3,1,0), Block(3,2,0), Block(3,3,0), Block(3,4,0), Block(3,5,0), Block(3,6,0), Block(3,7,0)};
 
 
 Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT):
@@ -17,8 +14,6 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
 
         const float dT = 1.0f / 60.0f;
 
-        draw(renderer);
-        enemy enm;
         while(!is_quit){
 
             time2 = std::chrono::system_clock::now();
@@ -27,12 +22,10 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
             //load hoat anh
             if(timeDeltaFloat >= dT){
                 time1=time2;
-                Block start = gmap[nROW / 2][0]; // Lấy start từ CreateMap()
-                Block finish = gmap[nROW / 2][nCOL - 1]; // Lấy finish từ CreateMap()
-                vector<Block> shortestPath = GameMap::findShortestPath(gmap, start, finish);
-                enm.moveInMap(renderer, shortestPath);
-//                enm.moveInMap(renderer, vtest);
                 processEvents(renderer, is_quit);
+//                update(renderer, dT);
+                draw(renderer);
+
             }
         }
     }
@@ -41,6 +34,9 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
 //{
 //    //dtor
 //}
+
+
+
 void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
 {
     bool mouseDownThisFrame = false;
@@ -81,7 +77,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                 break;
             }
         }
-        int mouseX =0;
+    int mouseX =0;
     int mouseY=0;
     SDL_GetMouseState(&mouseX, &mouseY);
     pos posM = GameMap::getBlockInMap(mouseX, mouseY);
@@ -101,15 +97,16 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                         SDL_Rect rect = {gmap[posM.first][posM.second].x1,gmap[posM.first][posM.second].y1, TILE_WIDTH, TILE_HEIGHT };
                         switch (TypeCurrent) {
                         case TowerType::archer:
+                            addTower(renderer, posM);
             //                cout << "ve ra archer o vi tri "<<posM.first << " "<<posM.second<<"====="<<endl;
-                                SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "Archer.png"), NULL, &rect);
+//                                SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "Archer.png"), NULL, &rect);
                             break;
                         case TowerType::canon:
             //                cout << "ve ra canon o vi tri "<<posM.first << " "<<posM.second<<"====="<<endl;
                                 SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "canon.png"), NULL, &rect);
                             break;
                         }
-                        SDL_RenderPresent(renderer);
+//                        SDL_RenderPresent(renderer);
                     }
                 }
 
@@ -121,18 +118,52 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
 }
 
 
+
+
 //void Game::update(SDL_Renderer* renderer, float dT)
 //{
 //    updateEnemy(dT);
 //}
 
 
+
+
 void Game::draw(SDL_Renderer* renderer)
 {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
+
     GameMap game_map;
+
     game_map.DrawMap(renderer);
+
+    for(auto& x : listTowers)
+        x.draw(renderer);
+
     SDL_RenderPresent(renderer);
 }
+
+
+
+
 //void Game::addEnemy(SDL_Renderer* renderer)
+void Game::addTower(SDL_Renderer* renderer, pos posM)
+{
+    listTowers.push_back(Tower(renderer, posM));
+}
+
+
+
+//void Game::addEnemy(){
+//    listEnemys.push_back(enemy));
+//}
+
+
+
+//void Game::update(SDL_Rederer* renderer, float dT)
+//{
+//    for(auto& x : listTowers)
+//        x
+//}
+
+
