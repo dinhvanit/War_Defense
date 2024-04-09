@@ -23,7 +23,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
             if(timeDeltaFloat >= dT){
                 time1=time2;
                 processEvents(renderer, is_quit);
-//                update(renderer, dT);
+                updates(renderer, dT);
                 draw(renderer);
 
             }
@@ -122,7 +122,9 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
 
 void Game::updates(SDL_Renderer* renderer, float dT)
 {
-    updateEnemy(dT);
+    updateEnemys(dT);
+
+    updateSpawnEnemy(renderer, dT);
 }
 
 void Game::updateEnemys(float dT)
@@ -132,11 +134,9 @@ void Game::updateEnemys(float dT)
         bool increment = true;
 
         if ((*it) != nullptr) {
-            (*it)->updateEnemy(dT, listUnits);
-
-            //Check if the unit is still alive.  If not then erase it and don't increment the iterator.
+            (*it)->updateEnemy(renderer, listEnemys);
             if ((*it)->isAlive() == false) {
-                it = listUnits.erase(it);
+                it = listEnemys.erase(it);
                 increment = false;
             }
         }
@@ -151,7 +151,7 @@ void Game::updateSpawnEnemy(SDL_Renderer* renderer, float dT)
 {
     spawnTimer.countDown(dT);
     //bat dau moi round moi
-    if(listEnemys.empty() && spawnEnemyCount = 0){
+    if(listEnemys.empty() && spawnEnemyCount == 0){
         roundTimer.countDown(dT);
         if (roundTimer.timeSIsZero()){
             spawnEnemyCount = countEnemy;
@@ -161,7 +161,7 @@ void Game::updateSpawnEnemy(SDL_Renderer* renderer, float dT)
 
     //them quai vao round
     if(spawnEnemyCount > 0 && spawnTimer.timeSIsZero()){
-        addEnemy();
+        addEnemy(renderer, start);
 
         spawnEnemyCount--;
         spawnTimer.resetToMax();
@@ -196,16 +196,11 @@ void Game::addTower(SDL_Renderer* renderer, pos posM)
 
 
 
-void Game::addEnemy(){
-    listEnemys.push_back(make_shared<enemy>(renderer, start));
+void Game::addEnemy(SDL_Renderer* renderer, Block sBlock){
+    listEnemys.push_back(make_shared<enemy>(renderer, sBlock));
 }
 
 
 
-//void Game::update(SDL_Rederer* renderer, float dT)
-//{
-//    for(auto& x : listTowers)
-//        x
-//}
 
 

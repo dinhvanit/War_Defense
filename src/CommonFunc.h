@@ -68,7 +68,7 @@ struct Block {
 typedef vector<vector<Block>> Map;
 typedef pair<int, int> pos;
 Map CreateMap();
-static Map gmap = CreateMap();
+Map gmap = CreateMap();
 
 const Block start = Block(nROW/2, 0 , 3);
 const Block finish = Block(nROW/2, nCOL-1, 4);

@@ -6,7 +6,7 @@
 #include "game_map.h"
 #include <vector>
 #include "time.h"
-
+#include <memory>//share_ptr
 
 //typedef enum{
 //    stateNone = 0;̬
@@ -26,12 +26,12 @@
 class enemy
 {
     public:
-        enemy(SDL_renderer* renderer, Block currentBlock);
-        ~enemy();
+        enemy(SDL_Renderer* renderer, Block currentBlock);
+//        ~enemy();
 
         void updateEnemy(SDL_Renderer* renderer, vector <shared_ptr<enemy>>& listEnemys);
 
-        void drawEnemy(SDL_Renderer* renderer, Block curBlock)
+        void drawEnemy(SDL_Renderer* renderer);
 //        void moveInBlock();
         void moveInMap(SDL_Renderer* renderer);
 
@@ -54,7 +54,7 @@ class enemy
         int blockIndex;
         const int healthMax = 10;
         int healthCurrent = healthMax;
-
+        float step;
 //        int numFrames;
 //        int CurrentFrame;
         SDL_Texture* enemyTexture ;

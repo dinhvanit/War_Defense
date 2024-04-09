@@ -1,8 +1,8 @@
 #include "enemy.h"
 
 const float enemy::speed = 0.5f;
-enemy::enemy(SDL_renderer* renderer, Block currentBlock) :
- numFrames(0), CurrentFrame(0), eBlock(0, 3, 3)
+enemy::enemy(SDL_Renderer* renderer, Block currentBlock) :
+ eBlock(start), step(2)
  {
     enemyTexture =loadTexture::loadT(renderer, "demon.png");
  }
@@ -17,65 +17,73 @@ enemy::enemy(SDL_renderer* renderer, Block currentBlock) :
 
 void enemy::updateEnemy(SDL_Renderer* renderer, vector <shared_ptr<enemy>>& listEnemys)
 {
-
+    if(eBlock.col==finish.col && eBlock.row==finish.row) healthCurrent = 0;
+    runNextBlock();
 }
 
-void enemy::drawEnemy(SDL_Renderer* renderer, Block curBlock)
+void enemy::drawEnemy(SDL_Renderer* renderer)
 {
-    SDL_Rect eRect= {curBlock.x1+TILE_WIDTH/4, curBlock.y1+TILE_HEIGHT/4, enemyW, enemyH }; // Vị trí và kích thước của
+    SDL_Rect eRect= {eBlock.x1+TILE_WIDTH/4, eBlock.y1+TILE_HEIGHT/4, enemyW, enemyH }; // Vị trí và kích thước của
     SDL_RenderCopy(renderer, enemyTexture, NULL, &eRect);
 }
 //moi lan vong lap game thi load anh tren map
 //nen dung if khong can dung while
 
-//void enemy::moveInMap(SDL_Renderer* renderer, vector<Block> enemyPath)
-//{
-//    enemyTexture = loadTexture::loadT(renderer, "1_run.png");
-//    int targetX = enemyPath[blockIndex].x1;
-//    int targetY = enemyPath[blockIndex].y1;
-//    cout << targetX <<" "<<targetY<<endl;
-//    if(x_pos < targetX)
-//    {
-//        x_pos+=5;
-//        cout << "dich phai"<<endl;
-//    }
-//
-//    else if(x_pos > targetX) x_pos-=5;
-//    else if(y_pos < targetY) y_pos+=5;
-//    else if(y_pos > targetY) y_pos-=5;
-//    else
-//    {
-//        cout <<"tang chi so : " <<blockIndex<<endl;
-//        blockIndex = (blockIndex+1)% enemyPath.size();
-//    }
-//    drawEnemy(renderer, x_pos+TILE_WIDTH/4, y_pos+TILE_HEIGHT/4);
-//    SDL_Delay(200);
-//}
-
-
 
 
 Block enemy::getBlock()
 {
-    cout << eBlock.row <<" "<<eBlock.col;
+//    cout << eBlock.row <<" "<<eBlock.col;
     return eBlock;
 }
 Block enemy::getNextBlock()
 {
     vector<Block> sPath = GameMap::findShortestPath(gmap, eBlock, finish);
     return sPath[1];
-}
+};
 
 
 void enemy::runNextBlock()
 {
+//    Block tempCurrBlock = getBlock();
 
+
+    Block tempNextBlock = getNextBlock();
+    cout << tempNextBlock.x1 <<" "<<tempNextBlock.x2 <<endl;
+    if( tempNextBlock.y1 > eBlock.y1)
+	{
+//		setState(stateWalkUp);
+        cout <<"di len"<<endl;
+        eBlock.y1 -= step;
+	}
+	else if(tempNextBlock.y1 < eBlock.y1)
+	{
+//		setState(stateWalkDown);
+        cout <<"di xuong"<<endl;
+        eBlock.y1 += step;
+	}
+	else if(tempNextBlock.x1 > eBlock.x1)
+	{
+		cout <<"di sang phai"<<endl;
+        eBlock.x1 += step;
+	}
+	else if(tempNextBlock.x1 < eBlock.x1)
+	{
+//		setState(stateWalkLeft);
+        cout <<"di sang trai"<<endl;
+        eBlock.x1 -= step;
+	}
+	else {
+        eBlock=getNextBlock();
+
+	}
 }
 
+
 //
-//bool enemy::isAlive(){
-//    return (healthCurrent > 0);
-//}
+bool enemy::isAlive(){
+    return (healthCurrent > 0);
+}
 //
 //void enemy::getDamage(int damage) {
 //	if (damage > 0) {

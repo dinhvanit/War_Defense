@@ -8,6 +8,7 @@
 #include <ctime>
 #include "Timer.h"
 #include "Tower.h"
+#include <memory>
 
 class Game
 {
@@ -28,7 +29,7 @@ class Game
         void processEvents(SDL_Renderer* renderer, bool& is_quit);
 
         void addTower(SDL_Renderer* renderer, pos posM);
-        void addEnemy();
+        void addEnemy(SDL_Renderer* renderer, Block sBlock);
 
         void updates(SDL_Renderer* renderer, float dT);
         void updateEnemys(float dT);
