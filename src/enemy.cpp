@@ -15,10 +15,10 @@ enemy::enemy(SDL_Renderer* renderer, Block currentBlock) :
 //    }
 //}
 
-void enemy::updateEnemy(SDL_Renderer* renderer, vector <shared_ptr<enemy>>& listEnemys)
+void enemy::updateEnemy(SDL_Renderer* renderer, vector <shared_ptr<enemy>>& listEnemys, Map gmap)
 {
     if(eBlock.col==finish.col && eBlock.row==finish.row) healthCurrent = 0;
-    runNextBlock();
+    runNextBlock(gmap);
 }
 
 void enemy::drawEnemy(SDL_Renderer* renderer)
@@ -36,31 +36,43 @@ Block enemy::getBlock()
 //    cout << eBlock.row <<" "<<eBlock.col;
     return eBlock;
 }
-Block enemy::getNextBlock()
+Block enemy::getNextBlock(Map gmap)
 {
     vector<Block> sPath = GameMap::findShortestPath(gmap, eBlock, finish);
+//    cout <<"chuyen Block ======== " <<eBlock.row <<" "<<eBlock.col<<endl;
+//    for(Block x : sPath) cout <<x.row <<","<<x.col << endl;
     return sPath[1];
 };
 
 
-void enemy::runNextBlock()
+void enemy::runNextBlock(Map gmap)
 {
 //    Block tempCurrBlock = getBlock();
 
 
-    Block tempNextBlock = getNextBlock();
-    cout << tempNextBlock.x1 <<" "<<tempNextBlock.x2 <<endl;
+    Block tempNextBlock = getNextBlock(gmap);
+//    cout <<"vi tri ke tiep "<<tempNextBlock.x1 <<"==="<<tempNextBlock.y1<<endl;
+//    cout <<eBlock.x1 <<" "<<eBlock.y1<<endl;
+////    cout <<"vi tri Block hien tai ---- " << eBlock.x1 <<" "<<eBlock.y1 <<endl;
+////    cout <<"vt tiep theo "<< tempNextBlock.x1 <<" "<<tempNextBlock.y1 <<endl;
+////    for (int i = 0; i < nROW; ++i) {
+////        for (int j = 0; j < nCOL; ++j) {
+////            cout << gmap[i][j].isTowerIn << "\t";
+////        }
+////        cout <<endl;
+////    }
     if( tempNextBlock.y1 > eBlock.y1)
 	{
-//		setState(stateWalkUp);
-        cout <<"di len"<<endl;
-        eBlock.y1 -= step;
+//		setState(stateWalkDown);
+//        cout <<"di xuong"<<endl;
+//        cout <<tempNextBlock.y1 <<"    "<<eBlock.y1<<"     ======"<<endl;
+        eBlock.y1 += step;
 	}
 	else if(tempNextBlock.y1 < eBlock.y1)
 	{
-//		setState(stateWalkDown);
-        cout <<"di xuong"<<endl;
-        eBlock.y1 += step;
+//		setState(stateWalkUp);
+//        cout <<"di len"<<endl;
+        eBlock.y1 -= step;
 	}
 	else if(tempNextBlock.x1 > eBlock.x1)
 	{
@@ -70,15 +82,15 @@ void enemy::runNextBlock()
 	else if(tempNextBlock.x1 < eBlock.x1)
 	{
 //		setState(stateWalkLeft);
-        cout <<"di sang trai"<<endl;
+//        cout <<"di sang trai"<<endl;
         eBlock.x1 -= step;
 	}
 	else {
-        eBlock=getNextBlock();
-
+        eBlock=getNextBlock(gmap);
+        cout <<"chuyen Block ======== " <<eBlock.row <<" "<<eBlock.col<<endl;
+        cout <<eBlock.x1 <<" ===== " <<eBlock.x2<<endl;
 	}
 }
-
 
 //
 bool enemy::isAlive(){

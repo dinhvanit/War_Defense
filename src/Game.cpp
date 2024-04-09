@@ -24,6 +24,12 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
                 time1=time2;
                 processEvents(renderer, is_quit);
                 updates(renderer, dT);
+//                for (int i = 0; i < nROW; ++i) {
+//                        for (int j = 0; j < nCOL; ++j) {
+//                            cout << gmap[i][j].isTowerIn << "\t";
+//                        }
+//                        cout <<endl;
+//                }
                 draw(renderer);
 
             }
@@ -126,7 +132,7 @@ void Game::updates(SDL_Renderer* renderer, float dT)
 
     updateSpawnEnemy(renderer, dT);
 }
-
+//cap nhap quai
 void Game::updateEnemys(float dT)
 {
     auto it = listEnemys.begin();
@@ -134,7 +140,7 @@ void Game::updateEnemys(float dT)
         bool increment = true;
 
         if ((*it) != nullptr) {
-            (*it)->updateEnemy(renderer, listEnemys);
+            (*it)->updateEnemy(renderer, listEnemys, gmap);
             if ((*it)->isAlive() == false) {
                 it = listEnemys.erase(it);
                 increment = false;
@@ -145,6 +151,7 @@ void Game::updateEnemys(float dT)
             it++;
     }
 }
+
 
 
 void Game::updateSpawnEnemy(SDL_Renderer* renderer, float dT)

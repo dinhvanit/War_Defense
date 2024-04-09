@@ -29,13 +29,13 @@ class enemy
         enemy(SDL_Renderer* renderer, Block currentBlock);
 //        ~enemy();
 
-        void updateEnemy(SDL_Renderer* renderer, vector <shared_ptr<enemy>>& listEnemys);
+        void updateEnemy(SDL_Renderer* renderer, vector <shared_ptr<enemy>>& listEnemys, Map gmap);
 
         void drawEnemy(SDL_Renderer* renderer);
 //        void moveInBlock();
         void moveInMap(SDL_Renderer* renderer);
 
-        Block getNextBlock();
+        Block getNextBlock(Map gmap);
 
         Block getBlock();
 
@@ -43,7 +43,7 @@ class enemy
 
         bool isAlive();
 
-        void runNextBlock();
+        void runNextBlock(Map gmap);
 
     private:
         pos ePos;

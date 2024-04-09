@@ -76,8 +76,8 @@ vector<Block> GameMap::findShortestPath(Map& gmap, Block start, Block finish)
         q.pop();
 
 
-        int dr[4] = {-1, 0, 1, 0};
-        int dc[4] = {0, 1, 0, -1};
+        int dr[4] = {0, -1, 1, 0};
+        int dc[4] = {1, 0, 0, -1};
 
         for (int i = 0; i < 4; ++i) {
             int new_row = current.row + dr[i];
