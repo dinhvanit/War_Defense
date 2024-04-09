@@ -75,4 +75,7 @@ const Block finish = Block(nROW/2, nCOL-1, 4);
 
 //so quai moi turn
 const int countEnemy = 5;
+
+//const int STATE_UP = 0;
+
 #endif // COMMONFUNC_H

@@ -8,15 +8,14 @@
 #include "time.h"
 #include <memory>//share_ptr
 
-//typedef enum{
-//    stateNone = 0;̬
-//    stateWalkRight,
-//    stateWalkLeft,
-//	stateWalkUp,
-//	stateWalkDown,
+typedef enum{
+    stateWalkRight,
+    stateWalkLeft,
+	stateWalkUp,
+	stateWalkDown,
 //	stateDeath,
 //	stateFrozen
-//}EnemyState;
+}EnemyState;
 //typedef enum{
 //    DEMON = 0;
 //    ORC,
@@ -45,6 +44,10 @@ class enemy
 
         void runNextBlock(Map gmap);
 
+        void MakeAnimation();
+
+        EnemyState currentState;
+
     private:
         pos ePos;
         Block eBlock;
@@ -57,7 +60,16 @@ class enemy
         float step;
 //        int numFrames;
 //        int CurrentFrame;
-        SDL_Texture* enemyTexture ;
+        SDL_Texture* enemyTexture;
+        SDL_Texture* enemyTextureUp ;
+        SDL_Texture* enemyTextureDown ;
+        SDL_Texture* enemyTextureRight;
+
+        SDL_Rect frameUp_clip[4];
+        SDL_Rect frameDown_clip[4];
+        SDL_Rect frameRight_clip[4];
+        int numFrames;
+        int CurrentFrame;
 };
 
 #endif // ENEMY_H

@@ -41,6 +41,7 @@ class Game
         int mouseStatus = 0;
 
         vector<shared_ptr<enemy>> listEnemys;
+        //smart pointer shared_ptr weak_ptr
         vector<Tower> listTowers;
 
         Timer spawnTimer, roundTimer;

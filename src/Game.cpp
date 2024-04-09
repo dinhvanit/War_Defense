@@ -132,7 +132,7 @@ void Game::updates(SDL_Renderer* renderer, float dT)
 
     updateSpawnEnemy(renderer, dT);
 }
-//cap nhap quai
+//cap nhap dinh vi quai
 void Game::updateEnemys(float dT)
 {
     auto it = listEnemys.begin();
