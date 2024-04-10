@@ -49,6 +49,10 @@ class Game
         GameMap game_map;
 
         int spawnEnemyCount=0;//so quai 1 turn
+
+        int currentGold=0;
+
+//        int currenHeart=0;
 };
 
 

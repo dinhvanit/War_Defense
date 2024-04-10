@@ -20,6 +20,7 @@ using namespace std;
 static SDL_Window* window = NULL;
 static SDL_Renderer* renderer = NULL;
 static SDL_Event event;
+static TTF_Font* gFont = NULL;
 
 //screen
 const int SCREEN_WIDTH = 1240;
@@ -78,4 +79,12 @@ const int countEnemy = 5;
 
 //const int STATE_UP = 0;
 
+//vang khoi tao
+
+const int GoldStart = 100;
+const int priceTower = 50;
+const int goldEnemy = 5;
+
+const int HeartStart = 5;// so mang
+static int HeartCURRENT = 5;
 #endif // COMMONFUNC_H

@@ -3,8 +3,7 @@
 
 Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT):
     TypeCurrent(TowerType::archer),
-    spawnTimer(0.25f), roundTimer(5.0f)
-
+    spawnTimer(0.25f), roundTimer(5.0f), currentGold(GoldStart)
 {
     if (window != nullptr && renderer != nullptr) {
         bool is_quit = false;
@@ -30,6 +29,8 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
 //                        }
 //                        cout <<endl;
 //                }
+                cout <<"vang hien tai la "<<currentGold<<endl;
+                cout <<"so mang hien tai la ==="<<HeartCURRENT<<endl;
                 draw(renderer);
 
             }
@@ -93,13 +94,14 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
         switch (mouseStatus)
         {
             case SDL_BUTTON_LEFT:
-                if( gmap[posM.first][posM.second].isTowerIn == 0 ){
+                if( gmap[posM.first][posM.second].isTowerIn == 0 && currentGold>=priceTower ){
                     gmap[posM.first][posM.second]=Block(posM.first, posM.second, 1);
                     if(!GameMap::ConDuong(gmap)) {
                         cout << "khong dat duoc vi tri nay!"<<endl;
                         gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
                     }
                     else {
+                        currentGold-=priceTower;
                         SDL_Rect rect = {gmap[posM.first][posM.second].x1,gmap[posM.first][posM.second].y1, TILE_WIDTH, TILE_HEIGHT };
                         switch (TypeCurrent) {
                         case TowerType::archer:
@@ -145,8 +147,9 @@ void Game::updateEnemys(float dT)
         bool increment = true;
 
         if ((*it) != nullptr) {
-            (*it)->updateEnemy(renderer, listEnemys, gmap);
+            (*it)->updateEnemy(renderer, listEnemys, gmap, HeartCURRENT);
             if ((*it)->isAlive() == false) {
+                currentGold+=goldEnemy;
                 it = listEnemys.erase(it);
                 increment = false;
             }

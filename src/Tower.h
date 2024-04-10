@@ -17,6 +17,7 @@ class Tower
         void draw(SDL_Renderer* renderer);
         void attackEnemy();
         void updateTarget(SDL_Renderer* renderer,float dT, vector<shared_ptr<enemy>>& listEnemys);
+        int getCost();
 
     private:
         bool updateA(float dT);
@@ -25,6 +26,7 @@ class Tower
         static const float weaponRange;//vung tan cong
         SDL_Texture* textureTower = nullptr;
         int damage;
+        int cost;
 };
 
 #endif // TOWER_H

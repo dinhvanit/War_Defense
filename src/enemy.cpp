@@ -36,9 +36,14 @@ void enemy::MakeAnimation()
 //    frameRight_clip[0]={423, 0, 141, 141};
 }
 
-void enemy::updateEnemy(SDL_Renderer* renderer, vector <shared_ptr<enemy>>& listEnemys, Map gmap)
+void enemy::updateEnemy(SDL_Renderer* renderer, vector <shared_ptr<enemy>>& listEnemys, Map gmap, int& CurrentHeart)
 {
-    if(eBlock.col==finish.col && eBlock.row==finish.row) healthCurrent = 0;
+    if(eBlock.col==finish.col && eBlock.row==finish.row) {
+        CurrentHeart--;
+        cout <<"m bị trừ 1 mạng do ngu ===="<<endl;
+//        Heart--;
+        healthCurrent=0;
+    }
     runNextBlock(gmap);
 }
 

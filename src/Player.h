@@ -2,15 +2,11 @@
 #define PLAYER_H
 
 
-class Player
-{
-    public:
-        Player();
-        virtual ~Player();
-
-    protected:
-
-    private:
-};
+//class Player
+//{
+//    public:
+//        void renderText()
+//    private:
+//};
 
 #endif // PLAYER_H

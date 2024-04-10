@@ -13,7 +13,8 @@ typedef enum{
     stateWalkLeft,
 	stateWalkUp,
 	stateWalkDown,
-//	stateDeath,
+	stateGetDamage,
+	stateDeath,
 //	stateFrozen
 }EnemyState;
 //typedef enum{
@@ -28,7 +29,7 @@ class enemy
         enemy(SDL_Renderer* renderer, Block currentBlock);
 //        ~enemy();
 
-        void updateEnemy(SDL_Renderer* renderer, vector <shared_ptr<enemy>>& listEnemys, Map gmap);
+        void updateEnemy(SDL_Renderer* renderer, vector <shared_ptr<enemy>>& listEnemys, Map gmap, int& CurrentHeart);
 
         void drawEnemy(SDL_Renderer* renderer);
 //        void moveInBlock();
@@ -55,7 +56,7 @@ class enemy
         int enemyW = 40;
         int enemyH = 50;
         int blockIndex;
-        const int healthMax = 100;
+        const int healthMax = 50;
         int healthCurrent = healthMax;
         float step;
 //        int numFrames;
@@ -70,6 +71,9 @@ class enemy
         SDL_Rect frameRight_clip[4];
         int numFrames;
         int CurrentFrame;
+
+//        int CurHeart=0;
+
 };
 
 #endif // ENEMY_H
