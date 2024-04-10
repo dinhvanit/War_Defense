@@ -130,6 +130,10 @@ void Game::updates(SDL_Renderer* renderer, float dT)
 {
     updateEnemys(dT);
 
+    for(auto& towerSelected : listTowers){
+        towerSelected.updateTarget(renderer, dT, listEnemys);
+    }
+
     updateSpawnEnemy(renderer, dT);
 }
 //cap nhap dinh vi quai

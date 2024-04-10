@@ -5,8 +5,8 @@ enemy::enemy(SDL_Renderer* renderer, Block currentBlock) :
  eBlock(start), step(2), currentState(stateWalkRight), CurrentFrame(0), numFrames(4)
  {
     enemyTexture =loadTexture::loadT(renderer, "demon.png");
-    enemyTextureUp = loadTexture::loadT(renderer, "cowUp.jpg");
-    enemyTextureDown = loadTexture::loadT(renderer, "cowDown.jpg");
+    enemyTextureUp = loadTexture::loadT(renderer, "botren.png");
+    enemyTextureDown = loadTexture::loadT(renderer, "boxuong.png");
     enemyTextureRight = loadTexture::loadT(renderer, "bophai.png");
  }
 
@@ -55,7 +55,7 @@ void enemy::drawEnemy(SDL_Renderer* renderer)
 //			cout <<"bo phai"<<endl;
 			break;
 		case(stateWalkLeft):
-            SDL_RenderCopy(renderer, enemyTextureRight, &frameUp_clip[CurrentFrame/4], &eRect);
+            SDL_RenderCopyEx(renderer, enemyTextureRight, &frameUp_clip[CurrentFrame/4], &eRect, NULL, NULL, SDL_FLIP_HORIZONTAL);
 			break;
 		case(stateWalkUp):
             SDL_RenderCopy(renderer, enemyTextureUp, &frameUp_clip[CurrentFrame/4], &eRect);
@@ -140,10 +140,10 @@ bool enemy::isAlive(){
     return (healthCurrent > 0);
 }
 //
-//void enemy::getDamage(int damage) {
-//	if (damage > 0) {
-//		healthCurrent -= damage;
-//		if (healthCurrent < 0)
-//			healthCurrent = 0;
-//	}
-//}
+void enemy::getDamage(int damage) {
+	if (damage > 0) {
+		healthCurrent -= damage;
+		if (healthCurrent < 0)
+			healthCurrent = 0;
+	}
+}

@@ -14,7 +14,7 @@ SDL_Texture* loadTexture::loadT(SDL_Renderer* renderer, string filename) {
 
             // Load the image using SDL_image
             SDL_Surface* surfaceTemp = IMG_Load(filepath.c_str());
-            SDL_SetColorKey(surfaceTemp, SDL_TRUE, SDL_MapRGB(surfaceTemp->format, 255, 255, 255));//tach mau trang
+//            SDL_SetColorKey(surfaceTemp, SDL_TRUE, SDL_MapRGB(surfaceTemp->format, 255, 255, 255));//tach mau trang
             if (surfaceTemp != nullptr) {
                 // The surface was created successfully, so attempt to create a texture with it.
                 SDL_Texture* textureOutput = SDL_CreateTextureFromSurface(renderer, surfaceTemp);
