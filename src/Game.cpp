@@ -132,6 +132,7 @@ void Game::updates(SDL_Renderer* renderer, float dT)
 
     for(auto& towerSelected : listTowers){
         towerSelected.updateTarget(renderer, dT, listEnemys);
+        towerSelected.attackEnemy();
     }
 
     updateSpawnEnemy(renderer, dT);

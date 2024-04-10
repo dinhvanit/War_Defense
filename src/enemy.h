@@ -55,7 +55,7 @@ class enemy
         int enemyW = 40;
         int enemyH = 50;
         int blockIndex;
-        const int healthMax = 10;
+        const int healthMax = 100;
         int healthCurrent = healthMax;
         float step;
 //        int numFrames;

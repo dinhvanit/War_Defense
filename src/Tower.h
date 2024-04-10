@@ -5,6 +5,7 @@
 #include "enemy.h"
 #include "Timer.h"
 #include <memory>
+#include <cmath>
 
 class Tower
 {
