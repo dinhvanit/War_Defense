@@ -12,7 +12,9 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
         auto time2 = std::chrono::system_clock::now();
 
         const float dT = 1.0f / 60.0f;
-
+//        SDL_Rect rectbar = {0, 0, X_UPPER_LEFT, SCREEN_HEIGHT};
+//        SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "StatusBar.png"), NULL, &rectbar);
+//        SDL_RenderPresent(renderer);
         while(!is_quit){
 
             time2 = std::chrono::system_clock::now();
@@ -196,7 +198,8 @@ void Game::draw(SDL_Renderer* renderer)
 
     for(auto& towerSelected : listTowers)
         towerSelected.draw(renderer);
-
+    showText(renderer, to_string(currentGold), 100, 570, TEXT_SIZE );
+    showText(renderer, to_string(HeartCURRENT), 100, 630, TEXT_SIZE);
     SDL_RenderPresent(renderer);
 }
 
@@ -216,6 +219,24 @@ void Game::addEnemy(SDL_Renderer* renderer, Block sBlock){
 }
 
 
+void Game::showText(SDL_Renderer* renderer,string input, int x, int y,int size)
+{
+    if(TTF_Init()==-1){
+        cout <<"loi "<<endl;
+    }
+    TTF_Font* font = TTF_OpenFont("assets/textfonts/VNI-Hobo.TTF", size);
+        if (font == nullptr) {
+            cout<< "Failed to load font: " << TTF_GetError() << endl;
+    }
+
+    SDL_Color White = {255,255,255};
+    SDL_Surface *textSurface = TTF_RenderText_Solid(font, input.c_str(), White);
+    SDL_Texture *text = SDL_CreateTextureFromSurface(renderer, textSurface);
+//    SDL_FreeSurface(textSurface);
+    SDL_Rect renderQuad = {x, y, textSurface->w, textSurface->h};
+    SDL_RenderCopy(renderer, text, NULL, &renderQuad);
+    SDL_DestroyTexture(text);
+}
 
 
 

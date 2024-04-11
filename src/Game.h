@@ -36,6 +36,8 @@ class Game
         void updateTowers(SDL_Renderer* renderer, Map& gmap);
         void updateSpawnEnemy(SDL_Renderer* renderer, float dT);
 
+        void showText(SDL_Renderer* renderer, string input, int x, int y, int size);
+
 //        void DestroyTower(SDL_renderer* renderer, Block posM);
 
         int mouseStatus = 0;

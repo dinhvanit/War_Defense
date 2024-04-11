@@ -60,6 +60,8 @@
 		<Unit filename="src/enemy.h" />
 		<Unit filename="src/game_map.cpp" />
 		<Unit filename="src/game_map.h" />
+		<Unit filename="src/loadTTF.cpp" />
+		<Unit filename="src/loadTTF.h" />
 		<Unit filename="src/loadTexture.cpp" />
 		<Unit filename="src/loadTexture.h" />
 		<Extensions />

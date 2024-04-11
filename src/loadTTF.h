@@ -1,16 +1,20 @@
-#ifndef LOADTTF_H
-#define LOADTTF_H
-
-#include "CommonFunc.h"
-
-
+//#ifndef LOADTTF_H
+//#define LOADTTF_H
+//
+//#include "CommonFunc.h"
+//#include "loadTexture.h"
+//
 //class loadTTF
 //{
 //    public:
-//        load
-//    protected:
-//
-//    private:
+////        loadTTF();
+////        ~loadTTF();
+//        void renderText(SDL_Renderer*& aRenderer, LTexture& textTexture, int x, int y);
+////    private:
+////        int posX;
+////        int posY;
 //};
-
-#endif // LOADTTF_H
+//
+//bool loadText(SDL_Renderer*& aRenderer, LTexture& textTexture, TTF_Font*& aFont);
+//
+//#endif // LOADTTF_H

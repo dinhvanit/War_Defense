@@ -32,8 +32,8 @@ void Tower::updateTarget(SDL_Renderer* renderer, float dT, vector<shared_ptr<ene
             targetEnemy = enemy;
 
 //            test target enemy
-//            SDL_Rect targetRect = {targetEnemy->getBlock().x1,targetEnemy->getBlock().y1, 20, 20};
-//            SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "dauV.jpg"), NULL, &targetRect);
+//            SDL_SetRenderDrawColor(renderer, 255,41,41, 0);
+//            SDL_RenderDrawLine(renderer, tamX, tamY, enemy->getBlock().x1, enemy->getBlock().y1);
 //            SDL_RenderPresent(renderer);
         }
     }
@@ -44,8 +44,7 @@ void Tower::attackEnemy() {
         // Kiểm tra xem quái vật vẫn còn sống
         if (targetEnemy->isAlive()) {
             // Bắn quái vật (thực hiện hành động bắn)
-//            SDL_SetRenderDrawColor(renderer, LINE_COLOR.r, LINE_COLOR.g, 170, 0);
-//            SDL_RenderDrawLine(renderer, )
+
 
             targetEnemy->getDamage(damage);
             cout <<"kill enemy ========" <<endl;

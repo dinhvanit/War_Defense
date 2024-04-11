@@ -83,8 +83,24 @@ const int countEnemy = 5;
 
 const int GoldStart = 100;
 const int priceTower = 50;
-const int goldEnemy = 5;
+const int goldEnemy = 10;
 
 const int HeartStart = 5;// so mang
 static int HeartCURRENT = 5;
+//class RGB {
+//public:
+//  RGB(int r, int g, int b) {
+//    if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+//      throw "Invalid RGB color!";
+//    red = r;
+//    green = g;
+//    blue = b;
+//  }
+//  Uint8 red;
+//  Uint8 green;
+//  Uint8 blue;
+//};
+//const RGB BLACK(0, 0, 0);
+const int TEXT_SIZE = 30;
+#define TEXTFONT "assets/OpenSans.ttf"
 #endif // COMMONFUNC_H
