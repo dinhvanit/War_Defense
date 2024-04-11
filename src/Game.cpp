@@ -3,7 +3,7 @@
 
 Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT):
     TypeCurrent(TowerType::archer),
-    spawnTimer(0.25f), roundTimer(5.0f), currentGold(GoldStart)
+    spawnTimer(0.25f), roundTimer(5.0f), currentGold(GoldStart), defeat(false), defeatTexture(loadTexture::loadT(renderer, "defeat.png"))
 {
     if (window != nullptr && renderer != nullptr) {
         bool is_quit = false;
@@ -25,15 +25,16 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
                 time1=time2;
                 processEvents(renderer, is_quit);
                 updates(renderer, dT);
-//                for (int i = 0; i < nROW; ++i) {
-//                        for (int j = 0; j < nCOL; ++j) {
-//                            cout << gmap[i][j].isTowerIn << "\t";
-//                        }
-//                        cout <<endl;
-//                }
-                cout <<"vang hien tai la "<<currentGold<<endl;
-                cout <<"so mang hien tai la ==="<<HeartCURRENT<<endl;
-                draw(renderer);
+//                cout <<"vang hien tai la "<<currentGold<<endl;
+//                cout <<"so mang hien tai la ==="<<HeartCURRENT<<endl;
+                if(HeartCURRENT<=0){
+                    SDL_Rect defeatRect = {(SCREEN_WIDTH-X_UPPER_LEFT)/4+X_UPPER_LEFT, (SCREEN_HEIGHT-Y_UPPER_LEFT)/3,(SCREEN_WIDTH-X_UPPER_LEFT)/2, (SCREEN_HEIGHT-Y_UPPER_LEFT)/3};
+                    SDL_RenderCopy(renderer, defeatTexture, NULL, &defeatRect);
+                    SDL_RenderPresent(renderer);
+                }
+                else{
+                    draw(renderer);
+                }
 
             }
         }

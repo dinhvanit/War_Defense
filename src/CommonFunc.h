@@ -102,5 +102,4 @@ static int HeartCURRENT = 5;
 //};
 //const RGB BLACK(0, 0, 0);
 const int TEXT_SIZE = 30;
-#define TEXTFONT "assets/OpenSans.ttf"
 #endif // COMMONFUNC_H

@@ -1,21 +1,15 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
+#include "CommonFunc.h"
 
 class Level
 {
-
     public:
-        Level();
-        virtual ~Level();
+        int CurrentLevel();
+        int countEnemyWave();
+        int getBoss();
 
-    protected:
-
-    private:
-        enum class TileType : char {
-            Tower,
-            enemySpawner,
-        };
 };
 
 #endif // LEVEL_H

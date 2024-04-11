@@ -54,6 +54,9 @@ class Game
 
         int currentGold=0;
 
+        bool defeat;
+
+        SDL_Texture* defeatTexture=nullptr;
 //        int currenHeart=0;
 };
 

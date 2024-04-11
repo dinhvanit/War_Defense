@@ -1,11 +1,11 @@
 #include "Level.h"
-
-Level::Level()
-{
-    //ctor
-}
-
-Level::~Level()
-{
-    //dtor
-}
+//
+//Level::Level()
+//{
+//    ctor
+//}
+//
+//Level::~Level()
+//{
+//    dtor
+//}
