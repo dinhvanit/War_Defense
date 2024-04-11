@@ -57,7 +57,7 @@ class Game
         bool defeat;
 
         SDL_Texture* defeatTexture=nullptr;
-//        int currenHeart=0;
+        int currentLevel;
 };
 
 

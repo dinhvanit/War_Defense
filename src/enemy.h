@@ -49,6 +49,8 @@ class enemy
 
         EnemyState currentState;
 
+        void SetMaxHP(int currentLevel);
+
     private:
         pos ePos;
         Block eBlock;
@@ -56,7 +58,7 @@ class enemy
         int enemyW = 40;
         int enemyH = 50;
         int blockIndex;
-        const int healthMax = 50;
+        int healthMax = 50;
         int healthCurrent = healthMax;
         float step;
 //        int numFrames;
@@ -72,7 +74,6 @@ class enemy
         int numFrames;
         int CurrentFrame;
 
-//        int CurHeart=0;
 
 };
 

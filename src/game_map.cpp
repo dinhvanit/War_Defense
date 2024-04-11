@@ -14,13 +14,16 @@ void GameMap::DrawMap(SDL_Renderer* renderer)
     SDL_Texture* tileStart = loadTexture::loadT(renderer, "Start.jpg");
     SDL_Texture* tileFinish = loadTexture::loadT(renderer, "Finish.jpg");
     SDL_Texture* TowerBar = loadTexture::loadT(renderer, "StatusBar.png");
+    SDL_Texture* Title = loadTexture::loadT(renderer, "Title.png");
 //    SDL_Texture* Archer = loadTexture::loadT(renderer, "archer.png");
 //    SDL_Texture* Canon = loadTexture::loadT(renderer, "canon.png");
 //    SDL_Texture* Mage = loadTexture::loadT(renderer, "mage.png");
     //draw TowerBar selection
     SDL_Rect rectbar = {0, 0, X_UPPER_LEFT, SCREEN_HEIGHT};
     SDL_RenderCopy(renderer, TowerBar, NULL, &rectbar);
-
+    //draw title
+    SDL_Rect rectTitle ={X_UPPER_LEFT, 0, SCREEN_WIDTH-X_UPPER_LEFT, Y_UPPER_LEFT};
+    SDL_RenderCopy(renderer, Title, NULL, &rectTitle);
 //    SDL_Rect rectArcher = {10, 10, 180, 150};
 //    SDL_RenderCopy(renderer, Archer, NULL, &rectArcher);
 //

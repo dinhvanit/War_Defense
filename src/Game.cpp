@@ -3,7 +3,7 @@
 
 Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT):
     TypeCurrent(TowerType::archer),
-    spawnTimer(0.25f), roundTimer(5.0f), currentGold(GoldStart), defeat(false), defeatTexture(loadTexture::loadT(renderer, "defeat.png"))
+    spawnTimer(0.25f), roundTimer(5.0f), currentGold(GoldStart), defeat(false), defeatTexture(loadTexture::loadT(renderer, "defeat.png")), currentLevel(0)
 {
     if (window != nullptr && renderer != nullptr) {
         bool is_quit = false;
@@ -27,7 +27,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
                 updates(renderer, dT);
 //                cout <<"vang hien tai la "<<currentGold<<endl;
 //                cout <<"so mang hien tai la ==="<<HeartCURRENT<<endl;
-                if(HeartCURRENT<=0){
+                if(HeartCURRENT<0){
                     SDL_Rect defeatRect = {(SCREEN_WIDTH-X_UPPER_LEFT)/4+X_UPPER_LEFT, (SCREEN_HEIGHT-Y_UPPER_LEFT)/3,(SCREEN_WIDTH-X_UPPER_LEFT)/2, (SCREEN_HEIGHT-Y_UPPER_LEFT)/3};
                     SDL_RenderCopy(renderer, defeatTexture, NULL, &defeatRect);
                     SDL_RenderPresent(renderer);
@@ -141,6 +141,7 @@ void Game::updates(SDL_Renderer* renderer, float dT)
     }
 
     updateSpawnEnemy(renderer, dT);
+
 }
 //cap nhap dinh vi quai
 void Game::updateEnemys(float dT)
@@ -173,14 +174,13 @@ void Game::updateSpawnEnemy(SDL_Renderer* renderer, float dT)
         roundTimer.countDown(dT);
         if (roundTimer.timeSIsZero()){
             spawnEnemyCount = countEnemy;
+            currentLevel++;
             roundTimer.resetToMax();
         }
     }
-
     //them quai vao round
     if(spawnEnemyCount > 0 && spawnTimer.timeSIsZero()){
         addEnemy(renderer, start);
-
         spawnEnemyCount--;
         spawnTimer.resetToMax();
     }
@@ -199,8 +199,9 @@ void Game::draw(SDL_Renderer* renderer)
 
     for(auto& towerSelected : listTowers)
         towerSelected.draw(renderer);
-    showText(renderer, to_string(currentGold), 100, 570, TEXT_SIZE );
-    showText(renderer, to_string(HeartCURRENT), 100, 630, TEXT_SIZE);
+    showText(renderer, to_string(currentGold), 100, 550+Y_UPPER_LEFT, TEXT_SIZE );
+    showText(renderer, to_string(HeartCURRENT), 100, 610+Y_UPPER_LEFT, TEXT_SIZE);
+    showText(renderer, to_string(currentLevel), 300, 50, TEXT_SIZE);
     SDL_RenderPresent(renderer);
 }
 

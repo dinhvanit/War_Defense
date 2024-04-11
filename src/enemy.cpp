@@ -40,7 +40,7 @@ void enemy::updateEnemy(SDL_Renderer* renderer, vector <shared_ptr<enemy>>& list
 {
     if(eBlock.col==finish.col && eBlock.row==finish.row) {
         CurrentHeart--;
-        cout <<"m bị trừ 1 mạng do ngu ===="<<endl;
+//        cout <<"m bị trừ 1 mạng do ngu ===="<<endl;
 //        Heart--;
         healthCurrent=0;
     }
@@ -147,8 +147,13 @@ bool enemy::isAlive(){
 //
 void enemy::getDamage(int damage) {
 	if (damage > 0) {
+        cout << "mau hien tai "<<healthCurrent<<endl;
 		healthCurrent -= damage;
 		if (healthCurrent < 0)
 			healthCurrent = 0;
 	}
 }
+
+//void enemy::SetMaxHP(int currentLevel){
+//    healthMax=healthMax+(currentLevel*20);
+//}

@@ -26,9 +26,10 @@ class GameMap
         SDL_Texture* tileStart = nullptr;
         SDL_Texture* tileFinish = nullptr;
         SDL_Texture* TowerBar = nullptr;
-        SDL_Texture* Archer = nullptr;
-        SDL_Texture* Canon = nullptr;
-        SDL_Texture* Mage = nullptr;
+//        SDL_Texture* Archer = nullptr;
+//        SDL_Texture* Canon = nullptr;
+//        SDL_Texture* Mage = nullptr;
+        SDL_Texture* Title = nullptr;
 };
 Map CreateMap();
 #endif // GAME_MAP_H

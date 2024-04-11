@@ -24,7 +24,7 @@ static TTF_Font* gFont = NULL;
 
 //screen
 const int SCREEN_WIDTH = 1240;
-const int SCREEN_HEIGHT = 700;
+const int SCREEN_HEIGHT = 800;
 const string WINDOW_TITLE = "War Defense";
 const int SCREEN_BPP = 32;
 const int FPS = 60;
@@ -39,7 +39,7 @@ const int TILE_WIDTH = 80;
 const int TILE_HEIGHT = 100;
 //bang de thanh chon defense
 const int X_UPPER_LEFT=200;
-const int Y_UPPER_LEFT=0;
+const int Y_UPPER_LEFT=100;
 
 //tao map nCOL*nROW 13*7
 const int nCOL = (SCREEN_WIDTH - X_UPPER_LEFT)/TILE_WIDTH ;
@@ -85,21 +85,7 @@ const int GoldStart = 100;
 const int priceTower = 50;
 const int goldEnemy = 10;
 
-const int HeartStart = 5;// so mang
-static int HeartCURRENT = 5;
-//class RGB {
-//public:
-//  RGB(int r, int g, int b) {
-//    if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-//      throw "Invalid RGB color!";
-//    red = r;
-//    green = g;
-//    blue = b;
-//  }
-//  Uint8 red;
-//  Uint8 green;
-//  Uint8 blue;
-//};
-//const RGB BLACK(0, 0, 0);
+static int HeartCURRENT = 10;
+
 const int TEXT_SIZE = 30;
 #endif // COMMONFUNC_H
