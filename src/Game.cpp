@@ -4,7 +4,7 @@
 Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT):
     TypeCurrent(TowerType::archer),
     spawnTimer(0.5f), roundTimer(5.0f), currentGold(GoldStart), defeat(false), defeatTexture(loadTexture::loadT(renderer, "defeat.png")),
-    currentLevel(0), spawnEnemyCount(0), gameStartTimer(20.0f)
+    currentLevel(0), spawnEnemyCount(0), gameStartTimer(5.0f, 5.0f)
 {
     if (window != nullptr && renderer != nullptr) {
         bool is_quit = false;
@@ -45,8 +45,6 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
 //{
 //    //dtor
 //}
-
-
 
 void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
 {
@@ -91,41 +89,45 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
         }
     int mouseX =0;
     int mouseY=0;
+    pos posM;
     SDL_GetMouseState(&mouseX, &mouseY);
-    pos posM = GameMap::getBlockInMap(mouseX, mouseY);
 
-    if(mouseStatus > 0)
-    {
-        switch (mouseStatus)
+    posM = GameMap::getBlockInMap(mouseX, mouseY);
+
+    if(mouseX>X_UPPER_LEFT && mouseY>Y_UPPER_LEFT){
+        if(mouseStatus > 0)
         {
-            case SDL_BUTTON_LEFT:
-                if( gmap[posM.first][posM.second].isTowerIn == 0 && currentGold>=priceTower ){
-                    gmap[posM.first][posM.second]=Block(posM.first, posM.second, 1);
-                    if(!GameMap::ConDuong(gmap)) {
-                        cout << "khong dat duoc vi tri nay!"<<endl;
-                        gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
-                    }
-                    else {
-                        currentGold-=priceTower;
-                        SDL_Rect rect = {gmap[posM.first][posM.second].x1,gmap[posM.first][posM.second].y1, TILE_WIDTH, TILE_HEIGHT };
-                        switch (TypeCurrent) {
-                        case TowerType::archer:
-                            addTower(renderer, posM);
-            //                cout << "ve ra archer o vi tri "<<posM.first << " "<<posM.second<<"====="<<endl;
-//                                SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "Archer.png"), NULL, &rect);
-                            break;
-                        case TowerType::canon:
-            //                cout << "ve ra canon o vi tri "<<posM.first << " "<<posM.second<<"====="<<endl;
-                                SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "canon.png"), NULL, &rect);
-                            break;
+            switch (mouseStatus)
+            {
+                case SDL_BUTTON_LEFT:
+                    if( gmap[posM.first][posM.second].isTowerIn == 0 && currentGold>=priceTower ){
+                        gmap[posM.first][posM.second]=Block(posM.first, posM.second, 1);
+                        if(!GameMap::ConDuong(gmap)) {
+                            cout << "khong dat duoc vi tri nay!"<<endl;
+                            gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
+                        }
+                        else {
+                            currentGold-=priceTower;
+                            SDL_Rect rect = {gmap[posM.first][posM.second].x1,gmap[posM.first][posM.second].y1, TILE_WIDTH, TILE_HEIGHT };
+                            switch (TypeCurrent) {
+                            case TowerType::archer:
+                                addTower(renderer, posM);
+                //                cout << "ve ra archer o vi tri "<<posM.first << " "<<posM.second<<"====="<<endl;
+    //                                SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "Archer.png"), NULL, &rect);
+                                break;
+                            case TowerType::canon:
+                //                cout << "ve ra canon o vi tri "<<posM.first << " "<<posM.second<<"====="<<endl;
+                                    SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "canon.png"), NULL, &rect);
+                                break;
+                            }
                         }
                     }
-                }
-                break;
-            case SDL_BUTTON_RIGHT:
-                DestroyTower(posM);
-//                cout <<"ao vai chuong"<<endl;
-                break;
+                    break;
+                case SDL_BUTTON_RIGHT:
+                    DestroyTower(posM);
+    //                cout <<"ao vai chuong"<<endl;
+                    break;
+            }
         }
     }
 }
@@ -182,17 +184,26 @@ void Game::updateSpawnEnemy(SDL_Renderer* renderer, float dT)
             if (roundTimer.timeSIsZero()){
                 spawnEnemyCount = countEnemy;
                 currentLevel++;
+
                 roundTimer.resetToMax();
             }
         }
     }
     //them quai vao round
     if(spawnEnemyCount > 0 && spawnTimer.timeSIsZero()){
+        for (auto& enemy : listEnemys) {
+            enemy->SetMaxHP(currentLevel);
+//            cout <<enemy->healthMax<<"la hp con hien tai"<<endl;
+        }
+        cout <<"quai dot = " <<currentLevel<<endl;
         addEnemy(renderer, start);
         spawnEnemyCount--;
         spawnTimer.resetToMax();
     }
 }
+
+
+
 
 void Game::draw(SDL_Renderer* renderer)
 {
@@ -224,9 +235,11 @@ void Game::addTower(SDL_Renderer* renderer, pos posM)
 
 
 
+
 void Game::addEnemy(SDL_Renderer* renderer, Block sBlock){
     listEnemys.push_back(make_shared<enemy>(renderer, sBlock));
 }
+
 
 
 void Game::showText(SDL_Renderer* renderer,string input, int x, int y,int size)
@@ -251,6 +264,9 @@ void Game::DestroyTower(pos posM) {
     for (auto it = listTowers.begin(); it != listTowers.end();) {
         if ((*it).CheckTowerInBlock(posM.first, posM.second)){
             it = listTowers.erase(it);
+
+            currentGold+=priceTower/2;//hoan lai 50% gold
+
             gmap[posM.first][posM.second].isTowerIn=0;
         }
         else

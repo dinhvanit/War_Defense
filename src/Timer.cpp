@@ -1,6 +1,7 @@
 #include "Timer.h"
 
 #include "Timer.h"
+//#include <iostream>
 
 
 
@@ -22,6 +23,7 @@ void Timer::countUp(float dT) {
 
 void Timer::countDown(float dT) {
 	if (timeSCurrent > 0.0f) {
+//        std::cout <<"thời gian dang dem nguoc "<<timeSCurrent<<std::endl;
 		timeSCurrent -= dT;
 		if (timeSCurrent < 0.0f)
 			timeSCurrent = 0.0f;

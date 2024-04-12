@@ -55,9 +55,11 @@ pos GameMap::getBlockInMap(int x, int y)
 {
 //    cout << x << " "<<y <<"---------"<<endl;
     pos result;
-    result.first = (y-Y_UPPER_LEFT)/TILE_HEIGHT;//tọa độ row
-    result.second = (x-X_UPPER_LEFT)/TILE_WIDTH;//tọa độ col
-//    cout << result.first << " "<<result.second<<"---------"<<endl;
+//    if(x>X_UPPER_LEFT && y>Y_UPPER_LEFT){
+        result.first = (y-Y_UPPER_LEFT)/TILE_HEIGHT;//tọa độ row
+        result.second = (x-X_UPPER_LEFT)/TILE_WIDTH;//tọa độ col
+    //    cout << result.first << " "<<result.second<<"---------"<<endl;
+//    }
     return result;
 }
 

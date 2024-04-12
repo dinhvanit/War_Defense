@@ -155,6 +155,6 @@ void enemy::getDamage(int damage) {
 }
 
 void enemy::SetMaxHP(int currentLevel){
-    healthMax=healthMax+(currentLevel*20);
-    healthCurrent=healthMax;
+    healthCurrent=50+(currentLevel*50);
+    cout <<"hp hien tai la"<<healthCurrent << "====="<<healthMax<<endl;
 }
