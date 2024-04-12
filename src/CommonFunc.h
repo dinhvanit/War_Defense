@@ -81,7 +81,7 @@ const int countEnemy = 5;
 
 //vang khoi tao
 
-const int GoldStart = 100;
+const int GoldStart = 10000;
 const int priceTower = 50;
 const int goldEnemy = 10;
 

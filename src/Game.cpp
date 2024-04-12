@@ -3,7 +3,8 @@
 
 Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT):
     TypeCurrent(TowerType::archer),
-    spawnTimer(0.25f), roundTimer(5.0f), currentGold(GoldStart), defeat(false), defeatTexture(loadTexture::loadT(renderer, "defeat.png")), currentLevel(0)
+    spawnTimer(0.5f), roundTimer(5.0f), currentGold(GoldStart), defeat(false), defeatTexture(loadTexture::loadT(renderer, "defeat.png")),
+    currentLevel(0), spawnEnemyCount(0), gameStartTimer(20.0f)
 {
     if (window != nullptr && renderer != nullptr) {
         bool is_quit = false;
@@ -77,10 +78,11 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                     mouseStatus = SDL_BUTTON_LEFT;
                     cout << SDL_BUTTON_LEFT <<endl;
                 }
-            else if (event.button.button == SDL_BUTTON_RIGHT){
-                mouseStatus = SDL_BUTTON_RIGHT;
-                cout << SDL_BUTTON_RIGHT <<endl;
-            }
+                else if (event.button.button == SDL_BUTTON_RIGHT){
+                    mouseStatus = SDL_BUTTON_RIGHT;
+                    cout << SDL_BUTTON_RIGHT <<endl;
+
+                }
             break;
             case SDL_MOUSEBUTTONUP:
                 mouseStatus = 0;
@@ -117,16 +119,19 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                                 SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "canon.png"), NULL, &rect);
                             break;
                         }
-//                        SDL_RenderPresent(renderer);
                     }
                 }
-
-            break;
+                break;
+            case SDL_BUTTON_RIGHT:
+                DestroyTower(posM);
+//                cout <<"ao vai chuong"<<endl;
+                break;
         }
     }
+}
 //    }//bo vong lap game ra khoi xu ly su kien
 //    cout << "khong truy cap vao duoc"<<endl;
-}
+
 
 
 
@@ -168,14 +173,17 @@ void Game::updateEnemys(float dT)
 
 void Game::updateSpawnEnemy(SDL_Renderer* renderer, float dT)
 {
-    spawnTimer.countDown(dT);
-    //bat dau moi round moi
-    if(listEnemys.empty() && spawnEnemyCount == 0){
-        roundTimer.countDown(dT);
-        if (roundTimer.timeSIsZero()){
-            spawnEnemyCount = countEnemy;
-            currentLevel++;
-            roundTimer.resetToMax();
+    gameStartTimer.countDown(dT);
+    if(gameStartTimer.timeSIsZero()){
+        spawnTimer.countDown(dT);
+        //bat dau moi round moi
+        if(listEnemys.empty() && spawnEnemyCount == 0){
+            roundTimer.countDown(dT);
+            if (roundTimer.timeSIsZero()){
+                spawnEnemyCount = countEnemy;
+                currentLevel++;
+                roundTimer.resetToMax();
+            }
         }
     }
     //them quai vao round
@@ -239,6 +247,15 @@ void Game::showText(SDL_Renderer* renderer,string input, int x, int y,int size)
     SDL_RenderCopy(renderer, text, NULL, &renderQuad);
     SDL_DestroyTexture(text);
 }
-
+void Game::DestroyTower(pos posM) {
+    for (auto it = listTowers.begin(); it != listTowers.end();) {
+        if ((*it).CheckTowerInBlock(posM.first, posM.second)){
+            it = listTowers.erase(it);
+            gmap[posM.first][posM.second].isTowerIn=0;
+        }
+        else
+            it++;
+    }
+}
 
 

@@ -18,6 +18,7 @@ class Tower
         void attackEnemy();
         void updateTarget(SDL_Renderer* renderer,float dT, vector<shared_ptr<enemy>>& listEnemys);
         int getCost();
+        bool CheckTowerInBlock(int row, int col);
 
     private:
         bool updateA(float dT);

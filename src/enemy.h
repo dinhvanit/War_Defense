@@ -59,7 +59,7 @@ class enemy
         int enemyH = 50;
         int blockIndex;
         int healthMax = 50;
-        int healthCurrent = healthMax;
+        int healthCurrent;
         float step;
 //        int numFrames;
 //        int CurrentFrame;

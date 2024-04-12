@@ -36,6 +36,8 @@ class Game
         void updateTowers(SDL_Renderer* renderer, Map& gmap);
         void updateSpawnEnemy(SDL_Renderer* renderer, float dT);
 
+        void DestroyTower(pos posM);
+
         void showText(SDL_Renderer* renderer, string input, int x, int y, int size);
 
 //        void DestroyTower(SDL_renderer* renderer, Block posM);
@@ -46,11 +48,11 @@ class Game
         //smart pointer shared_ptr weak_ptr
         vector<Tower> listTowers;
 
-        Timer spawnTimer, roundTimer;
+        Timer spawnTimer, roundTimer, gameStartTimer;
 
         GameMap game_map;
 
-        int spawnEnemyCount=0;//so quai 1 turn
+        int spawnEnemyCount;//so quai 1 turn
 
         int currentGold=0;
 

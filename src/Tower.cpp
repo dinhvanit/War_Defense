@@ -64,3 +64,8 @@ int Tower::getCost()
 {
     return cost;
 }
+
+bool Tower::CheckTowerInBlock(int row, int col)
+{
+    return ((int)posM.first==row && (int)posM.second == col);
+}

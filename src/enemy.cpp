@@ -2,7 +2,7 @@
 
 const float enemy::speed = 0.5f;
 enemy::enemy(SDL_Renderer* renderer, Block currentBlock) :
- eBlock(start), step(2), currentState(stateWalkRight), CurrentFrame(0), numFrames(4)
+ eBlock(start), step(2), currentState(stateWalkRight), CurrentFrame(0), numFrames(4), healthCurrent(healthMax)
  {
     enemyTexture =loadTexture::loadT(renderer, "demon.png");
     enemyTextureUp = loadTexture::loadT(renderer, "botren.png");
@@ -154,6 +154,7 @@ void enemy::getDamage(int damage) {
 	}
 }
 
-//void enemy::SetMaxHP(int currentLevel){
-//    healthMax=healthMax+(currentLevel*20);
-//}
+void enemy::SetMaxHP(int currentLevel){
+    healthMax=healthMax+(currentLevel*20);
+    healthCurrent=healthMax;
+}
