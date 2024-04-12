@@ -50,6 +50,7 @@ class enemy
         EnemyState currentState;
 
         void SetMaxHP(int currentLevel);
+        int healthCurrent;
 
     private:
         pos ePos;
@@ -59,7 +60,6 @@ class enemy
         int enemyH = 50;
         int blockIndex;
         const int healthMax = 50;
-        int healthCurrent;
         float step;
 //        int numFrames;
 //        int CurrentFrame;
@@ -68,9 +68,7 @@ class enemy
         SDL_Texture* enemyTextureDown ;
         SDL_Texture* enemyTextureRight;
 
-        SDL_Rect frameUp_clip[4];
-        SDL_Rect frameDown_clip[4];
-        SDL_Rect frameRight_clip[4];
+        SDL_Rect frame_clip[4];
         int numFrames;
         int CurrentFrame;
 

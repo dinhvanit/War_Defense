@@ -1,6 +1,6 @@
 #include "Tower.h"
 
-const float Tower::weaponRange = 100.0f;
+const float Tower::weaponRange =190.0f;
 
 
 Tower::Tower(SDL_Renderer* renderer, pos _pos):
@@ -23,6 +23,8 @@ void Tower::updateTarget(SDL_Renderer* renderer, float dT, vector<shared_ptr<ene
     for (const auto& enemy : listEnemys) {
         float distanceSquared = (tamX - enemy->getBlock().x1) * (tamX - enemy->getBlock().x1) +
                                 (tamY - enemy->getBlock().y1) * (tamY - enemy->getBlock().y1);
+//        float distanceSquared = (tamX - enemy->getBlock().x2) * (tamX - enemy->getBlock().x2) +
+//                                (tamY - enemy->getBlock().y2) * (tamY - enemy->getBlock().y2);
         float distance = sqrt(distanceSquared);
 
 //        cout << distance <<" khoang cach "<<endl;

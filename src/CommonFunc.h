@@ -62,8 +62,8 @@ struct Block {
         // Tính toán giá trị của các thành viên dựa trên các tham số truyền vào
         this->x1 = this->col * TILE_WIDTH + X_UPPER_LEFT;
         this->y1 = this->row * TILE_HEIGHT + Y_UPPER_LEFT;
-        this->x2 = this->x1 + TILE_WIDTH;
-        this->y2 = this->y1 + TILE_HEIGHT;
+        this->x2 = this->x1 + TILE_WIDTH/2;
+        this->y2 = this->y1 + TILE_HEIGHT/2;
     }
 };
 typedef vector<vector<Block>> Map;
@@ -81,11 +81,13 @@ const int countEnemy = 5;
 
 //vang khoi tao
 
-const int GoldStart = 10000;
+const int GoldStart = 100;
 const int priceTower = 50;
 const int goldEnemy = 10;
 
 static int HeartCURRENT = 10;
 
 const int TEXT_SIZE = 30;
+
+const int BUTTON_SIZE = 80;
 #endif // COMMONFUNC_H

@@ -2,7 +2,7 @@
 
 const float enemy::speed = 0.5f;
 enemy::enemy(SDL_Renderer* renderer, Block currentBlock) :
- eBlock(start), step(2), currentState(stateWalkRight), CurrentFrame(0), numFrames(4), healthCurrent(healthMax)
+ eBlock(start), step(2), currentState(stateWalkRight), CurrentFrame(0), numFrames(4), healthCurrent(100)
  {
     enemyTexture =loadTexture::loadT(renderer, "demon.png");
     enemyTextureUp = loadTexture::loadT(renderer, "botren.png");
@@ -20,20 +20,11 @@ enemy::enemy(SDL_Renderer* renderer, Block currentBlock) :
 
 void enemy::MakeAnimation()
 {
-    frameUp_clip[0]={0, 0, 141, 141};
-    frameUp_clip[1]={141, 0, 141, 141};
-    frameUp_clip[2]={282, 0, 141, 141};
-    frameUp_clip[3]={423, 0, 141, 141};
+    frame_clip[0]={0, 0, 141, 141};
+    frame_clip[1]={141, 0, 141, 141};
+    frame_clip[2]={282, 0, 141, 141};
+    frame_clip[3]={423, 0, 141, 141};
 
-//    frameDown_clip[0]={0, 0, 141, 141};
-//    frameDown_clip[0]={141, 0, 141, 141};
-//    frameDown_clip[0]={282, 0, 141, 141};
-//    frameDown_clip[0]={423, 0, 141, 141};
-//
-//    frameRight_clip[0]={0, 0, 141, 141};
-//    frameRight_clip[0]={141, 0, 141, 141};
-//    frameRight_clip[0]={282, 0, 141, 141};
-//    frameRight_clip[0]={423, 0, 141, 141};
 }
 
 void enemy::updateEnemy(SDL_Renderer* renderer, vector <shared_ptr<enemy>>& listEnemys, Map gmap, int& CurrentHeart)
@@ -56,17 +47,17 @@ void enemy::drawEnemy(SDL_Renderer* renderer)
     switch(currentState)
     {
         case(stateWalkRight):
-			SDL_RenderCopy(renderer, enemyTextureRight, &frameUp_clip[CurrentFrame/4], &eRect);
+			SDL_RenderCopy(renderer, enemyTextureRight, &frame_clip[CurrentFrame/4], &eRect);
 //			cout <<"bo phai"<<endl;
 			break;
 		case(stateWalkLeft):
-            SDL_RenderCopyEx(renderer, enemyTextureRight, &frameUp_clip[CurrentFrame/4], &eRect, NULL, NULL, SDL_FLIP_HORIZONTAL);
+            SDL_RenderCopyEx(renderer, enemyTextureRight, &frame_clip[CurrentFrame/4], &eRect, NULL, NULL, SDL_FLIP_HORIZONTAL);
 			break;
 		case(stateWalkUp):
-            SDL_RenderCopy(renderer, enemyTextureUp, &frameUp_clip[CurrentFrame/4], &eRect);
+            SDL_RenderCopy(renderer, enemyTextureUp, &frame_clip[CurrentFrame/4], &eRect);
 			break;
 		case(stateWalkDown):
-            SDL_RenderCopy(renderer, enemyTextureDown, &frameUp_clip[CurrentFrame/4], &eRect);
+            SDL_RenderCopy(renderer, enemyTextureDown, &frame_clip[CurrentFrame/4], &eRect);
 			break;
 
     }
@@ -156,5 +147,4 @@ void enemy::getDamage(int damage) {
 
 void enemy::SetMaxHP(int currentLevel){
     healthCurrent=50+(currentLevel*50);
-    cout <<"hp hien tai la"<<healthCurrent << "====="<<healthMax<<endl;
 }

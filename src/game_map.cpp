@@ -15,23 +15,30 @@ void GameMap::DrawMap(SDL_Renderer* renderer)
     SDL_Texture* tileFinish = loadTexture::loadT(renderer, "Finish.jpg");
     SDL_Texture* TowerBar = loadTexture::loadT(renderer, "StatusBar.png");
     SDL_Texture* Title = loadTexture::loadT(renderer, "Title.png");
-//    SDL_Texture* Archer = loadTexture::loadT(renderer, "archer.png");
-//    SDL_Texture* Canon = loadTexture::loadT(renderer, "canon.png");
-//    SDL_Texture* Mage = loadTexture::loadT(renderer, "mage.png");
+    SDL_Texture* PauseButton = loadTexture::loadT(renderer, "Pause_Button.png");
+    SDL_Texture* TurboButton = loadTexture::loadT(renderer, "Turbo_Button.png");
+    SDL_Texture* DestroyButton = loadTexture::loadT(renderer, "destroy.png");
+
+    SDL_Texture* BossNext = loadTexture::loadT(renderer, "demonfront.png");
+
     //draw TowerBar selection
     SDL_Rect rectbar = {0, 0, X_UPPER_LEFT, SCREEN_HEIGHT};
     SDL_RenderCopy(renderer, TowerBar, NULL, &rectbar);
     //draw title
     SDL_Rect rectTitle ={X_UPPER_LEFT, 0, SCREEN_WIDTH-X_UPPER_LEFT, Y_UPPER_LEFT};
     SDL_RenderCopy(renderer, Title, NULL, &rectTitle);
-//    SDL_Rect rectArcher = {10, 10, 180, 150};
-//    SDL_RenderCopy(renderer, Archer, NULL, &rectArcher);
-//
-//    SDL_Rect rectCanon = {10, 180, 180, 150};
-//    SDL_RenderCopy(renderer, Canon, NULL, &rectCanon);
-//
-//    SDL_Rect rectMage = {10,340, 180, 150};
-//    SDL_RenderCopy(renderer, Mage, NULL, &rectMage);
+    //draw button
+    SDL_Rect PauseButtonRect ={SCREEN_WIDTH-100*1, 10, BUTTON_SIZE, BUTTON_SIZE};
+    SDL_RenderCopy(renderer, PauseButton, NULL, &PauseButtonRect);
+
+    SDL_Rect TurboButtonRect ={SCREEN_WIDTH-100*2, 10, BUTTON_SIZE, BUTTON_SIZE};
+    SDL_RenderCopy(renderer, TurboButton, NULL, &TurboButtonRect);
+
+    SDL_Rect DestroyButtonRect ={SCREEN_WIDTH-100*3, 10, BUTTON_SIZE, BUTTON_SIZE};
+    SDL_RenderCopy(renderer, DestroyButton, NULL, &DestroyButtonRect);
+
+    SDL_Rect BossNextRect ={SCREEN_WIDTH-100*4-50, 10, BUTTON_SIZE, BUTTON_SIZE};
+    SDL_RenderCopy(renderer, BossNext, NULL, &BossNextRect);
 
     for (int y = 0; y < nROW; y++) {
         for (int x = 0; x < nCOL; x++) {
