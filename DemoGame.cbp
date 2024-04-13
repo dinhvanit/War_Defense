@@ -46,6 +46,11 @@
 		<Unit filename="src/Level.cpp" />
 		<Unit filename="src/Level.h" />
 		<Unit filename="src/Main.cpp" />
+		<Unit filename="src/MenuGame.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src/MenuGame.h" />
 		<Unit filename="src/Move.cpp" />
 		<Unit filename="src/Move.h" />
 		<Unit filename="src/Player.cpp" />
