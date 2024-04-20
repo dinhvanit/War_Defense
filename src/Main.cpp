@@ -48,22 +48,14 @@ void close()
 int main(int argc, char* argv[]){
     if(InitData() == false)
         return 1;
-    // Tạo đối tượng MenuGame
     MenuGame menu(window, renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    // Hiển thị menu và lấy lựa chọn từ người chơi
     Selection choice = menu.ShowMenu();
 
-    // Kiểm tra lựa chọn và thực hiện các hành động tương ứng
     if (choice == START) {
-        // Người chơi đã chọn Start, bắt đầu trò chơi
         Game game(window, renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
-//    else if (choice == HOW_TO_PLAY) {
-//        // Người chơi đã chọn How to play, hiển thị hướng dẫn chơi
-//        menu.RenderHowToPlay();
-//        cout << "truy cap vao vi tri"<<endl;
-//    }
+
     close();
     return 0;
 }

@@ -19,12 +19,13 @@ class Tower
         void updateTarget(SDL_Renderer* renderer,float dT, vector<shared_ptr<enemy>>& listEnemys);
         int getCost();
         bool CheckTowerInBlock(int row, int col);
+        bool isOutOfRange(shared_ptr<enemy> enemy);
 
     private:
         bool updateA(float dT);
         pos posM;
-        shared_ptr<enemy> targetEnemy;
-//        weak_ptr<enemy> targetEnemy;//target 1 con gần nhât
+//        shared_ptr<enemy> targetEnemy;
+        weak_ptr<enemy> targetEnemy;//target 1 con gần nhât
         static const float weaponRange;//vung tan cong
         SDL_Texture* textureTower = nullptr;
         int damage;

@@ -92,7 +92,7 @@ void MenuGame::RenderHowToPlay() {
                     isRunning = false;
                 }
             }
-            cout <<"dang trong cua so how to play"<<endl;
+//            cout <<"dang trong cua so how to play"<<endl;
         }
     }
 }

@@ -3,7 +3,7 @@
 
 Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT):
     TypeCurrent(TowerType::archer),
-    spawnTimer(0.5f), roundTimer(5.0f), currentGold(GoldStart), defeat(false), defeatTexture(loadTexture::loadT(renderer, "defeat.png")),
+    spawnTimer(1.0f), roundTimer(5.0f), currentGold(GoldStart), defeat(false), defeatTexture(loadTexture::loadT(renderer, "defeat.png")),
     currentLevel(0), spawnEnemyCount(0), gameStartTimer(5.0f, 5.0f)
 {
     if (window != nullptr && renderer != nullptr) {
@@ -69,6 +69,10 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                     cout << "chon type canon"<<endl;
                     break;
                 }
+                case SDL_SCANCODE_3:
+                    TypeCurrent = TowerType :: mage;
+                    cout <<"chon type mage"<<endl;
+                    break;
             case SDL_MOUSEBUTTONDOWN:
                 mouseDownThisFrame = (mouseStatus == 0);
                 if (event.button.button == SDL_BUTTON_LEFT){

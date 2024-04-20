@@ -1,6 +1,6 @@
 #include "enemy.h"
 
-const float enemy::speed = 0.5f;
+//const float enemy::speed = 0.5f;
 enemy::enemy(SDL_Renderer* renderer, Block currentBlock) :
  eBlock(start), step(2), currentState(stateWalkRight), CurrentFrame(0), numFrames(4), healthCurrent(100)
  {

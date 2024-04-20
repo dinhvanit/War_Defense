@@ -16,7 +16,7 @@ class Game
         enum class TowerType{
             archer,
             canon,
-            acy,
+            mage,
         }TypeCurrent;
 
     public:
