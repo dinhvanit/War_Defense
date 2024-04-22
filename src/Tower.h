@@ -22,13 +22,14 @@ class Tower
         bool isOutOfRange(shared_ptr<enemy> enemy);
 
     private:
-        bool updateA(float dT);
+//        bool updateA(float dT);
         pos posM;
 //        shared_ptr<enemy> targetEnemy;
         weak_ptr<enemy> targetEnemy;//target 1 con gần nhât
         static const float weaponRange;//vung tan cong
         SDL_Texture* textureTower = nullptr;
         int damage;
+
         int cost;
 };
 

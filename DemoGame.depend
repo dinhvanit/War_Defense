@@ -2,7 +2,7 @@
 1711806848 source:d:\bigproject\game_sdl2\src\commonfunc.cpp
 	"CommonFunc.h"
 
-1713067610 d:\bigproject\game_sdl2\src\commonfunc.h
+1713790569 d:\bigproject\game_sdl2\src\commonfunc.h
 	<iostream>
 	<windows.h>
 	<string>
@@ -64,10 +64,10 @@
 	"CommonFunc.h"
 	"game_map.h"
 
-1713621988 source:d:\bigproject\game_sdl2\src\game.cpp
+1713804569 source:d:\bigproject\game_sdl2\src\game.cpp
 	"Game.h"
 
-1713606450 d:\bigproject\game_sdl2\src\game.h
+1713805357 d:\bigproject\game_sdl2\src\game.h
 	"CommonFunc.h"
 	"game_map.h"
 	"enemy.h"
@@ -76,6 +76,9 @@
 	"Timer.h"
 	"Tower.h"
 	<memory>
+	"BaseTower.h"
+	"Archer.h"
+	"Canon.h"
 
 1712398414 d:\bigproject\game_sdl2\src\loadtexture.h
 	"CommonFunc.h"
@@ -83,10 +86,10 @@
 1712721694 source:d:\bigproject\game_sdl2\src\loadtexture.cpp
 	"loadTexture.h"
 
-1713630905 source:d:\bigproject\game_sdl2\src\tower.cpp
+1713787749 source:d:\bigproject\game_sdl2\src\tower.cpp
 	"Tower.h"
 
-1713630355 d:\bigproject\game_sdl2\src\tower.h
+1713797762 d:\bigproject\game_sdl2\src\tower.h
 	"CommonFunc.h"
 	"enemy.h"
 	"Timer.h"
@@ -99,7 +102,7 @@
 1712843221 d:\bigproject\game_sdl2\src\level.h
 	"CommonFunc.h"
 
-1713630439 source:d:\bigproject\game_sdl2\src\enemy.cpp
+1713790664 source:d:\bigproject\game_sdl2\src\enemy.cpp
 	"enemy.h"
 
 1712934667 d:\bigproject\game_sdl2\src\enemy.h
@@ -138,31 +141,37 @@
 
 1712502542 d:\bigproject\game_sdl2\src\enemy\baseenemy.h
 
-1712918844 source:d:\bigproject\game_sdl2\src\tower\basetower.cpp
+1713800515 source:d:\bigproject\game_sdl2\src\tower\basetower.cpp
 	"BaseTower.h"
 
-1712918836 d:\bigproject\game_sdl2\src\tower\basetower.h
+1713800507 d:\bigproject\game_sdl2\src\tower\basetower.h
 	"CommonFunc.h"
+	"enemy.h"
+	"Timer.h"
+	<memory>
+	<cmath>
 
 1712807081 source:d:\bigproject\game_sdl2\src\loadttf.cpp
 
 1712748364 d:\bigproject\game_sdl2\src\loadttf.h
 	"CommonFunc.h"
 
-1713241745 source:d:\bigproject\game_sdl2\src\menugame.cpp
+1713786415 source:d:\bigproject\game_sdl2\src\menugame.cpp
 	"MenuGame.h"
 
 1713004683 d:\bigproject\game_sdl2\src\menugame.h
 	"CommonFunc.h"
 	"loadTexture.h"
 
-1713015552 source:d:\bigproject\game_sdl2\src\tower\archer.cpp
+1713800579 source:d:\bigproject\game_sdl2\src\tower\archer.cpp
 	"Archer.h"
 
-1713015552 d:\bigproject\game_sdl2\src\tower\archer.h
+1713799507 d:\bigproject\game_sdl2\src\tower\archer.h
+	"BaseTower.h"
 
-1713015585 source:d:\bigproject\game_sdl2\src\tower\canon.cpp
+1713804895 source:d:\bigproject\game_sdl2\src\tower\canon.cpp
 	"Canon.h"
 
-1713015585 d:\bigproject\game_sdl2\src\tower\canon.h
+1713804930 d:\bigproject\game_sdl2\src\tower\canon.h
+	"BaseTower.h"
 

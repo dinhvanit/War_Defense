@@ -1,11 +1,5 @@
 #include "BaseTower.h"
 
-//BaseTower::BaseTower()
-//{
-//    //ctor
-//}
-//
-//BaseTower::~BaseTower()
-//{
-//    //dtor
-//}
+BaseTower::BaseTower(SDL_Renderer* renderer, pos _pos):
+    posM (_pos), damage(1), cost(50){}
+

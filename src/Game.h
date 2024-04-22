@@ -9,6 +9,10 @@
 #include "Timer.h"
 #include "Tower.h"
 #include <memory>
+#include "BaseTower.h"
+#include "Archer.h"
+#include "Canon.h"
+
 
 class Game
 {
@@ -29,6 +33,15 @@ class Game
         void processEvents(SDL_Renderer* renderer, bool& is_quit);
 
         void addTower(SDL_Renderer* renderer, pos posM);
+
+        //add thap
+        void addArcherTower(SDL_Renderer* renderer, pos posM);
+
+//        void addCanonTower(SDL_Renderer* renderer, pos posM);
+
+//        void addMageTower(SDL_Renderer* renderer, pos posM);
+
+
         void addEnemy(SDL_Renderer* renderer, Block sBlock);
 
         void updates(SDL_Renderer* renderer, float dT);
@@ -46,7 +59,8 @@ class Game
 
         vector<shared_ptr<enemy>> listEnemys;
         //smart pointer shared_ptr weak_ptr
-        vector<Tower> listTowers;
+        vector<shared_ptr<BaseTower>> listTowers;
+//        listTowers.push_back(new Cannon(fjal;fjlasjf))
 
         Timer spawnTimer, roundTimer, gameStartTimer;
 

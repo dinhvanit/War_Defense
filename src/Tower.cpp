@@ -66,7 +66,6 @@ void Tower::draw(SDL_Renderer* renderer){
     SDL_RenderCopy(renderer, textureTower, NULL, &rect);
 
     if (auto lockedEnemy = targetEnemy.lock()) {
-        // Nếu có, vẽ đường chỉ từ tháp đến con quái
         float tamX = gmap[posM.first][posM.second].x2;
         float tamY = gmap[posM.first][posM.second].y2;
         float enemyX = lockedEnemy->getBlock().x1+TILE_HEIGHT/2;

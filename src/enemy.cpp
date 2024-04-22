@@ -146,5 +146,5 @@ void enemy::getDamage(int damage) {
 }
 
 void enemy::SetMaxHP(int currentLevel){
-    healthCurrent=50+(currentLevel*50);
+    healthCurrent=50+(currentLevel*100);
 }

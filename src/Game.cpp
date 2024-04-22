@@ -68,11 +68,11 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                     TypeCurrent = TowerType :: canon;
                     cout << "chon type canon"<<endl;
                     break;
-                }
                 case SDL_SCANCODE_3:
                     TypeCurrent = TowerType :: mage;
                     cout <<"chon type mage"<<endl;
                     break;
+                }
             case SDL_MOUSEBUTTONDOWN:
                 mouseDownThisFrame = (mouseStatus == 0);
                 if (event.button.button == SDL_BUTTON_LEFT){
@@ -114,13 +114,13 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                             SDL_Rect rect = {gmap[posM.first][posM.second].x1,gmap[posM.first][posM.second].y1, TILE_WIDTH, TILE_HEIGHT };
                             switch (TypeCurrent) {
                             case TowerType::archer:
-                                addTower(renderer, posM);
+                                addArcherTower(renderer, posM);
                 //                cout << "ve ra archer o vi tri "<<posM.first << " "<<posM.second<<"====="<<endl;
     //                                SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "Archer.png"), NULL, &rect);
                                 break;
                             case TowerType::canon:
                 //                cout << "ve ra canon o vi tri "<<posM.first << " "<<posM.second<<"====="<<endl;
-                                    SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "canon.png"), NULL, &rect);
+//                                addCanonTower(renderer, posM);
                                 break;
                             }
                         }
@@ -146,8 +146,8 @@ void Game::updates(SDL_Renderer* renderer, float dT)
     updateEnemys(dT);
 
     for(auto& towerSelected : listTowers){
-        towerSelected.updateTarget(renderer, dT, listEnemys);
-        towerSelected.attackEnemy();
+        towerSelected->updateTarget(renderer, dT, listEnemys);
+        towerSelected->attackEnemy();
     }
 
     updateSpawnEnemy(renderer, dT);
@@ -220,7 +220,7 @@ void Game::draw(SDL_Renderer* renderer)
 
 
     for(auto& towerSelected : listTowers)
-        towerSelected.draw(renderer);
+        towerSelected->draw(renderer);
     showText(renderer, to_string(currentGold), 100, 550+Y_UPPER_LEFT, TEXT_SIZE );
     showText(renderer, to_string(HeartCURRENT), 100, 610+Y_UPPER_LEFT, TEXT_SIZE);
     showText(renderer, to_string(currentLevel), 300, 50, TEXT_SIZE);
@@ -231,10 +231,28 @@ void Game::draw(SDL_Renderer* renderer)
 
 
 //void Game::addEnemy(SDL_Renderer* renderer)
-void Game::addTower(SDL_Renderer* renderer, pos posM)
-{
-    listTowers.push_back(Tower(renderer, posM));
+//void Game::addTower(SDL_Renderer* renderer, pos posM)
+//{
+//    listTowers.push_back(Tower(renderer, posM));
+//
+//}
+
+// add các loại tháp
+void Game::addArcherTower(SDL_Renderer* renderer, pos posM) {
+    shared_ptr<Archer> archerPtr = make_shared<Archer>(renderer, posM);
+    listTowers.push_back(archerPtr);
 }
+//void Game::addCanonTower(SDL_Renderer* renderer, pos posM) {
+//    shared_ptr<Canon> canonPtr = make_shared<Canon>(renderer, posM);
+//    listTowers.push_back(canonPtr);
+//}
+//void Game::addCanonTower(SDL_Renderer* renderer, pos posM) {
+//    listTowers.push_back(Canon(renderer, posM));
+//}
+//
+//void Game::addMageTower(SDL_Renderer* renderer, pos posM) {
+//    listTowers.push_back(Mage(renderer, posM));
+//}
 
 
 
@@ -263,18 +281,21 @@ void Game::showText(SDL_Renderer* renderer,string input, int x, int y,int size)
     SDL_RenderCopy(renderer, text, NULL, &renderQuad);
     SDL_DestroyTexture(text);
 }
-void Game::DestroyTower(pos posM) {
+void Game::DestroyTower(pos posM)
+{
     for (auto it = listTowers.begin(); it != listTowers.end();) {
-        if ((*it).CheckTowerInBlock(posM.first, posM.second)){
+        if ((*it)->CheckTowerInBlock(posM.first, posM.second)){
+            currentGold+=(*it)->getCost()/2;
             it = listTowers.erase(it);
 
-            currentGold+=priceTower/2;//hoan lai 50% gold
+//            currentGold+=priceTower/2;//hoan lai 50% gold
 
             gmap[posM.first][posM.second].isTowerIn=0;
         }
         else
             it++;
     }
+
 }
 
 
