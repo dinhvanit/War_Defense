@@ -7,6 +7,7 @@
 #include <memory>
 #include <cmath>
 
+enum class TowerName {Empty , Archer, Canon, };
 class BaseTower {
 public:
     BaseTower(SDL_Renderer* renderer, pos _pos);

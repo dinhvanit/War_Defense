@@ -17,8 +17,8 @@ void Archer::updateTarget(SDL_Renderer* renderer, float dT, vector<shared_ptr<en
         weak_ptr<enemy> closestEnemy;
 
         for (const auto& enemy : listEnemys) {
-            float distanceSquared = (tamX - enemy->getBlock().x2) * (tamX - enemy->getBlock().x2) +
-                                    (tamY - enemy->getBlock().y2) * (tamY - enemy->getBlock().y2);
+            float distanceSquared = (tamX - enemy->getBlock().x2) * (tamX - enemy->getBlock().x1) +
+                                    (tamY - enemy->getBlock().y2) * (tamY - enemy->getBlock().y1);
             float distance = sqrt(distanceSquared);
             if (distance <= closestDistance) {
                 closestDistance = distance;

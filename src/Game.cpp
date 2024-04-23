@@ -208,10 +208,10 @@ void Game::updateSpawnEnemy(SDL_Renderer* renderer, float dT)
     }
     //them quai vao round
     if(spawnEnemyCount > 0 && spawnTimer.timeSIsZero()){
-        for (auto& enemy : listEnemys) {
-            enemy->SetMaxHP(currentLevel);
+//        for (auto& enemy : listEnemys) {
+//            enemy->SetMaxHP(currentLevel);
 //            cout <<enemy->healthCurrent<<"la hp con hien tai"<<endl;
-        }
+//        }
         cout <<"quai dot = " <<currentLevel<<endl;
         addEnemy(renderer, start);
         spawnEnemyCount--;
@@ -272,7 +272,7 @@ void Game::addCanonTower(SDL_Renderer* renderer, pos posM) {
 
 
 void Game::addEnemy(SDL_Renderer* renderer, Block sBlock){
-    listEnemys.push_back(make_shared<enemy>(renderer, sBlock));
+    listEnemys.push_back(make_shared<enemy>(renderer, sBlock, currentLevel));
 }
 
 

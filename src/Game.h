@@ -53,6 +53,7 @@ class Game
 
         void showText(SDL_Renderer* renderer, string input, int x, int y, int size);
 
+//        void showCurrentTower(SDL_Renderer* renderer )
 //        void DestroyTower(SDL_renderer* renderer, Block posM);
 
         int mouseStatus = 0;

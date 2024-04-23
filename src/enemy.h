@@ -26,7 +26,7 @@ typedef enum{
 class enemy
 {
     public:
-        enemy(SDL_Renderer* renderer, Block currentBlock);
+        enemy(SDL_Renderer* renderer, Block currentBlock, int currentLevel);
 //        ~enemy();
 
         void updateEnemy(SDL_Renderer* renderer, vector <shared_ptr<enemy>>& listEnemys, Map gmap, int& CurrentHeart);

@@ -37,7 +37,7 @@ void GameMap::DrawMap(SDL_Renderer* renderer)
     SDL_Rect DestroyButtonRect ={SCREEN_WIDTH-100*3, 10, BUTTON_SIZE, BUTTON_SIZE};
     SDL_RenderCopy(renderer, DestroyButton, NULL, &DestroyButtonRect);
 
-    SDL_Rect BossNextRect ={SCREEN_WIDTH-100*4-50, 10, BUTTON_SIZE, BUTTON_SIZE};
+    SDL_Rect BossNextRect ={SCREEN_WIDTH-100*4-130, 10, BUTTON_SIZE, BUTTON_SIZE};
     SDL_RenderCopy(renderer, BossNext, NULL, &BossNextRect);
 
     for (int y = 0; y < nROW; y++) {
