@@ -3,12 +3,12 @@
 //const float enemy::speed = 0.5f;
 enemy::enemy(SDL_Renderer* renderer, Block currentBlock) :
  eBlock(start), step(2), currentState(stateWalkRight), CurrentFrame(0), numFrames(4), healthCurrent(100)
- {
+{
     enemyTexture =loadTexture::loadT(renderer, "demon.png");
     enemyTextureUp = loadTexture::loadT(renderer, "botren.png");
     enemyTextureDown = loadTexture::loadT(renderer, "boxuong.png");
     enemyTextureRight = loadTexture::loadT(renderer, "bophai.png");
- }
+}
 
 
 //enemy::~enemy()
@@ -31,7 +31,6 @@ void enemy::updateEnemy(SDL_Renderer* renderer, vector <shared_ptr<enemy>>& list
 {
     if(eBlock.col==finish.col && eBlock.row==finish.row) {
         CurrentHeart--;
-//        cout <<"m bị trừ 1 mạng do ngu ===="<<endl;
 //        Heart--;
         healthCurrent=0;
     }
@@ -41,7 +40,7 @@ void enemy::updateEnemy(SDL_Renderer* renderer, vector <shared_ptr<enemy>>& list
 void enemy::drawEnemy(SDL_Renderer* renderer)
 {
     MakeAnimation();
-    SDL_Rect eRect= {eBlock.x1+TILE_WIDTH/4, eBlock.y1+TILE_HEIGHT/4, enemyW, enemyH }; // Vị trí và kích thước của
+    SDL_Rect eRect= {eBlock.x1+TILE_WIDTH/4, eBlock.y1+TILE_HEIGHT/4, enemyW, enemyH };
 //    SDL_RenderCopy(renderer, enemyTexture, NULL, &eRect);
     CurrentFrame = (CurrentFrame + 1) % numFrames;
     switch(currentState)
@@ -59,8 +58,8 @@ void enemy::drawEnemy(SDL_Renderer* renderer)
 		case(stateWalkDown):
             SDL_RenderCopy(renderer, enemyTextureDown, &frame_clip[CurrentFrame/4], &eRect);
 			break;
-
     }
+    drawHealthBar(renderer);
 }
 //moi lan vong lap game thi load anh tren map
 //nen dung if khong can dung while
@@ -144,7 +143,29 @@ void enemy::getDamage(int damage) {
 			healthCurrent = 0;
 	}
 }
+void enemy::drawHealthBar(SDL_Renderer* renderer) {
+
+    int BarWidth = 50;
+    int barHeight = 5;
+    int healthBarX = eBlock.x1;
+    int healthBarY = eBlock.y1;
+
+    float healthRatio = (float)healthCurrent / healthMax;//ti le ve thanh mau theo % currentHealth
+    int currentHealthWidth = static_cast<int>(BarWidth* healthRatio);
+
+
+    SDL_Rect bgRect = { healthBarX, healthBarY, BarWidth, barHeight };
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_RenderFillRect(renderer, &bgRect);
+
+    SDL_Rect healthRect = { healthBarX, healthBarY, currentHealthWidth, barHeight };
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_RenderFillRect(renderer, &healthRect);
+}
+
+
 
 void enemy::SetMaxHP(int currentLevel){
-    healthCurrent=50+(currentLevel*100);
+    healthMax = 50+(currentLevel*100);
+    healthCurrent=healthMax;
 }

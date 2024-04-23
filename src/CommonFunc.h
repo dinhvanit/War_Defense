@@ -90,4 +90,10 @@ static int HeartCURRENT = 10;
 const int TEXT_SIZE = 30;
 
 const int BUTTON_SIZE = 80;
+
+// bang gia thap
+
+const int priceArcher = 50;
+const int priceCanon = 100;
+const int priceMage = 75;
 #endif // COMMONFUNC_H

@@ -74,6 +74,8 @@ class Game
 
         SDL_Texture* defeatTexture=nullptr;
         int currentLevel;
+
+
 };
 
 

@@ -47,9 +47,12 @@ class enemy
 
         void MakeAnimation();
 
+        void drawHealthBar(SDL_Renderer* renderer);
+
         EnemyState currentState;
 
         void SetMaxHP(int currentLevel);
+
         int healthCurrent;
 
     private:
@@ -59,7 +62,9 @@ class enemy
         int enemyW = 40;
         int enemyH = 50;
         int blockIndex;
-        const int healthMax = 50;
+
+        int healthMax = 100;
+
         float step;
 //        int numFrames;
 //        int CurrentFrame;
@@ -71,7 +76,6 @@ class enemy
         SDL_Rect frame_clip[4];
         int numFrames;
         int CurrentFrame;
-
 
 };
 

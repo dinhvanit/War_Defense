@@ -3,7 +3,7 @@
 const float Archer::weaponRange =190.0f;
 
 Archer::Archer(SDL_Renderer* renderer, pos _pos) :
-    BaseTower(renderer, _pos), damage(1), cost(50)
+    BaseTower(renderer, _pos), damage(1), cost(priceArcher)
 {
     textureTower = loadTexture::loadT(renderer, "archer.png");
 }

@@ -111,17 +111,28 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                             gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
                         }
                         else {
-                            currentGold-=priceTower;
+
                             SDL_Rect rect = {gmap[posM.first][posM.second].x1,gmap[posM.first][posM.second].y1, TILE_WIDTH, TILE_HEIGHT };
                             switch (TypeCurrent) {
                             case TowerType::archer:
-                                addArcherTower(renderer, posM);
-                //                cout << "ve ra archer o vi tri "<<posM.first << " "<<posM.second<<"====="<<endl;
-    //                                SDL_RenderCopy(renderer,loadTexture::loadT(renderer, "Archer.png"), NULL, &rect);
+                                if(currentGold>=priceArcher) {
+                                    addArcherTower(renderer, posM);
+                                    currentGold-=priceArcher;
+                                }
+                                else {
+                                    gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
+                                    cout << "khong du tien dat archer" <<endl;
+                                }
                                 break;
                             case TowerType::canon:
-                //                cout << "ve ra canon o vi tri "<<posM.first << " "<<posM.second<<"====="<<endl;
-                                addCanonTower(renderer, posM);
+                                if(currentGold>=priceCanon){
+                                    addCanonTower(renderer, posM);
+                                    currentGold-=priceCanon;
+                                }
+                                else {
+                                    gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
+                                    cout << "khong du tien dat canon" <<endl;
+                                }
                                 break;
                             }
                         }
@@ -187,8 +198,10 @@ void Game::updateSpawnEnemy(SDL_Renderer* renderer, float dT)
             roundTimer.countDown(dT);
             if (roundTimer.timeSIsZero()){
                 spawnEnemyCount = countEnemy;
+//                for (auto& enemy : listEnemys) {
+//                    enemy->SetMaxHP(currentLevel);
+//                }
                 currentLevel++;
-
                 roundTimer.resetToMax();
             }
         }

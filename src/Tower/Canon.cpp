@@ -1,9 +1,9 @@
 #include "Canon.h"
 
-const float Canon::weaponRange = 150.0f;
+const float Canon::weaponRange = 130.0f;
 
 Canon::Canon(SDL_Renderer* renderer, pos _pos) :
-    BaseTower(renderer, _pos), damage(2), cost(100)
+    BaseTower(renderer, _pos), damage(2), cost(priceCanon)
 {
     textureTower = loadTexture::loadT(renderer, "canon.png");
     targetEnemies = vector<shared_ptr<enemy>>();
@@ -13,13 +13,13 @@ void Canon::updateTarget(SDL_Renderer* renderer, float dT, vector<shared_ptr<ene
 
     targetEnemies.clear();
 
-    float tamY = posM.first * TILE_HEIGHT + TILE_HEIGHT / 2 + Y_UPPER_LEFT;
-    float tamX = posM.second * TILE_WIDTH + TILE_WIDTH + X_UPPER_LEFT;
+    float tamY = gmap[posM.first][posM.second].y2;
+    float tamX = gmap[posM.first][posM.second].x2;
 
     for (const auto& enemy : listEnemys) {
         if (enemy != nullptr && enemy->isAlive()) {
-            float distanceSquared = (tamX - enemy->getBlock().x1) * (tamX - enemy->getBlock().x1) +
-                                    (tamY - enemy->getBlock().y1) * (tamY - enemy->getBlock().y1);
+            float distanceSquared = (tamX - enemy->getBlock().x2) * (tamX - enemy->getBlock().x2) +
+                                    (tamY - enemy->getBlock().y2) * (tamY - enemy->getBlock().y2);
             float distance = sqrt(distanceSquared);
             if (distance <= weaponRange) {
                 targetEnemies.push_back(enemy);
