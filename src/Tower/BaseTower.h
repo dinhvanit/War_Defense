@@ -10,7 +10,6 @@
 class BaseTower {
 public:
     BaseTower(SDL_Renderer* renderer, pos _pos);
-//    virtual ~BaseTower();
 
     virtual void updateTarget(SDL_Renderer* renderer, float dT, vector<shared_ptr<enemy>>& listEnemys) = 0;
     virtual void attackEnemy() = 0;

@@ -73,6 +73,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                     cout <<"chon type mage"<<endl;
                     break;
                 }
+                break;
             case SDL_MOUSEBUTTONDOWN:
                 mouseDownThisFrame = (mouseStatus == 0);
                 if (event.button.button == SDL_BUTTON_LEFT){
@@ -120,7 +121,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                                 break;
                             case TowerType::canon:
                 //                cout << "ve ra canon o vi tri "<<posM.first << " "<<posM.second<<"====="<<endl;
-//                                addCanonTower(renderer, posM);
+                                addCanonTower(renderer, posM);
                                 break;
                             }
                         }
@@ -242,10 +243,10 @@ void Game::addArcherTower(SDL_Renderer* renderer, pos posM) {
     shared_ptr<Archer> archerPtr = make_shared<Archer>(renderer, posM);
     listTowers.push_back(archerPtr);
 }
-//void Game::addCanonTower(SDL_Renderer* renderer, pos posM) {
-//    shared_ptr<Canon> canonPtr = make_shared<Canon>(renderer, posM);
-//    listTowers.push_back(canonPtr);
-//}
+void Game::addCanonTower(SDL_Renderer* renderer, pos posM) {
+    shared_ptr<Canon> canonPtr = make_shared<Canon>(renderer, posM);
+    listTowers.push_back(canonPtr);
+}
 //void Game::addCanonTower(SDL_Renderer* renderer, pos posM) {
 //    listTowers.push_back(Canon(renderer, posM));
 //}

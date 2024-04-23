@@ -12,8 +12,9 @@ public:
     void draw(SDL_Renderer* renderer) override;
     int getCost() override;
     bool CheckTowerInBlock(int row, int col) override;
-//    bool isOutOfRange(shared_ptr<enemy> enemy) override;
+    bool isOutOfRange(shared_ptr<enemy> enemy) override;
 private:
+    vector<std::shared_ptr<enemy>> targetEnemies;
     shared_ptr<enemy> targetEnemy;//target 1 con gần nhât
     static const float weaponRange;//vung tan cong
     SDL_Texture* textureTower = nullptr;

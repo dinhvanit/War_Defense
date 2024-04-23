@@ -37,7 +37,7 @@ class Game
         //add thap
         void addArcherTower(SDL_Renderer* renderer, pos posM);
 
-//        void addCanonTower(SDL_Renderer* renderer, pos posM);
+        void addCanonTower(SDL_Renderer* renderer, pos posM);
 
 //        void addMageTower(SDL_Renderer* renderer, pos posM);
 
