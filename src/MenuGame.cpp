@@ -49,7 +49,8 @@ Selection MenuGame::ShowMenu() {
                 else if (SDL_PointInRect(&p, &howToPlayRect)) {
                     // chon How to play
                     choice = HOW_TO_PLAY;
-                    RenderHowToPlay();
+                    isMenu=false;
+
                 }
                 else if (SDL_PointInRect(&p, &quitRect)){
                     choice = QUIT;

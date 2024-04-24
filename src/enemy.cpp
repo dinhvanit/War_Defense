@@ -1,11 +1,11 @@
 #include "enemy.h"
 
-//const float enemy::speed = 0.5f;
+
 enemy::enemy(SDL_Renderer* renderer, Block currentBlock, int currentLevel) :
  eBlock(start), step(2), currentState(stateWalkRight), CurrentFrame(0), numFrames(4)
 {
     healthMax = 50+(currentLevel*100);
-    cout << healthMax <<"-==-======"<<endl;
+//    cout << healthMax <<"-==-======"<<endl;
     healthCurrent=healthMax;
     enemyTexture =loadTexture::loadT(renderer, "demon.png");
     enemyTextureUp = loadTexture::loadT(renderer, "botren.png");

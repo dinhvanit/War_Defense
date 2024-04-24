@@ -48,14 +48,23 @@ void close()
 int main(int argc, char* argv[]){
     if(InitData() == false)
         return 1;
-    MenuGame menu(window, renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+    bool GameTrue=true;
+    while(GameTrue){
+        MenuGame menu(window, renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    Selection choice = menu.ShowMenu();
+        Selection choice = menu.ShowMenu();
 
-    if (choice == START) {
-        Game game(window, renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+        if (choice == START) {
+            Game game(window, renderer, SCREEN_WIDTH, SCREEN_HEIGHT, GameTrue);
+        }
+        else if (choice == HOW_TO_PLAY) {
+            cout <<"choice how to play";
+            menu.RenderHowToPlay();
+        }
+        else if (choice == QUIT){
+            GameTrue=false;
+        }
     }
-
     close();
     return 0;
 }

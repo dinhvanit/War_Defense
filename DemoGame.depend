@@ -16,7 +16,7 @@
 	<queue>
 	<algorithm>
 
-1713606352 source:d:\bigproject\game_sdl2\src\main.cpp
+1713924713 source:d:\bigproject\game_sdl2\src\main.cpp
 	"CommonFunc.h"
 	"game_map.h"
 	"Game.h"
@@ -34,7 +34,7 @@
 1710438376 d:\bigproject\game_sdl2\src\sdl_utils.h
 	"CommonFunc.h"
 
-1713891401 source:d:\bigproject\game_sdl2\src\game_map.cpp
+1713891961 source:d:\bigproject\game_sdl2\src\game_map.cpp
 	"game_map.h"
 
 1713891962 d:\bigproject\game_sdl2\src\game_map.h
@@ -64,10 +64,10 @@
 	"CommonFunc.h"
 	"game_map.h"
 
-1713889719 source:d:\bigproject\game_sdl2\src\game.cpp
+1713929430 source:d:\bigproject\game_sdl2\src\game.cpp
 	"Game.h"
 
-1713891598 d:\bigproject\game_sdl2\src\game.h
+1713930086 d:\bigproject\game_sdl2\src\game.h
 	"CommonFunc.h"
 	"game_map.h"
 	"enemy.h"
@@ -102,7 +102,7 @@
 1712843221 d:\bigproject\game_sdl2\src\level.h
 	"CommonFunc.h"
 
-1713889644 source:d:\bigproject\game_sdl2\src\enemy.cpp
+1713923674 source:d:\bigproject\game_sdl2\src\enemy.cpp
 	"enemy.h"
 
 1713889605 d:\bigproject\game_sdl2\src\enemy.h
@@ -144,7 +144,7 @@
 1713886989 source:d:\bigproject\game_sdl2\src\tower\basetower.cpp
 	"BaseTower.h"
 
-1713891349 d:\bigproject\game_sdl2\src\tower\basetower.h
+1713892141 d:\bigproject\game_sdl2\src\tower\basetower.h
 	"CommonFunc.h"
 	"enemy.h"
 	"Timer.h"
@@ -156,7 +156,7 @@
 1712748364 d:\bigproject\game_sdl2\src\loadttf.h
 	"CommonFunc.h"
 
-1713786415 source:d:\bigproject\game_sdl2\src\menugame.cpp
+1713924283 source:d:\bigproject\game_sdl2\src\menugame.cpp
 	"MenuGame.h"
 
 1713004683 d:\bigproject\game_sdl2\src\menugame.h
@@ -174,4 +174,9 @@
 
 1713845005 d:\bigproject\game_sdl2\src\tower\canon.h
 	"BaseTower.h"
+
+1713923690 source:d:\bigproject\game_sdl2\src\tower\mage.cpp
+	"Mage.h"
+
+1713923709 d:\bigproject\game_sdl2\src\tower\mage.h
 

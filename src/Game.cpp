@@ -1,13 +1,13 @@
 #include "Game.h"
 
 
-Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT):
+Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool& GameTrue):
     TypeCurrent(TowerType::archer),
     spawnTimer(1.0f), roundTimer(5.0f), currentGold(GoldStart), defeat(false), defeatTexture(loadTexture::loadT(renderer, "defeat.png")),
     currentLevel(0), spawnEnemyCount(0), gameStartTimer(5.0f, 5.0f)
 {
     if (window != nullptr && renderer != nullptr) {
-        bool is_quit = false;
+//        bool is_quit = false;
 
         auto time1 = std::chrono::system_clock::now();
         auto time2 = std::chrono::system_clock::now();
@@ -24,35 +24,51 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
             //load hoat anh
             if(timeDeltaFloat >= dT){
                 time1=time2;
-                processEvents(renderer, is_quit);
 //                cout <<"vang hien tai la "<<currentGold<<endl;
 //                cout <<"so mang hien tai la ==="<<HeartCURRENT<<endl;
-                if(HeartCURRENT>0){
-                    updates(renderer, dT);
-                    draw(renderer);
+                if(!PauseMenu){
+                    processEvents(renderer, is_quit, GameTrue);
+                    if(HeartCURRENT>0 ){
+                        updates(renderer, dT);
+                        draw(renderer);
+
+                    }
+                    else{
+                        SDL_Rect defeatRect = {(SCREEN_WIDTH-X_UPPER_LEFT)/4+X_UPPER_LEFT, (SCREEN_HEIGHT-Y_UPPER_LEFT)/3+Y_UPPER_LEFT,(SCREEN_WIDTH-X_UPPER_LEFT)/2, (SCREEN_HEIGHT-Y_UPPER_LEFT)/3};
+                        SDL_RenderCopy(renderer, defeatTexture, NULL, &defeatRect);
+                        SDL_RenderPresent(renderer);
+                    }
                 }
-                else{
-                    SDL_Rect defeatRect = {(SCREEN_WIDTH-X_UPPER_LEFT)/4+X_UPPER_LEFT, (SCREEN_HEIGHT-Y_UPPER_LEFT)/3+Y_UPPER_LEFT,(SCREEN_WIDTH-X_UPPER_LEFT)/2, (SCREEN_HEIGHT-Y_UPPER_LEFT)/3};
-                    SDL_RenderCopy(renderer, defeatTexture, NULL, &defeatRect);
-                    SDL_RenderPresent(renderer);
+                else
+                {
+                    showPauseMenu(renderer);
                 }
             }
         }
     }
 }
-//Game::~Game()
-//{
-//    //dtor
-//}
+Game::~Game()
+{
+    loadTexture::deallocateTextures();
+}
 
-void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
+void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
 {
     bool mouseDownThisFrame = false;
+    SDL_Rect PauseButtonRect ={SCREEN_WIDTH-100*1, 10, BUTTON_SIZE, BUTTON_SIZE};
 //    while(!is_quit){
+
+    int mouseX =0;
+    int mouseY=0;
+    pos posM;
+    SDL_GetMouseState(&mouseX, &mouseY);
+    SDL_Point pM={mouseX, mouseY};
+
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
             case SDL_QUIT:
                 is_quit = true;
+                GameTrue = false;
                 break;
             case SDL_KEYDOWN:
                 switch (event.key.keysym.scancode) {
@@ -78,7 +94,11 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                 mouseDownThisFrame = (mouseStatus == 0);
                 if (event.button.button == SDL_BUTTON_LEFT){
                     mouseStatus = SDL_BUTTON_LEFT;
-                    cout << SDL_BUTTON_LEFT <<endl;
+                    cout << pM.x <<" " << pM.y<<endl;
+                    if (SDL_PointInRect(&pM, &PauseButtonRect)){
+                        PauseMenu=true;
+                        cout <<"bam pause"<<endl;
+                    }
                 }
                 else if (event.button.button == SDL_BUTTON_RIGHT){
                     mouseStatus = SDL_BUTTON_RIGHT;
@@ -91,10 +111,6 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
                 break;
             }
         }
-    int mouseX =0;
-    int mouseY=0;
-    pos posM;
-    SDL_GetMouseState(&mouseX, &mouseY);
 
     posM = GameMap::getBlockInMap(mouseX, mouseY);
 
@@ -145,6 +161,9 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit)
             }
         }
     }
+//    else{
+//        cout <<"mouse ngoai map"<<endl;
+//    }
 }
 //    }//bo vong lap game ra khoi xu ly su kien
 //    cout << "khong truy cap vao duoc"<<endl;
@@ -238,6 +257,9 @@ void Game::draw(SDL_Renderer* renderer)
     showText(renderer, to_string(currentGold), 100, 550+Y_UPPER_LEFT, TEXT_SIZE );
     showText(renderer, to_string(HeartCURRENT), 100, 610+Y_UPPER_LEFT, TEXT_SIZE);
     showText(renderer, to_string(currentLevel), 300, 50, TEXT_SIZE);
+
+    showCurrentTower(renderer);
+
     SDL_RenderPresent(renderer);
 }
 
@@ -312,4 +334,55 @@ void Game::DestroyTower(pos posM)
 
 }
 
+void Game::showCurrentTower(SDL_Renderer* renderer ){
+    SDL_Rect CurTowerRect ={SCREEN_WIDTH-100*4-30, 10, BUTTON_SIZE, BUTTON_SIZE};
+    switch (TypeCurrent)
+    {
+        case TowerType::archer:
+            SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "archer.png"), NULL, &CurTowerRect);
+            break;
+        case TowerType::canon:
+            SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "canon.png"), NULL, &CurTowerRect);
+            break;
+        case TowerType::mage:
+            SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "mage.png"), NULL, &CurTowerRect);
+            break;
+    }
+}
 
+void Game::showPauseMenu(SDL_Renderer* renderer){
+    SDL_Rect PauMenuRect = {X_UPPER_LEFT+4*TILE_WIDTH, Y_UPPER_LEFT + TILE_WIDTH, 4*TILE_WIDTH, 5*TILE_HEIGHT};
+    SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "menu.png"), NULL, &PauMenuRect);
+    SDL_RenderPresent(renderer);
+    SDL_Rect BackToGameRect = {562, 585, 242, 75};
+    SDL_Rect MainMenu = {609, 532, 150, 35};
+    SDL_Rect ResetLevel = {609, 479, 150, 35};
+//    SDL_Rect MainMenu = {0, 0, 300, 300};
+//    SDL_Rect Music = {609, 333, 60, 14};
+//    SDL_Rect SoundFX = {575, 363, 85, 14};
+    SDL_Event eMenu;
+    while(PauseMenu)
+    {
+        while(SDL_PollEvent(&eMenu)){
+//            if(eMenu.type = SDL_QUIT){
+//                PauseMenu=false;
+//            }
+            if (eMenu.type == SDL_MOUSEBUTTONDOWN) {
+                int x, y;
+                SDL_GetMouseState(&x, &y);
+                SDL_Point p ={x, y};
+                cout << x <<" " <<y<<endl;
+                if (SDL_PointInRect(&p, &MainMenu)) {
+                    PauseMenu=false;
+                    is_quit=true;
+//                    cout <<"vao main menu"<<endl;
+                }
+
+                else if (SDL_PointInRect(&p, &BackToGameRect)){
+                    PauseMenu=false;
+                }
+            }
+
+        }
+    }
+}

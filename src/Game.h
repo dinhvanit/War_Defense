@@ -24,13 +24,13 @@ class Game
         }TypeCurrent;
 
     public:
-        Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT);
-        ~Game(){};
+        Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool& GameTrue);
+        ~Game();
 //        void addTower(SDL_renderer* renderer, )
 
     private:
         void draw(SDL_Renderer* renderer);
-        void processEvents(SDL_Renderer* renderer, bool& is_quit);
+        void processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue);
 
         void addTower(SDL_Renderer* renderer, pos posM);
 
@@ -53,7 +53,9 @@ class Game
 
         void showText(SDL_Renderer* renderer, string input, int x, int y, int size);
 
-//        void showCurrentTower(SDL_Renderer* renderer )
+        void showCurrentTower(SDL_Renderer* renderer);
+
+        void showPauseMenu(SDL_Renderer* renderer);
 //        void DestroyTower(SDL_renderer* renderer, Block posM);
 
         int mouseStatus = 0;
@@ -76,6 +78,9 @@ class Game
         SDL_Texture* defeatTexture=nullptr;
         int currentLevel;
 
+        bool is_quit = false;
+
+        bool PauseMenu = false;
 
 };
 
