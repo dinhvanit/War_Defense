@@ -29,6 +29,10 @@ void Archer::updateTarget(SDL_Renderer* renderer, float dT, vector<shared_ptr<en
         if (auto lockedEnemy = closestEnemy.lock()) {
             targetEnemy = closestEnemy;
         }
+        //ra khoi tam ban thi khong theo doi nua
+        else{
+            targetEnemy.reset();
+        }
     }
 }
 
@@ -37,7 +41,8 @@ void Archer::attackEnemy() {
         if (lockedEnemy->isAlive()) {
             lockedEnemy->getDamage(damage);
 //            cout <<"kill enemy ========" <<endl;
-        } else {
+        }
+        else {
             targetEnemy.reset();
         }
     }

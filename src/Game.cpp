@@ -116,6 +116,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
                                     break;
                                 case TowerType::canon:
                                     if(currentGold>=priceCanon){
+//                                        cout <<"add canon"<<endl;
                                         addCanonTower(renderer, posM);
                                         currentGold-=priceCanon;
                                     }
