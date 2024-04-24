@@ -31,7 +31,6 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
                     if(HeartCURRENT>0 ){
                         updates(renderer, dT);
                         draw(renderer);
-
                     }
                     else{
                         SDL_Rect defeatRect = {(SCREEN_WIDTH-X_UPPER_LEFT)/4+X_UPPER_LEFT, (SCREEN_HEIGHT-Y_UPPER_LEFT)/3+Y_UPPER_LEFT,(SCREEN_WIDTH-X_UPPER_LEFT)/2, (SCREEN_HEIGHT-Y_UPPER_LEFT)/3};
@@ -63,7 +62,6 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
     pos posM;
     SDL_GetMouseState(&mouseX, &mouseY);
     SDL_Point pM={mouseX, mouseY};
-
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
             case SDL_QUIT:
@@ -91,82 +89,60 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
                 }
                 break;
             case SDL_MOUSEBUTTONDOWN:
-                mouseDownThisFrame = (mouseStatus == 0);
-                if (event.button.button == SDL_BUTTON_LEFT){
-                    mouseStatus = SDL_BUTTON_LEFT;
-                    cout << pM.x <<" " << pM.y<<endl;
-                    if (SDL_PointInRect(&pM, &PauseButtonRect)){
-                        PauseMenu=true;
-                        cout <<"bam pause"<<endl;
-                    }
-                }
-                else if (event.button.button == SDL_BUTTON_RIGHT){
-                    mouseStatus = SDL_BUTTON_RIGHT;
-                    cout << SDL_BUTTON_RIGHT <<endl;
-
-                }
-            break;
-            case SDL_MOUSEBUTTONUP:
-                mouseStatus = 0;
-                break;
-            }
-        }
-
-    posM = GameMap::getBlockInMap(mouseX, mouseY);
-
-    if(mouseX>X_UPPER_LEFT && mouseY>Y_UPPER_LEFT){
-        if(mouseStatus > 0)
-        {
-            switch (mouseStatus)
-            {
-                case SDL_BUTTON_LEFT:
-                    if( gmap[posM.first][posM.second].isTowerIn == 0 && currentGold>=priceTower ){
-                        gmap[posM.first][posM.second]=Block(posM.first, posM.second, 1);
-                        if(!GameMap::ConDuong(gmap)) {
-                            cout << "khong dat duoc vi tri nay!"<<endl;
-                            gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
-                        }
-                        else {
-
-                            SDL_Rect rect = {gmap[posM.first][posM.second].x1,gmap[posM.first][posM.second].y1, TILE_WIDTH, TILE_HEIGHT };
-                            switch (TypeCurrent) {
-                            case TowerType::archer:
-                                if(currentGold>=priceArcher) {
-                                    addArcherTower(renderer, posM);
-                                    currentGold-=priceArcher;
+                posM = GameMap::getBlockInMap(mouseX, mouseY);
+                cout <<"bam chuot xuong"<<endl;
+                if(mouseX>X_UPPER_LEFT && mouseY>Y_UPPER_LEFT){
+                    cout <<"chuot ben trong"<<endl;
+                    if(event.button.button == SDL_BUTTON_LEFT){
+                        cout <<"bam chuot trai"<<endl;
+                        if( gmap[posM.first][posM.second].isTowerIn == 0 && currentGold>=priceTower ){
+                            gmap[posM.first][posM.second]=Block(posM.first, posM.second, 1);
+                            if(!GameMap::ConDuong(gmap)) {
+                                cout << "khong dat duoc vi tri nay!"<<endl;
+                                gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
+                            }
+                            else{
+                                SDL_Rect rect = {gmap[posM.first][posM.second].x1,gmap[posM.first][posM.second].y1, TILE_WIDTH, TILE_HEIGHT };
+                                switch (TypeCurrent) {
+                                case TowerType::archer:
+                                    if(currentGold>=priceArcher) {
+                                        addArcherTower(renderer, posM);
+                                        currentGold-=priceArcher;
+                                    }
+                                    else {
+                                        gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
+                                        cout << "khong du tien dat archer" <<endl;
+                                    }
+                                    break;
+                                case TowerType::canon:
+                                    if(currentGold>=priceCanon){
+                                        addCanonTower(renderer, posM);
+                                        currentGold-=priceCanon;
+                                    }
+                                    else {
+                                        gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
+                                        cout << "khong du tien dat canon" <<endl;
+                                    }
+                                    break;
                                 }
-                                else {
-                                    gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
-                                    cout << "khong du tien dat archer" <<endl;
-                                }
-                                break;
-                            case TowerType::canon:
-                                if(currentGold>=priceCanon){
-                                    addCanonTower(renderer, posM);
-                                    currentGold-=priceCanon;
-                                }
-                                else {
-                                    gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
-                                    cout << "khong du tien dat canon" <<endl;
-                                }
-                                break;
                             }
                         }
                     }
-                    break;
-                case SDL_BUTTON_RIGHT:
-                    DestroyTower(posM);
-    //                cout <<"ao vai chuong"<<endl;
-                    break;
+                    else if (event.button.button == SDL_BUTTON_RIGHT){
+                            DestroyTower(posM);
+                    }
+                }
+                else {
+                    if (event.button.button == SDL_BUTTON_LEFT){
+                        if (SDL_PointInRect(&pM, &PauseButtonRect)){
+                            PauseMenu=true;
+                            cout <<"bam pause"<<endl;
+                        }
+                    }
+                }
             }
         }
-    }
-//    else{
-//        cout <<"mouse ngoai map"<<endl;
-//    }
 }
-//    }//bo vong lap game ra khoi xu ly su kien
-//    cout << "khong truy cap vao duoc"<<endl;
 
 
 
