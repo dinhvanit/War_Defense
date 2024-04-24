@@ -374,18 +374,19 @@ void Game::showCurrentTower(SDL_Renderer* renderer ){
 }
 
 void Game::showPauseMenu(SDL_Renderer* renderer, bool& GameTrue){
-    SDL_Rect PauMenuRect = {X_UPPER_LEFT+4*TILE_WIDTH, Y_UPPER_LEFT + TILE_WIDTH, 4*TILE_WIDTH, 5*TILE_HEIGHT};
-    SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "menu.png"), NULL, &PauMenuRect);
-    SDL_RenderPresent(renderer);
-    SDL_Rect BackToGameRect = {562, 585, 242, 75};
-    SDL_Rect MainMenu = {609, 532, 150, 35};
-    SDL_Rect ResetLevel = {609, 479, 150, 35};
-    SDL_Rect MusicRect = {600, 330, 65, 20};
-    SDL_Rect SoundFXRect = {570, 338, 90, 20};
-    SDL_Rect SpeakerSoundFX = {680, 360, 20, 20};
-    SDL_Event eMenu;
+
     while(PauseMenu)
     {
+        SDL_Rect PauMenuRect = {X_UPPER_LEFT+4*TILE_WIDTH, Y_UPPER_LEFT + TILE_WIDTH, 4*TILE_WIDTH, 5*TILE_HEIGHT};
+        SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "menu.png"), NULL, &PauMenuRect);
+        SDL_Rect BackToGameRect = {562, 585, 242, 75};
+        SDL_Rect MainMenu = {609, 532, 150, 35};
+        SDL_Rect ResetLevel = {609, 479, 150, 35};
+//        SDL_Rect MusicRect = {600, 330, 65, 20};
+//        SDL_Rect SoundFXRect = {570, 364, 100, 20};
+        SDL_Rect SpeakerSoundFX = {680, 360, 50, 50};
+        SDL_Rect SpeakerMusic ={680, 320, 50, 50};
+        SDL_Event eMenu;
         while(SDL_PollEvent(&eMenu)){
 //            if(eMenu.type = SDL_QUIT){
 //                PauseMenu=false;
@@ -410,24 +411,30 @@ void Game::showPauseMenu(SDL_Renderer* renderer, bool& GameTrue){
                 else if (SDL_PointInRect(&p, &BackToGameRect)){
                     PauseMenu=false;
                 }
-                else if (SDL_PointInRect(&p, &MusicRect)){
+                else if (SDL_PointInRect(&p, &SpeakerMusic)){
                     if(Music==true) Music=false;
                     else Music=true;
                 }
-                else if (SDL_PointInRect(&p, &SoundFXRect)){
+                else if (SDL_PointInRect(&p, &SpeakerSoundFX)){
                     if(SoundFX==true) {
                         SoundFX=false;
-//                        SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "loa.png"), NULL, &SpeakerSoundFX);
+                        cout <<"Bam tat SoundFx"<<endl;
                     }
                     else if(SoundFX==false){
                         SoundFX=true;
-//                        cout <<"Bam bat SoundFX"<<endl;
-//                        SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "Mute.png"), NULL, &SpeakerSoundFX);
+                        cout <<"Bam bat SoundFX"<<endl;
                     }
                 }
             }
 
         }
+    if(SoundFX==true) SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "loa.png"), NULL, &SpeakerSoundFX);
+    else SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "Mute.png"), NULL, &SpeakerSoundFX);
+
+    if(Music==true) SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "loa.png"), NULL, &SpeakerMusic);
+    else SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "Mute.png"), NULL, &SpeakerMusic);
+
+    SDL_RenderPresent(renderer);
     }
 }
 void Game::showDefeatBoard(SDL_Renderer* renderer, bool& GameTrue)
