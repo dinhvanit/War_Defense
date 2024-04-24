@@ -61,7 +61,7 @@ class Game
         void showDefeatBoard(SDL_Renderer* renderer, bool& GameTrue);
 
         Mix_Chunk* loadSound(string fileAudio);
-
+        Mix_Music* loadMusic(string fileMusic);
         int mouseStatus = 0;
 
         vector<shared_ptr<enemy>> listEnemys;
@@ -84,11 +84,15 @@ class Game
         int currentLevel;
 
         bool is_quit = false;
-
         bool PauseMenu = false;
 
-        Mix_Chunk* Cowmoo=nullptr;
+        bool Music;
+        bool SoundFX;
 
+
+        Mix_Chunk* Cowmoo=nullptr;
+        Mix_Chunk* DefeatSound=nullptr;
+        Mix_Music* musicGame=nullptr;
 };
 
 

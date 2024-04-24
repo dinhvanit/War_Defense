@@ -42,7 +42,7 @@ void Canon::draw(SDL_Renderer* renderer) {
                 float enemyX = targetEnemy->getBlock().x1 + TILE_HEIGHT / 2;
                 float enemyY = targetEnemy->getBlock().y1 + TILE_WIDTH / 2;
 
-                SDL_SetRenderDrawColor(renderer, 38, 0, 253, 0);
+                SDL_SetRenderDrawColor(renderer,Yellow.r, Yellow.g, Yellow.b, 255);
                 SDL_RenderDrawLine(renderer, tamX, tamY, enemyX, enemyY);
             }
         }

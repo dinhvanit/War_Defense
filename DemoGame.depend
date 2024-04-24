@@ -64,10 +64,10 @@
 	"CommonFunc.h"
 	"game_map.h"
 
-1713949927 source:d:\bigproject\game_sdl2\src\game.cpp
+1713970483 source:d:\bigproject\game_sdl2\src\game.cpp
 	"Game.h"
 
-1713949709 d:\bigproject\game_sdl2\src\game.h
+1713965690 d:\bigproject\game_sdl2\src\game.h
 	"CommonFunc.h"
 	"game_map.h"
 	"enemy.h"
@@ -103,16 +103,17 @@
 1712843221 d:\bigproject\game_sdl2\src\level.h
 	"CommonFunc.h"
 
-1713947549 source:d:\bigproject\game_sdl2\src\enemy.cpp
+1713955575 source:d:\bigproject\game_sdl2\src\enemy.cpp
 	"enemy.h"
 
-1713944214 d:\bigproject\game_sdl2\src\enemy.h
+1713955063 d:\bigproject\game_sdl2\src\enemy.h
 	"CommonFunc.h"
 	"loadTexture.h"
 	"game_map.h"
 	<vector>
 	"time.h"
 	<memory>
+	<cmath>
 
 1711702408 source:d:\bigproject\game_sdl2\src\move.cpp
 	"Move.h"
@@ -170,7 +171,7 @@
 1713807439 d:\bigproject\game_sdl2\src\tower\archer.h
 	"BaseTower.h"
 
-1713944822 source:d:\bigproject\game_sdl2\src\tower\canon.cpp
+1713955087 source:d:\bigproject\game_sdl2\src\tower\canon.cpp
 	"Canon.h"
 
 1713845005 d:\bigproject\game_sdl2\src\tower\canon.h

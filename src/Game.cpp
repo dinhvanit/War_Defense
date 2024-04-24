@@ -14,7 +14,9 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
 
         const float dT = 1.0f / 60.0f;
         Cowmoo = loadSound("cow_moo1.wav");
-
+        DefeatSound = loadSound("DefeatSound.wav");
+//        musicGame = loadMusic("game_music.wav");
+        musicGame = loadMusic("Music.mp3");
         gmap=CreateMap();
 //        for(int i=0; i<5; i++){
 //                for(int j=0; j<5; j++){
@@ -22,8 +24,21 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
 //                }
 //                cout <<endl;
 //        }
+        Music=true;
+        SoundFX=true;
         while(!is_quit){
 
+            if(Music==true){
+                if(Mix_PlayingMusic()==0) {
+                    Mix_PlayMusic(musicGame, -1);
+                }
+                else {
+                    Mix_ResumeMusic();
+                }
+            }
+            else {
+                Mix_PauseMusic();
+            }
             time2 = std::chrono::system_clock::now();
             std::chrono::duration<float> timeDelta = time2 - time1;
             float timeDeltaFloat = timeDelta.count();
@@ -46,6 +61,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
                     }
                 }
                 else {
+                    if(SoundFX) Mix_PlayChannel(-1,DefeatSound,0);
                     showDefeatBoard(renderer, GameTrue);
                 }
             }
@@ -147,10 +163,26 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
                     }
                 }
                 else {
+                    SDL_Rect ArcherButton = {13, 21, 169, 193};
+                    SDL_Rect CanonButton = {13, 214, 169, 193};
+                    SDL_Rect MageButton = {13, 407, 169, 193};
                     if (event.button.button == SDL_BUTTON_LEFT){
+                        cout << pM.x<<" "<<pM.y<<endl;
                         if (SDL_PointInRect(&pM, &PauseButtonRect)){
                             PauseMenu=true;
                             cout <<"bam pause"<<endl;
+                        }
+                        else if(SDL_PointInRect(&pM, &ArcherButton))
+                        {
+                            TypeCurrent = TowerType :: archer;
+                        }
+                        else if(SDL_PointInRect(&pM, &CanonButton))
+                        {
+                            TypeCurrent = TowerType::canon;
+                        }
+                        else if (SDL_PointInRect(&pM, &MageButton))
+                        {
+                            TypeCurrent = TowerType::mage;
                         }
                     }
                 }
@@ -207,7 +239,8 @@ void Game::updateSpawnEnemy(SDL_Renderer* renderer, float dT)
             roundTimer.countDown(dT);
             if (roundTimer.timeSIsZero()){
                 spawnEnemyCount = countEnemy;
-                Mix_PlayChannel(-1,Cowmoo,0);
+                if(SoundFX) Mix_PlayChannel(-1,Cowmoo,0);
+                else cout <<" tat am thanh sound fx"<<endl;
 //                for (auto& enemy : listEnemys) {
 //                    enemy->SetMaxHP(currentLevel);
 //                }
@@ -347,9 +380,9 @@ void Game::showPauseMenu(SDL_Renderer* renderer, bool& GameTrue){
     SDL_Rect BackToGameRect = {562, 585, 242, 75};
     SDL_Rect MainMenu = {609, 532, 150, 35};
     SDL_Rect ResetLevel = {609, 479, 150, 35};
-//    SDL_Rect MainMenu = {0, 0, 300, 300};
-//    SDL_Rect Music = {609, 333, 60, 14};
-//    SDL_Rect SoundFX = {575, 363, 85, 14};
+    SDL_Rect MusicRect = {600, 330, 65, 20};
+    SDL_Rect SoundFXRect = {570, 338, 90, 20};
+    SDL_Rect SpeakerSoundFX = {680, 360, 20, 20};
     SDL_Event eMenu;
     while(PauseMenu)
     {
@@ -376,6 +409,21 @@ void Game::showPauseMenu(SDL_Renderer* renderer, bool& GameTrue){
 
                 else if (SDL_PointInRect(&p, &BackToGameRect)){
                     PauseMenu=false;
+                }
+                else if (SDL_PointInRect(&p, &MusicRect)){
+                    if(Music==true) Music=false;
+                    else Music=true;
+                }
+                else if (SDL_PointInRect(&p, &SoundFXRect)){
+                    if(SoundFX==true) {
+                        SoundFX=false;
+//                        SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "loa.png"), NULL, &SpeakerSoundFX);
+                    }
+                    else if(SoundFX==false){
+                        SoundFX=true;
+//                        cout <<"Bam bat SoundFX"<<endl;
+//                        SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "Mute.png"), NULL, &SpeakerSoundFX);
+                    }
                 }
             }
 
@@ -415,7 +463,7 @@ void Game::showDefeatBoard(SDL_Renderer* renderer, bool& GameTrue)
 
 Mix_Chunk* Game::loadSound(string fileAudio){
     if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1){
-        cout << "LỖI MIX_OpenAudio " << Mix_GetError() << endl;
+        cout << "Loi MIX_OpenAudio " << Mix_GetError() << endl;
     }
 
     string path = "assets/sounds/" + fileAudio;
@@ -425,4 +473,18 @@ Mix_Chunk* Game::loadSound(string fileAudio){
         cout<<"ERROR loading file:" << Mix_GetError() << endl;
     }
     return chunk;
+}
+
+Mix_Music* Game::loadMusic(string fileMusic){
+    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1){
+        cout << "Loi MIX_OpenAudio " << Mix_GetError() << endl;
+    }
+
+    string path = "assets/sounds/" + fileMusic;
+    Mix_Music* music = Mix_LoadMUS(path.c_str());
+
+    if (music == NULL){
+        cout<<"ERROR loading file:" << Mix_GetError() << endl;
+    }
+    return music;
 }

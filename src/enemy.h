@@ -7,6 +7,7 @@
 #include <vector>
 #include "time.h"
 #include <memory>//share_ptr
+#include <cmath>
 
 typedef enum{
     stateWalkRight,
