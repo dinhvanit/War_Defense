@@ -3,7 +3,7 @@
 
 Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool& GameTrue):
     TypeCurrent(TowerType::archer),
-    spawnTimer(1.0f), roundTimer(5.0f), currentGold(GoldStart), defeat(false), defeatTexture(loadTexture::loadT(renderer, "defeat.png")),
+    spawnTimer(1.0f), roundTimer(5.0f), HeartCURRENT(HeartStart), currentGold(GoldStart), defeat(false), defeatTexture(loadTexture::loadT(renderer, "defeat.png")),
     currentLevel(0), spawnEnemyCount(0), gameStartTimer(5.0f, 5.0f)
 {
     if (window != nullptr && renderer != nullptr) {
@@ -13,9 +13,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
         auto time2 = std::chrono::system_clock::now();
 
         const float dT = 1.0f / 60.0f;
-//        SDL_Rect rectbar = {0, 0, X_UPPER_LEFT, SCREEN_HEIGHT};
-//        SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "StatusBar.png"), NULL, &rectbar);
-//        SDL_RenderPresent(renderer);
+
         while(!is_quit){
 
             time2 = std::chrono::system_clock::now();
@@ -26,21 +24,21 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
                 time1=time2;
 //                cout <<"vang hien tai la "<<currentGold<<endl;
 //                cout <<"so mang hien tai la ==="<<HeartCURRENT<<endl;
-                if(!PauseMenu){
-                    processEvents(renderer, is_quit, GameTrue);
-                    if(HeartCURRENT>0 ){
+                if(HeartCURRENT>0 ) defeat=false;
+                else defeat=true;
+                if(!defeat){
+                    if(!PauseMenu){
+                        processEvents(renderer, is_quit, GameTrue);
                         updates(renderer, dT);
                         draw(renderer);
                     }
-                    else{
-                        SDL_Rect defeatRect = {(SCREEN_WIDTH-X_UPPER_LEFT)/4+X_UPPER_LEFT, (SCREEN_HEIGHT-Y_UPPER_LEFT)/3+Y_UPPER_LEFT,(SCREEN_WIDTH-X_UPPER_LEFT)/2, (SCREEN_HEIGHT-Y_UPPER_LEFT)/3};
-                        SDL_RenderCopy(renderer, defeatTexture, NULL, &defeatRect);
-                        SDL_RenderPresent(renderer);
+                    else
+                    {
+                        showPauseMenu(renderer, GameTrue);
                     }
                 }
-                else
-                {
-                    showPauseMenu(renderer);
+                else {
+                    showDefeatBoard(renderer, GameTrue);
                 }
             }
         }
@@ -231,9 +229,9 @@ void Game::draw(SDL_Renderer* renderer)
 
     for(auto& towerSelected : listTowers)
         towerSelected->draw(renderer);
-    showText(renderer, to_string(currentGold), 100, 550+Y_UPPER_LEFT, TEXT_SIZE );
-    showText(renderer, to_string(HeartCURRENT), 100, 610+Y_UPPER_LEFT, TEXT_SIZE);
-    showText(renderer, to_string(currentLevel), 300, 50, TEXT_SIZE);
+    showText(renderer, to_string(currentGold), 100, 550+Y_UPPER_LEFT, TEXT_SIZE , Yellow);
+    showText(renderer, to_string(HeartCURRENT), 100, 610+Y_UPPER_LEFT, TEXT_SIZE, Red);
+    showText(renderer, to_string(currentLevel), 300, 50, TEXT_SIZE, White);
 
     showCurrentTower(renderer);
 
@@ -276,7 +274,7 @@ void Game::addEnemy(SDL_Renderer* renderer, Block sBlock){
 
 
 
-void Game::showText(SDL_Renderer* renderer,string input, int x, int y,int size)
+void Game::showText(SDL_Renderer* renderer,string input, int x, int y,int size, SDL_Color color)
 {
     if(TTF_Init()==-1){
         cout <<"loi "<<endl;
@@ -285,9 +283,7 @@ void Game::showText(SDL_Renderer* renderer,string input, int x, int y,int size)
         if (font == nullptr) {
             cout<< "Failed to load font: " << TTF_GetError() << endl;
     }
-
-    SDL_Color White = {255,255,255};
-    SDL_Surface *textSurface = TTF_RenderText_Solid(font, input.c_str(), White);
+    SDL_Surface *textSurface = TTF_RenderText_Solid(font, input.c_str(), color);
     SDL_Texture *text = SDL_CreateTextureFromSurface(renderer, textSurface);
 //    SDL_FreeSurface(textSurface);
     SDL_Rect renderQuad = {x, y, textSurface->w, textSurface->h};
@@ -327,7 +323,7 @@ void Game::showCurrentTower(SDL_Renderer* renderer ){
     }
 }
 
-void Game::showPauseMenu(SDL_Renderer* renderer){
+void Game::showPauseMenu(SDL_Renderer* renderer, bool& GameTrue){
     SDL_Rect PauMenuRect = {X_UPPER_LEFT+4*TILE_WIDTH, Y_UPPER_LEFT + TILE_WIDTH, 4*TILE_WIDTH, 5*TILE_HEIGHT};
     SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "menu.png"), NULL, &PauMenuRect);
     SDL_RenderPresent(renderer);
@@ -344,7 +340,13 @@ void Game::showPauseMenu(SDL_Renderer* renderer){
 //            if(eMenu.type = SDL_QUIT){
 //                PauseMenu=false;
 //            }
-            if (eMenu.type == SDL_MOUSEBUTTONDOWN) {
+            if(eMenu.type == SDL_QUIT){
+                PauseMenu=false;
+                is_quit = true;
+                GameTrue = false;
+                break;
+            }
+            else if (eMenu.type == SDL_MOUSEBUTTONDOWN) {
                 int x, y;
                 SDL_GetMouseState(&x, &y);
                 SDL_Point p ={x, y};
@@ -360,6 +362,36 @@ void Game::showPauseMenu(SDL_Renderer* renderer){
                 }
             }
 
+        }
+    }
+}
+void Game::showDefeatBoard(SDL_Renderer* renderer, bool& GameTrue)
+{
+    SDL_Rect DefeatBoardRect = {X_UPPER_LEFT+4*TILE_WIDTH, Y_UPPER_LEFT + TILE_WIDTH, 4*TILE_WIDTH, 5*TILE_HEIGHT};
+    SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "defeatBoard.png"), NULL, &DefeatBoardRect);
+    showText(renderer, to_string(currentLevel), 650, 350, 72, Red);
+    SDL_RenderPresent(renderer);
+
+    SDL_Rect MainMenu = {567, 592, 100, 43};
+    SDL_Rect ResetLevel = {694, 592, 100, 43};
+
+    SDL_Event eDefeat;
+
+    while(SDL_PollEvent(&eDefeat)){
+        if(eDefeat.type == SDL_QUIT){
+                is_quit = true;
+                GameTrue = false;
+                break;
+        }
+        else if (eDefeat.type == SDL_MOUSEBUTTONDOWN) {
+            int x, y;
+            SDL_GetMouseState(&x, &y);
+            SDL_Point p ={x, y};
+            cout << x <<" " <<y<<endl;
+            if (SDL_PointInRect(&p, &MainMenu)) {
+                is_quit=true;
+                break;
+            }
         }
     }
 }

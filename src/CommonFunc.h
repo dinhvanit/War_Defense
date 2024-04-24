@@ -85,7 +85,7 @@ const int GoldStart = 100;
 const int priceTower = 50;
 const int goldEnemy = 10;
 
-static int HeartCURRENT = 10;
+const int HeartStart = 5;
 
 const int TEXT_SIZE = 30;
 
@@ -96,4 +96,11 @@ const int BUTTON_SIZE = 80;
 const int priceArcher = 50;
 const int priceCanon = 100;
 const int priceMage = 75;
+
+
+const SDL_Color Black = {0, 0, 0};
+const SDL_Color White = {255, 255, 255};
+const SDL_Color Yellow = {255, 255, 0};
+const SDL_Color Red = {255, 0, 0};
+
 #endif // COMMONFUNC_H

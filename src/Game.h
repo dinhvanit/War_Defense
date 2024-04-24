@@ -51,12 +51,13 @@ class Game
 
         void DestroyTower(pos posM);
 
-        void showText(SDL_Renderer* renderer, string input, int x, int y, int size);
+        void showText(SDL_Renderer* renderer, string input, int x, int y, int size, SDL_Color color);
 
         void showCurrentTower(SDL_Renderer* renderer);
 
-        void showPauseMenu(SDL_Renderer* renderer);
-//        void DestroyTower(SDL_renderer* renderer, Block posM);
+        void showPauseMenu(SDL_Renderer* renderer, bool& GameTrue);
+
+        void showDefeatBoard(SDL_Renderer* renderer, bool& GameTrue);
 
         int mouseStatus = 0;
 
@@ -72,8 +73,9 @@ class Game
         int spawnEnemyCount;//so quai 1 turn
 
         int currentGold=0;
+        int HeartCURRENT;
 
-        bool defeat;
+        bool defeat=false;
 
         SDL_Texture* defeatTexture=nullptr;
         int currentLevel;
