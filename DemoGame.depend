@@ -64,17 +64,16 @@
 	"CommonFunc.h"
 	"game_map.h"
 
-1713972362 source:d:\bigproject\game_sdl2\src\game.cpp
+1713976381 source:d:\bigproject\game_sdl2\src\game.cpp
 	"Game.h"
 
-1713965690 d:\bigproject\game_sdl2\src\game.h
+1713978229 d:\bigproject\game_sdl2\src\game.h
 	"CommonFunc.h"
 	"game_map.h"
 	"enemy.h"
 	<chrono>
 	<ctime>
 	"Timer.h"
-	"Tower.h"
 	<memory>
 	"BaseTower.h"
 	"Archer.h"
@@ -165,21 +164,21 @@
 	"CommonFunc.h"
 	"loadTexture.h"
 
-1713937223 source:d:\bigproject\game_sdl2\src\tower\archer.cpp
+1713974950 source:d:\bigproject\game_sdl2\src\tower\archer.cpp
 	"Archer.h"
 
-1713807439 d:\bigproject\game_sdl2\src\tower\archer.h
+1713974950 d:\bigproject\game_sdl2\src\tower\archer.h
 	"BaseTower.h"
 
-1713955087 source:d:\bigproject\game_sdl2\src\tower\canon.cpp
+1713974950 source:d:\bigproject\game_sdl2\src\tower\canon.cpp
 	"Canon.h"
 
-1713845005 d:\bigproject\game_sdl2\src\tower\canon.h
+1713974950 d:\bigproject\game_sdl2\src\tower\canon.h
 	"BaseTower.h"
 
-1713944915 source:d:\bigproject\game_sdl2\src\tower\mage.cpp
+1713974950 source:d:\bigproject\game_sdl2\src\tower\mage.cpp
 	"Mage.h"
 
-1713943254 d:\bigproject\game_sdl2\src\tower\mage.h
+1713974950 d:\bigproject\game_sdl2\src\tower\mage.h
 	"BaseTower.h"
 

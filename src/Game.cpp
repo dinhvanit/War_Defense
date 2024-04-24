@@ -68,16 +68,46 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
         }
     }
 }
+
+
 Game::~Game()
 {
     loadTexture::deallocateTextures();
+    for (auto& tower : listTowers) {
+        tower.reset();
+    }
+
+    for (auto& enemy : listEnemys) {
+        enemy.reset();
+    }
+
+    if (defeatTexture != nullptr) {
+        SDL_DestroyTexture(defeatTexture);
+        defeatTexture = nullptr;
+    }
+
+    if (musicGame != nullptr) {
+        Mix_FreeMusic(musicGame);
+        musicGame = nullptr;
+    }
+
+    if (Cowmoo != nullptr) {
+        Mix_FreeChunk(Cowmoo);
+        Cowmoo = nullptr;
+    }
+
+    if (DefeatSound != nullptr) {
+        Mix_FreeChunk(DefeatSound);
+        DefeatSound = nullptr;
+    }
 }
+
+
 
 void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
 {
     bool mouseDownThisFrame = false;
     SDL_Rect PauseButtonRect ={SCREEN_WIDTH-100*1, 10, BUTTON_SIZE, BUTTON_SIZE};
-//    while(!is_quit){
 
     int mouseX =0;
     int mouseY=0;

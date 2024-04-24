@@ -48,7 +48,10 @@
 		<Unit filename="src/MenuGame.h" />
 		<Unit filename="src/Timer.cpp" />
 		<Unit filename="src/Timer.h" />
-		<Unit filename="src/Tower.cpp" />
+		<Unit filename="src/Tower.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
 		<Unit filename="src/Tower.h" />
 		<Unit filename="src/Tower/Archer.cpp" />
 		<Unit filename="src/Tower/Archer.h" />
