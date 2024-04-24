@@ -6,7 +6,7 @@ enemy::enemy(SDL_Renderer* renderer, Block currentBlock, int currentLevel) :
  slowEffect(1)
 // slowDuration(0)
 {
-    healthMax = 50+(currentLevel*100);
+    healthMax = 50+(currentLevel/5*500);
 //    cout << healthMax <<"-==-======"<<endl;
     healthCurrent=healthMax;
     enemyTexture =loadTexture::loadT(renderer, "demon.png");

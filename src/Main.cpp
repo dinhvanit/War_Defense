@@ -55,10 +55,11 @@ int main(int argc, char* argv[]){
         Selection choice = menu.ShowMenu();
 
         if (choice == START) {
+
             Game game(window, renderer, SCREEN_WIDTH, SCREEN_HEIGHT, GameTrue);
         }
         else if (choice == HOW_TO_PLAY) {
-            cout <<"choice how to play";
+//            cout <<"choice how to play";
             menu.RenderHowToPlay();
         }
         else if (choice == QUIT){

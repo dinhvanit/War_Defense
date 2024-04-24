@@ -14,6 +14,13 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
 
         const float dT = 1.0f / 60.0f;
 
+        gmap=CreateMap();
+//        for(int i=0; i<5; i++){
+//                for(int j=0; j<5; j++){
+//                    cout << gmap[i][j].isTowerIn<<" ";
+//                }
+//                cout <<endl;
+//        }
         while(!is_quit){
 
             time2 = std::chrono::system_clock::now();
@@ -88,15 +95,12 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 posM = GameMap::getBlockInMap(mouseX, mouseY);
-                cout <<"bam chuot xuong"<<endl;
                 if(mouseX>X_UPPER_LEFT && mouseY>Y_UPPER_LEFT){
-                    cout <<"chuot ben trong"<<endl;
                     if(event.button.button == SDL_BUTTON_LEFT){
-                        cout <<"bam chuot trai"<<endl;
                         if( gmap[posM.first][posM.second].isTowerIn == 0 && currentGold>=priceTower ){
                             gmap[posM.first][posM.second]=Block(posM.first, posM.second, 1);
                             if(!GameMap::ConDuong(gmap)) {
-                                cout << "khong dat duoc vi tri nay!"<<endl;
+//                                cout << "khong dat duoc vi tri nay!"<<endl;
                                 gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
                             }
                             else{

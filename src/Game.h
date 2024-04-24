@@ -60,6 +60,7 @@ class Game
 
         void showDefeatBoard(SDL_Renderer* renderer, bool& GameTrue);
 
+
         int mouseStatus = 0;
 
         vector<shared_ptr<enemy>> listEnemys;
