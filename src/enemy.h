@@ -51,9 +51,14 @@ class enemy
 
         EnemyState currentState;
 
-        void SetMaxHP(int currentLevel);
+//        void SetMaxHP(int currentLevel);
 
         int healthCurrent;
+
+//ham lam cham quai
+        void applySlowEffect(int effect);
+//        void updateSlowEffect();//cap nhap hieu ung lam cham sau moi lan lap
+        void resetSlowEffect();
 
     private:
         pos ePos;
@@ -76,6 +81,9 @@ class enemy
         SDL_Rect frame_clip[4];
         int numFrames;
         int CurrentFrame;
+
+//hieu ung lam cham
+        int slowEffect;//muc do lam cham
 
 };
 

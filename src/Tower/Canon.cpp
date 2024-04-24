@@ -3,7 +3,7 @@
 const float Canon::weaponRange = 130.0f;
 
 Canon::Canon(SDL_Renderer* renderer, pos _pos) :
-    BaseTower(renderer, _pos), damage(2), cost(priceCanon)
+    BaseTower(renderer, _pos), damage(1), cost(priceCanon)
 {
     textureTower = loadTexture::loadT(renderer, "canon.png");
     targetEnemies = vector<shared_ptr<enemy>>();

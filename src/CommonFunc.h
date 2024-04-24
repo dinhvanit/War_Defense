@@ -85,7 +85,7 @@ const int GoldStart = 100;
 const int priceTower = 50;
 const int goldEnemy = 10;
 
-const int HeartStart = 5;
+const int HeartStart = 10;
 
 const int TEXT_SIZE = 30;
 

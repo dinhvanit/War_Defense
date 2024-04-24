@@ -2,7 +2,9 @@
 
 
 enemy::enemy(SDL_Renderer* renderer, Block currentBlock, int currentLevel) :
- eBlock(start), step(2), currentState(stateWalkRight), CurrentFrame(0), numFrames(4)
+ eBlock(start), step(2), currentState(stateWalkRight), CurrentFrame(0), numFrames(4),
+ slowEffect(1)
+// slowDuration(0)
 {
     healthMax = 50+(currentLevel*100);
 //    cout << healthMax <<"-==-======"<<endl;
@@ -86,7 +88,8 @@ Block enemy::getNextBlock(Map gmap)
 void enemy::runNextBlock(Map gmap)
 {
 //    Block tempCurrBlock = getBlock();
-
+    float currentStep = step;
+    currentStep /= slowEffect;
 
     Block tempNextBlock = getNextBlock(gmap);
 //    cout <<"vi tri ke tiep "<<tempNextBlock.x1 <<"==="<<tempNextBlock.y1<<endl;
@@ -103,27 +106,27 @@ void enemy::runNextBlock(Map gmap)
 	{
 //        cout <<"di xuong"<<endl;
 //        cout <<tempNextBlock.y1 <<"    "<<eBlock.y1<<"     ======"<<endl;
-        eBlock.y1 += step;
+        eBlock.y1 += currentStep;
         currentState=stateWalkDown;
 	}
 	else if(tempNextBlock.y1 < eBlock.y1)
 	{
 //		setState(stateWalkUp);
 //        cout <<"di len"<<endl;
-        eBlock.y1 -= step;
+        eBlock.y1 -= currentStep;
         currentState=stateWalkUp;
 	}
 	else if(tempNextBlock.x1 > eBlock.x1)
 	{
 //		cout <<"di sang phai"<<endl;
-        eBlock.x1 += step;
+        eBlock.x1 += currentStep;
         currentState=stateWalkRight;
 	}
 	else if(tempNextBlock.x1 < eBlock.x1)
 	{
 //		setState(stateWalkLeft);
 //        cout <<"di sang trai"<<endl;
-        eBlock.x1 -= step;
+        eBlock.x1 -= currentStep;
         currentState=stateWalkLeft;
 	}
 	else {
@@ -166,9 +169,16 @@ void enemy::drawHealthBar(SDL_Renderer* renderer) {
     SDL_RenderFillRect(renderer, &healthRect);
 }
 
-
-
 //void enemy::SetMaxHP(int currentLevel){
 //    healthMax = 50+(currentLevel*100);
 //    healthCurrent=healthMax;
 //}
+void enemy::applySlowEffect(int effect)
+{
+    slowEffect = effect;
+}
+void enemy::resetSlowEffect()
+{
+    slowEffect = 1;
+}
+

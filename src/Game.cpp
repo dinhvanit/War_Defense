@@ -123,6 +123,16 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
                                         cout << "khong du tien dat canon" <<endl;
                                     }
                                     break;
+                                case TowerType::mage:
+                                    if(currentGold>=priceMage) {
+                                        addMageTower(renderer, posM);
+                                        currentGold-=priceMage;
+                                    }
+                                    else {
+                                        gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
+                                        cout << "khong du tien dat mage" <<endl;
+                                    }
+                                    break;
                                 }
                             }
                         }
@@ -257,10 +267,11 @@ void Game::addCanonTower(SDL_Renderer* renderer, pos posM) {
     shared_ptr<Canon> canonPtr = make_shared<Canon>(renderer, posM);
     listTowers.push_back(canonPtr);
 }
-//void Game::addCanonTower(SDL_Renderer* renderer, pos posM) {
-//    listTowers.push_back(Canon(renderer, posM));
-//}
-//
+
+void Game::addMageTower(SDL_Renderer* renderer, pos posM) {
+    shared_ptr<Mage> MagePtr = make_shared<Mage>(renderer, posM);
+    listTowers.push_back(MagePtr);
+}
 //void Game::addMageTower(SDL_Renderer* renderer, pos posM) {
 //    listTowers.push_back(Mage(renderer, posM));
 //}

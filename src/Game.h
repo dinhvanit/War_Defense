@@ -12,6 +12,7 @@
 #include "BaseTower.h"
 #include "Archer.h"
 #include "Canon.h"
+#include "Mage.h"
 
 
 class Game
@@ -39,7 +40,7 @@ class Game
 
         void addCanonTower(SDL_Renderer* renderer, pos posM);
 
-//        void addMageTower(SDL_Renderer* renderer, pos posM);
+        void addMageTower(SDL_Renderer* renderer, pos posM);
 
 
         void addEnemy(SDL_Renderer* renderer, Block sBlock);
