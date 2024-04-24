@@ -13,6 +13,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
         auto time2 = std::chrono::system_clock::now();
 
         const float dT = 1.0f / 60.0f;
+        Cowmoo = loadSound("cow_moo1.wav");
 
         gmap=CreateMap();
 //        for(int i=0; i<5; i++){
@@ -206,6 +207,7 @@ void Game::updateSpawnEnemy(SDL_Renderer* renderer, float dT)
             roundTimer.countDown(dT);
             if (roundTimer.timeSIsZero()){
                 spawnEnemyCount = countEnemy;
+                Mix_PlayChannel(-1,Cowmoo,0);
 //                for (auto& enemy : listEnemys) {
 //                    enemy->SetMaxHP(currentLevel);
 //                }
@@ -409,4 +411,18 @@ void Game::showDefeatBoard(SDL_Renderer* renderer, bool& GameTrue)
             }
         }
     }
+}
+
+Mix_Chunk* Game::loadSound(string fileAudio){
+    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1){
+        cout << "LỖI MIX_OpenAudio " << Mix_GetError() << endl;
+    }
+
+    string path = "assets/sounds/" + fileAudio;
+    Mix_Chunk* chunk = Mix_LoadWAV(path.c_str());
+
+    if (chunk == NULL){
+        cout<<"ERROR loading file:" << Mix_GetError() << endl;
+    }
+    return chunk;
 }

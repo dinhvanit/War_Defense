@@ -60,6 +60,7 @@ class Game
 
         void showDefeatBoard(SDL_Renderer* renderer, bool& GameTrue);
 
+        Mix_Chunk* loadSound(string fileAudio);
 
         int mouseStatus = 0;
 
@@ -85,6 +86,8 @@ class Game
         bool is_quit = false;
 
         bool PauseMenu = false;
+
+        Mix_Chunk* Cowmoo=nullptr;
 
 };
 
