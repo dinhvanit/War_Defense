@@ -20,7 +20,7 @@ using namespace std;
 static SDL_Window* window = NULL;
 static SDL_Renderer* renderer = NULL;
 static SDL_Event event;
-static TTF_Font* gFont = NULL;
+//static TTF_Font* gFont = NULL;
 
 //screen
 const int SCREEN_WIDTH = 1240;

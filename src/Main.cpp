@@ -49,21 +49,27 @@ int main(int argc, char* argv[]){
     if(InitData() == false)
         return 1;
     bool GameTrue=true;
+    bool RestartGame = false;
     while(GameTrue){
-        MenuGame menu(window, renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-        Selection choice = menu.ShowMenu();
+//        if(RestartGame) cout <<"Choi lai 1"<<endl;
+        if(RestartGame) Game game(window, renderer, SCREEN_WIDTH, SCREEN_HEIGHT, GameTrue, RestartGame);
+        else{
+            MenuGame menu(window, renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-        if (choice == START) {
+            Selection choice = menu.ShowMenu();
+            if ( choice == START) {
 
-            Game game(window, renderer, SCREEN_WIDTH, SCREEN_HEIGHT, GameTrue);
-        }
-        else if (choice == HOW_TO_PLAY) {
-//            cout <<"choice how to play";
-            menu.RenderHowToPlay();
-        }
-        else if (choice == QUIT){
-            GameTrue=false;
+                Game game(window, renderer, SCREEN_WIDTH, SCREEN_HEIGHT, GameTrue, RestartGame);
+
+            }
+            else if (choice == HOW_TO_PLAY) {
+    //            cout <<"choice how to play";
+                menu.RenderHowToPlay();
+            }
+            else if (choice == QUIT){
+                GameTrue=false;
+            }
         }
     }
     close();

@@ -25,7 +25,7 @@ class Game
         }TypeCurrent;
 
     public:
-        Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool& GameTrue);
+        Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool& GameTrue, bool& RestartGame);
         ~Game();
 //        void addTower(SDL_renderer* renderer, )
 
@@ -33,13 +33,10 @@ class Game
         void draw(SDL_Renderer* renderer);
         void processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue);
 
-        void addTower(SDL_Renderer* renderer, pos posM);
-
+//        void addTower(SDL_Renderer* renderer, pos posM);
         //add thap
         void addArcherTower(SDL_Renderer* renderer, pos posM);
-
         void addCanonTower(SDL_Renderer* renderer, pos posM);
-
         void addMageTower(SDL_Renderer* renderer, pos posM);
 
 
@@ -53,16 +50,12 @@ class Game
         void DestroyTower(pos posM);
 
         void showText(SDL_Renderer* renderer, string input, int x, int y, int size, SDL_Color color);
-
         void showCurrentTower(SDL_Renderer* renderer);
-
-        void showPauseMenu(SDL_Renderer* renderer, bool& GameTrue);
-
-        void showDefeatBoard(SDL_Renderer* renderer, bool& GameTrue);
+        void showPauseMenu(SDL_Renderer* renderer, bool& GameTrue, bool& RestartGame);
+        void showDefeatBoard(SDL_Renderer* renderer, bool& GameTrue, bool& RestartGame);
 
         Mix_Chunk* loadSound(string fileAudio);
         Mix_Music* loadMusic(string fileMusic);
-        int mouseStatus = 0;
 
         vector<shared_ptr<enemy>> listEnemys;
         //smart pointer shared_ptr weak_ptr
@@ -77,12 +70,11 @@ class Game
 
         int currentGold=0;
         int HeartCURRENT;
-
-        bool defeat=false;
-
-        SDL_Texture* defeatTexture=nullptr;
         int currentLevel;
 
+        SDL_Texture* defeatTexture=nullptr;
+
+        bool defeat=false;
         bool is_quit = false;
         bool PauseMenu = false;
 

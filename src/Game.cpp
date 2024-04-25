@@ -1,11 +1,12 @@
 #include "Game.h"
 
 
-Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool& GameTrue):
+Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool& GameTrue, bool& RestartGame):
     TypeCurrent(TowerType::archer),
-    spawnTimer(1.0f), roundTimer(5.0f), HeartCURRENT(HeartStart), currentGold(GoldStart), defeat(false), defeatTexture(loadTexture::loadT(renderer, "defeat.png")),
-    currentLevel(0), spawnEnemyCount(0), gameStartTimer(5.0f, 5.0f)
+    spawnTimer(1.0f), roundTimer(5.0f),gameStartTimer(5.0f, 5.0f), spawnEnemyCount(0), currentGold(GoldStart), HeartCURRENT(HeartStart),currentLevel(0), defeatTexture(loadTexture::loadT(renderer, "defeat.png")),
+    defeat(false)
 {
+    RestartGame=false;
     if (window != nullptr && renderer != nullptr) {
 //        bool is_quit = false;
 
@@ -15,15 +16,9 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
         const float dT = 1.0f / 60.0f;
         Cowmoo = loadSound("cow_moo1.wav");
         DefeatSound = loadSound("DefeatSound.wav");
-//        musicGame = loadMusic("game_music.wav");
         musicGame = loadMusic("Music.mp3");
         gmap=CreateMap();
-//        for(int i=0; i<5; i++){
-//                for(int j=0; j<5; j++){
-//                    cout << gmap[i][j].isTowerIn<<" ";
-//                }
-//                cout <<endl;
-//        }
+
         Music=true;
         SoundFX=true;
         while(!is_quit){
@@ -57,12 +52,12 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int SCREEN_WIDTH, int SCR
                     }
                     else
                     {
-                        showPauseMenu(renderer, GameTrue);
+                        showPauseMenu(renderer, GameTrue, RestartGame);
                     }
                 }
                 else {
-                    if(SoundFX) Mix_PlayChannel(-1,DefeatSound,0);
-                    showDefeatBoard(renderer, GameTrue);
+//                    if(SoundFX) Mix_PlayChannel(-1,DefeatSound,0);
+                    showDefeatBoard(renderer, GameTrue, RestartGame);
                 }
             }
         }
@@ -106,7 +101,6 @@ Game::~Game()
 
 void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
 {
-    bool mouseDownThisFrame = false;
     SDL_Rect PauseButtonRect ={SCREEN_WIDTH-100*1, 10, BUTTON_SIZE, BUTTON_SIZE};
 
     int mouseX =0;
@@ -128,15 +122,17 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
                     break;
                 case SDL_SCANCODE_1:
                     TypeCurrent = TowerType :: archer;
-                    cout << "chon type archer"<<endl;
+//                    cout << "chon type archer"<<endl;
                     break;
                 case SDL_SCANCODE_2:
                     TypeCurrent = TowerType :: canon;
-                    cout << "chon type canon"<<endl;
+//                    cout << "chon type canon"<<endl;
                     break;
                 case SDL_SCANCODE_3:
                     TypeCurrent = TowerType :: mage;
-                    cout <<"chon type mage"<<endl;
+//                    cout <<"chon type mage"<<endl;
+                    break;
+                default:
                     break;
                 }
                 break;
@@ -151,7 +147,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
                                 gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
                             }
                             else{
-                                SDL_Rect rect = {gmap[posM.first][posM.second].x1,gmap[posM.first][posM.second].y1, TILE_WIDTH, TILE_HEIGHT };
+//                                SDL_Rect rect = {gmap[posM.first][posM.second].x1,gmap[posM.first][posM.second].y1, TILE_WIDTH, TILE_HEIGHT };
                                 switch (TypeCurrent) {
                                 case TowerType::archer:
                                     if(currentGold>=priceArcher) {
@@ -160,7 +156,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
                                     }
                                     else {
                                         gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
-                                        cout << "khong du tien dat archer" <<endl;
+//                                        cout << "khong du tien dat archer" <<endl;
                                     }
                                     break;
                                 case TowerType::canon:
@@ -171,7 +167,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
                                     }
                                     else {
                                         gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
-                                        cout << "khong du tien dat canon" <<endl;
+//                                        cout << "khong du tien dat canon" <<endl;
                                     }
                                     break;
                                 case TowerType::mage:
@@ -181,7 +177,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
                                     }
                                     else {
                                         gmap[posM.first][posM.second]=Block(posM.first, posM.second, 0);
-                                        cout << "khong du tien dat mage" <<endl;
+//                                        cout << "khong du tien dat mage" <<endl;
                                     }
                                     break;
                                 }
@@ -200,7 +196,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
                         cout << pM.x<<" "<<pM.y<<endl;
                         if (SDL_PointInRect(&pM, &PauseButtonRect)){
                             PauseMenu=true;
-                            cout <<"bam pause"<<endl;
+//                            cout <<"bam pause"<<endl;
                         }
                         else if(SDL_PointInRect(&pM, &ArcherButton))
                         {
@@ -216,6 +212,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
                         }
                     }
                 }
+                break;
             }
         }
 }
@@ -270,7 +267,7 @@ void Game::updateSpawnEnemy(SDL_Renderer* renderer, float dT)
             if (roundTimer.timeSIsZero()){
                 spawnEnemyCount = countEnemy;
                 if(SoundFX) Mix_PlayChannel(-1,Cowmoo,0);
-                else cout <<" tat am thanh sound fx"<<endl;
+//                else cout <<" tat am thanh sound fx"<<endl;
 //                for (auto& enemy : listEnemys) {
 //                    enemy->SetMaxHP(currentLevel);
 //                }
@@ -285,7 +282,7 @@ void Game::updateSpawnEnemy(SDL_Renderer* renderer, float dT)
 //            enemy->SetMaxHP(currentLevel);
 //            cout <<enemy->healthCurrent<<"la hp con hien tai"<<endl;
 //        }
-        cout <<"quai dot = " <<currentLevel<<endl;
+//        cout <<"quai dot = " <<currentLevel<<endl;
         addEnemy(renderer, start);
         spawnEnemyCount--;
         spawnTimer.resetToMax();
@@ -403,7 +400,7 @@ void Game::showCurrentTower(SDL_Renderer* renderer ){
     }
 }
 
-void Game::showPauseMenu(SDL_Renderer* renderer, bool& GameTrue){
+void Game::showPauseMenu(SDL_Renderer* renderer, bool& GameTrue, bool& RestartGame){
 
     while(PauseMenu)
     {
@@ -411,7 +408,7 @@ void Game::showPauseMenu(SDL_Renderer* renderer, bool& GameTrue){
         SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "menu.png"), NULL, &PauMenuRect);
         SDL_Rect BackToGameRect = {562, 585, 242, 75};
         SDL_Rect MainMenu = {609, 532, 150, 35};
-        SDL_Rect ResetLevel = {609, 479, 150, 35};
+        SDL_Rect ResetLevel = {609, 475, 150, 35};
 //        SDL_Rect MusicRect = {600, 330, 65, 20};
 //        SDL_Rect SoundFXRect = {570, 364, 100, 20};
         SDL_Rect SpeakerSoundFX = {680, 360, 50, 50};
@@ -437,6 +434,12 @@ void Game::showPauseMenu(SDL_Renderer* renderer, bool& GameTrue){
                     is_quit=true;
 //                    cout <<"vao main menu"<<endl;
                 }
+                if(SDL_PointInRect(&p, &ResetLevel))
+                {
+                    PauseMenu=false;
+                    is_quit=true;
+                    RestartGame=true;
+                }
 
                 else if (SDL_PointInRect(&p, &BackToGameRect)){
                     PauseMenu=false;
@@ -448,11 +451,11 @@ void Game::showPauseMenu(SDL_Renderer* renderer, bool& GameTrue){
                 else if (SDL_PointInRect(&p, &SpeakerSoundFX)){
                     if(SoundFX==true) {
                         SoundFX=false;
-                        cout <<"Bam tat SoundFx"<<endl;
+//                        cout <<"Bam tat SoundFx"<<endl;
                     }
                     else if(SoundFX==false){
                         SoundFX=true;
-                        cout <<"Bam bat SoundFX"<<endl;
+//                        cout <<"Bam bat SoundFX"<<endl;
                     }
                 }
             }
@@ -467,18 +470,18 @@ void Game::showPauseMenu(SDL_Renderer* renderer, bool& GameTrue){
     SDL_RenderPresent(renderer);
     }
 }
-void Game::showDefeatBoard(SDL_Renderer* renderer, bool& GameTrue)
+void Game::showDefeatBoard(SDL_Renderer* renderer, bool& GameTrue, bool& RestartGame)
 {
     SDL_Rect DefeatBoardRect = {X_UPPER_LEFT+4*TILE_WIDTH, Y_UPPER_LEFT + TILE_WIDTH, 4*TILE_WIDTH, 5*TILE_HEIGHT};
     SDL_RenderCopy(renderer, loadTexture::loadT(renderer, "defeatBoard.png"), NULL, &DefeatBoardRect);
     showText(renderer, to_string(currentLevel), 650, 350, 72, Red);
     SDL_RenderPresent(renderer);
 
-    SDL_Rect MainMenu = {567, 592, 100, 43};
-    SDL_Rect ResetLevel = {694, 592, 100, 43};
+    SDL_Rect MainMenu = {567, 592, 100, 45};
+    SDL_Rect ResetLevel = {689, 588, 100, 45};
 
     SDL_Event eDefeat;
-
+    if(SoundFX) Mix_PlayChannel(-1,DefeatSound,0);
     while(SDL_PollEvent(&eDefeat)){
         if(eDefeat.type == SDL_QUIT){
                 is_quit = true;
@@ -493,6 +496,10 @@ void Game::showDefeatBoard(SDL_Renderer* renderer, bool& GameTrue)
             if (SDL_PointInRect(&p, &MainMenu)) {
                 is_quit=true;
                 break;
+            }
+            else if(SDL_PointInRect(&p, &ResetLevel)){
+                is_quit=true;
+                RestartGame=true;
             }
         }
     }

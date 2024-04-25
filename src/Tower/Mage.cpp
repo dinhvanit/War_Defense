@@ -1,6 +1,6 @@
 #include "Mage.h"
 
-const float Mage::weaponRange = 190.0f;
+const float Mage::weaponRange = 150.0f;
 
 Mage::Mage(SDL_Renderer* renderer, pos _pos) :
     BaseTower(renderer, _pos), damage(0), cost(priceMage), slowEffect(2), slowDuration(10)

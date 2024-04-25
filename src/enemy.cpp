@@ -8,8 +8,8 @@ enemy::enemy(SDL_Renderer* renderer, Block currentBlock, int currentLevel) :
 {
     if(currentLevel<10) healthMax = 50+(currentLevel/4*400);
     else if (currentLevel >=0 && currentLevel<20) healthMax = (currentLevel/2*400);
-    else if (currentLevel >=20 && currentLevel <40 ) healthMax = (currentLevel/2*600);
-//    cout << healthMax <<"-==-======"<<endl;
+    else if (currentLevel >=20 && currentLevel <40 ) healthMax = (currentLevel/2*800);
+    else if (currentLevel>=40) healthMax=currentLevel/2;
     healthCurrent=healthMax;
     enemyTexture =loadTexture::loadT(renderer, "demon.png");
     enemyTextureUp = loadTexture::loadT(renderer, "botren.png");
@@ -145,7 +145,7 @@ bool enemy::isAlive(){
 //
 void enemy::getDamage(int damage) {
 	if (damage > 0) {
-        cout << "mau hien tai "<<healthCurrent<<endl;
+//        cout << "mau hien tai "<<healthCurrent<<endl;
 		healthCurrent -= damage;
 		if (healthCurrent < 0)
 			healthCurrent = 0;
