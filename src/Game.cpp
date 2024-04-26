@@ -492,7 +492,7 @@ void Game::showDefeatBoard(SDL_Renderer* renderer, bool& GameTrue, bool& Restart
             int x, y;
             SDL_GetMouseState(&x, &y);
             SDL_Point p ={x, y};
-            cout << x <<" " <<y<<endl;
+//            cout << x <<" " <<y<<endl;
             if (SDL_PointInRect(&p, &MainMenu)) {
                 is_quit=true;
                 break;

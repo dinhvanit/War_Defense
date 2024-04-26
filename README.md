@@ -2,14 +2,14 @@
 ## Giới thiệu bản thân
 - Họ và tên: Nguyễn Đình Văn
 - Lớp: K68-J
-- Mã sinh viên: 23020712
+- Mã sinh viên: 23020714
 - Bài tập lớn INT2215_52 Lập trình nâng cao
 
 ## Giới thiệu game
 - `War Defense` là một game thể loại thủ thành chiến thuật.Cố gắng bảo vệ ngôi nhà khi bị các quái vật xâm nhập bằng cách đặt hợp lý các loại tháp để tạo đường đi và có các chức năng khác nhau để tiêu diệt kẻ địch. Kẻ địch là các loại quái vật cố gắng tìm đường ngắn nhất đến ngôi nhà của bạn. Cố gắng kiếm vàng bằng cách tiêu diệt địch và mua loại tháp phù hợp để đạt level cao nhất.
 
 ## Video trải nghiệm game và trình bày qua về code
-- Link youtube: ** **
+- Link youtube: **https://youtu.be/jVeAYhro-HM**
 
 - [0. Cách tải game](#0-cách-tải-game)
   * [a. Cách 1: Không bao gồm code.](#a-cách-1-không-bao-gồm-code)
@@ -27,7 +27,7 @@
 
 # 0. Cách tải game
 ## a. Cách 1: Không bao gồm code.
-- Tải game (được nén thành .zip) tại link sau: **https://github.com/**.
+- Tải game (được nén thành .zip) tại link sau: **https://github.com/dinhvanit/War_Defense/releases**.
 - Cách này tiết kiệm bộ nhớ và thời gian tải đi rất nhiều (khoảng 103MB).
 - Giải nén game vào một thư mục và bật TheInfernalTunnels.exe lên và chơi.
 
