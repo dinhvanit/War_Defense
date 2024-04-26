@@ -193,7 +193,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& is_quit, bool& GameTrue)
                     SDL_Rect CanonButton = {13, 214, 169, 193};
                     SDL_Rect MageButton = {13, 407, 169, 193};
                     if (event.button.button == SDL_BUTTON_LEFT){
-                        cout << pM.x<<" "<<pM.y<<endl;
+//                        cout << pM.x<<" "<<pM.y<<endl;
                         if (SDL_PointInRect(&pM, &PauseButtonRect)){
                             PauseMenu=true;
 //                            cout <<"bam pause"<<endl;
@@ -428,7 +428,7 @@ void Game::showPauseMenu(SDL_Renderer* renderer, bool& GameTrue, bool& RestartGa
                 int x, y;
                 SDL_GetMouseState(&x, &y);
                 SDL_Point p ={x, y};
-                cout << x <<" " <<y<<endl;
+//                cout << x <<" " <<y<<endl;
                 if (SDL_PointInRect(&p, &MainMenu)) {
                     PauseMenu=false;
                     is_quit=true;
