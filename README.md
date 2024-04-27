@@ -27,8 +27,8 @@
 
 # 0. Cách tải game
 ## a. Cách 1: Không bao gồm code.
-- Tải game (được nén thành .zip) tại link sau: **https://github.com/dinhvanit/War_Defense/releases**.
-- Cách này tiết kiệm bộ nhớ và thời gian tải đi rất nhiều (khoảng 103MB).
+- Tải game (được nén thành .zip) tại link sau: **https://github.com/dinhvanit/War_Defense/releases/tag/V.0.1**.
+- Cách này tiết kiệm bộ nhớ và thời gian tải đi rất nhiều (khoảng 33MB).
 - Giải nén game vào một thư mục và bật TheInfernalTunnels.exe lên và chơi.
 
 ## b. Cách 2: Bao gồm code và có thể biên dịch.
@@ -96,9 +96,9 @@ Có 5 loại cây, lần lượt theo thứ tự có thể nhận được trong
 
 ||Tên tháp	|Chức năng|
 |-|-|-|
-|![image]()|Archer	|Mỗi lần bắn tia vào 1 con quái .|
-|![image]()|Canon	|Gây sát thương tất cả mục tiêu nhưng sát thương yếu hơn Archer|
-|![image]()|Mage	|Không gây sát thương nhưng làm chậm tất cả các quái trong tầm.|
+|![image](https://raw.githubusercontent.com/dinhvanit/War_Defense/main/assets/images/archer.png)|Archer	|Mỗi lần bắn tia vào 1 con quái .|
+|![image](https://raw.githubusercontent.com/dinhvanit/War_Defense/main/assets/images/canon.png)|Canon	|Gây sát thương tất cả mục tiêu nhưng sát thương yếu hơn Archer|
+|![image](https://raw.githubusercontent.com/dinhvanit/War_Defense/main/assets/images/mage.png)|Mage	|Không gây sát thương nhưng làm chậm tất cả các quái trong tầm.|
 
  
 ## b.	Các loại Enemy
